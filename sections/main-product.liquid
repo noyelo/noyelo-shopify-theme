@@ -24,6 +24,7 @@
   {%- if product.quantity_price_breaks_configured? -%}
     {{ 'component-volume-pricing.css' | asset_url | stylesheet_tag }}
   {%- endif -%}
+  {{ 'noyelo-product.css' | asset_url | stylesheet_tag }}
 
   {%- style -%}
     .section-{{ section.id }}-padding {
@@ -686,6 +687,51 @@
                       <script src="{{ 'quick-add.js' | asset_url }}" defer="defer"></script>
                     {%- endif -%}
                   </product-recommendations>
+                {%- when 'noyelo_rating' -%}
+                  <div class="ny-pdp-rating" {{ block.shopify_attributes }}>
+                    {%- render 'noyelo-product-rating',
+                      product: product,
+                      manual_rating: block.settings.manual_rating,
+                      manual_count: block.settings.manual_count,
+                      link: '#reviews'
+                    -%}
+                  </div>
+                {%- when 'noyelo_benefits' -%}
+                  <ul class="ny-checklist ny-pdp-benefits" role="list" {{ block.shopify_attributes }}>
+                    {%- for i in (1..5) -%}
+                      {%- assign benefit_key = 'benefit_' | append: i -%}
+                      {%- if block.settings[benefit_key] != blank -%}
+                        <li>
+                          {%- render 'noyelo-icon', icon: 'check' -%}
+                          <span>{{ block.settings[benefit_key] }}</span>
+                        </li>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                {%- when 'noyelo_trust' -%}
+                  <div class="ny-pdp-trust" {{ block.shopify_attributes }}>
+                    <ul class="ny-pdp-trust__list" role="list">
+                      {%- for i in (1..4) -%}
+                        {%- liquid
+                          assign trust_text_key = 'text_' | append: i
+                          assign trust_icon_key = 'icon_' | append: i
+                        -%}
+                        {%- if block.settings[trust_text_key] != blank -%}
+                          <li class="ny-pdp-trust__item">
+                            {%- render 'noyelo-icon', icon: block.settings[trust_icon_key] -%}
+                            <span>{{ block.settings[trust_text_key] }}</span>
+                          </li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                    {%- if block.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+                      <ul class="ny-payment-icons ny-pdp-trust__payment" role="list">
+                        {%- for type in shop.enabled_payment_types -%}
+                          <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- endif -%}
+                  </div>
                 {%- when 'icon-with-text' -%}
                   {% render 'icon-with-text', block: block %}
               {%- endcase -%}
@@ -751,6 +797,11 @@
       </script>
     </div>
   </product-component>
+
+  {%- assign has_buy_buttons = section.blocks | where: 'type', 'buy_buttons' -%}
+  {%- if settings.sticky_atc_enabled and has_buy_buttons.size > 0 -%}
+    {%- render 'noyelo-sticky-atc', product: product, section_id: section.id -%}
+  {%- endif -%}
 </product-info>
 
 {% schema %}
@@ -761,6 +812,128 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "noyelo_rating",
+      "name": "NOYELO Bewertung",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Zeigt Sterne und Anzahl aus den Review-Metafeldern des Produkts (von Review-Apps befüllt). Klick springt zur Bewertungs-Section."
+        },
+        {
+          "type": "number",
+          "id": "manual_rating",
+          "label": "Manuelle Bewertung (optional)",
+          "info": "Nur echte, belegbare Werte verwenden, z. B. 4.8"
+        },
+        {
+          "type": "number",
+          "id": "manual_count",
+          "label": "Anzahl Bewertungen (optional)"
+        }
+      ]
+    },
+    {
+      "type": "noyelo_benefits",
+      "name": "NOYELO Vorteile-Liste",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "benefit_1",
+          "label": "Vorteil 1",
+          "default": "Passt sich Kopf und Nacken an"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "benefit_2",
+          "label": "Vorteil 2",
+          "default": "Entlastet Schultern und Nacken"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "benefit_3",
+          "label": "Vorteil 3",
+          "default": "Atmungsaktiver, waschbarer Bezug"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "benefit_4",
+          "label": "Vorteil 4"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "benefit_5",
+          "label": "Vorteil 5"
+        }
+      ]
+    },
+    {
+      "type": "noyelo_trust",
+      "name": "NOYELO Vertrauen & Versand",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_1",
+          "label": "Zeile 1 – Icon",
+          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "default": "truck"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_1",
+          "label": "Zeile 1 – Text",
+          "default": "<strong>Kostenloser Versand</strong> – Lieferung in 2–4 Werktagen"
+        },
+        {
+          "type": "select",
+          "id": "icon_2",
+          "label": "Zeile 2 – Icon",
+          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "default": "moon"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_2",
+          "label": "Zeile 2 – Text",
+          "default": "<strong>30 Nächte</strong> zuhause testen"
+        },
+        {
+          "type": "select",
+          "id": "icon_3",
+          "label": "Zeile 3 – Icon",
+          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "default": "return"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_3",
+          "label": "Zeile 3 – Text",
+          "default": "Einfache Rückgabe"
+        },
+        {
+          "type": "select",
+          "id": "icon_4",
+          "label": "Zeile 4 – Icon",
+          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "default": "lock"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_4",
+          "label": "Zeile 4 – Text",
+          "default": "Sichere Zahlung"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_payment_icons",
+          "label": "Zahlungsarten anzeigen",
+          "default": true
+        }
+      ]
     },
     {
       "type": "text",

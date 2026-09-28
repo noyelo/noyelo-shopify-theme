@@ -1,0 +1,385 @@
+/* ==========================================================================
+   NOYELO — product page refinements (loaded after Dawn's product CSS)
+   ========================================================================== */
+
+/* Gallery */
+.product__media-wrapper .product__media-item .media,
+.product__media-wrapper .product-media-container {
+  border-radius: var(--ny-radius);
+  overflow: hidden;
+}
+
+.product__media-wrapper .product-media-container {
+  background-color: var(--ny-surface);
+}
+
+.product__media-list .media > *,
+.product-media-container .media > * {
+  border-radius: 0;
+}
+
+.product-media-container.media-fit-contain img {
+  padding: 4%;
+}
+
+.thumbnail-list .thumbnail {
+  border-radius: var(--ny-radius-sm);
+  overflow: hidden;
+  background-color: var(--ny-surface);
+}
+
+.thumbnail-list .thumbnail[aria-current] {
+  box-shadow: 0 0 0 0.15rem rgb(var(--color-foreground));
+  border-color: transparent;
+}
+
+.thumbnail-list .thumbnail img {
+  pointer-events: none;
+}
+
+.product__media-wrapper .slider-counter {
+  font-size: 1.3rem;
+}
+
+.product__media-wrapper .slider-buttons {
+  gap: 0.4rem;
+}
+
+.product__media-toggle.focus-visible,
+.product__media-icon {
+  border-radius: 50%;
+}
+
+.product__media-icon {
+  width: 4rem;
+  height: 4rem;
+  background-color: rgba(var(--color-background), 0.9);
+  border: 0;
+}
+
+/* Layout */
+@media screen and (min-width: 750px) {
+  .product__column-sticky {
+    top: calc(var(--header-height, 7.6rem) + 2.4rem);
+  }
+
+  .product__info-wrapper {
+    padding-left: 4.8rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .product--medium:not(.product--no-media) .product__info-wrapper,
+  .product--large:not(.product--no-media) .product__info-wrapper {
+    padding-left: 6.4rem;
+  }
+
+  .product--right.product--medium:not(.product--no-media) .product__info-wrapper,
+  .product--right.product--large:not(.product--no-media) .product__info-wrapper {
+    padding-left: 0;
+    padding-right: 6.4rem;
+  }
+}
+
+/* Buy box */
+.product__info-container > * + * {
+  margin: 1.6rem 0;
+}
+
+.product__info-container > *:first-child {
+  margin-top: 0;
+}
+
+.product__info-container .product__title {
+  margin-bottom: 0.8rem;
+}
+
+.product__title h1 {
+  font-size: clamp(2.8rem, 2.2rem + 1.6vw, 4rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.product__text.caption-with-letter-spacing {
+  color: rgba(var(--color-foreground), 0.68);
+}
+
+.product__info-container .price--large {
+  font-size: 2.6rem;
+}
+
+.product__info-container .price__badge-sale,
+.product__info-container .price__badge-sold-out {
+  margin-left: 0.4rem;
+}
+
+.product__tax {
+  margin-top: -0.8rem;
+  color: var(--ny-muted);
+}
+
+.ny-pdp-rating {
+  margin-top: -0.4rem;
+}
+
+.ny-pdp-rating .ny-stars {
+  --ny-star-size: 1.7rem;
+}
+
+.ny-pdp-benefits {
+  padding: 0.4rem 0;
+  font-size: 1.5rem;
+  color: rgb(var(--color-foreground));
+}
+
+/* Variant pills */
+.product-form__input {
+  margin-bottom: 0;
+}
+
+.product-form__input .form__label {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: var(--ny-font-weight-medium);
+  color: rgb(var(--color-foreground));
+}
+
+.product-form__input input[type='radio'] + label {
+  min-height: 4.8rem;
+  min-width: 6.4rem;
+  padding: 1.2rem 2.2rem;
+  font-size: 1.5rem;
+  letter-spacing: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--ny-duration) var(--ny-ease), background-color var(--ny-duration) var(--ny-ease);
+}
+
+.product-form__input input[type='radio'] + label:hover {
+  border-color: rgba(var(--color-foreground), 0.6);
+}
+
+.product-form__input input[type='radio']:checked + label {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.product-form__input .select__select {
+  border-radius: var(--ny-radius-sm);
+}
+
+/* Quantity + buttons */
+.product-form__quantity .quantity {
+  width: 14rem;
+  min-height: 5.2rem;
+}
+
+.product-form__buttons {
+  max-width: none;
+}
+
+.product-form__submit {
+  min-height: 5.8rem;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}
+
+.product-form__submit.button--secondary {
+  --color-button: var(--color-foreground);
+  --color-button-text: var(--color-background);
+  --alpha-button-background: 1;
+  color: rgb(var(--color-background));
+  background-color: rgb(var(--color-foreground));
+}
+
+.shopify-payment-button__button {
+  min-height: 5.2rem;
+  border-radius: var(--ny-radius-pill) !important;
+  overflow: hidden;
+}
+
+.shopify-payment-button__more-options {
+  font-size: 1.3rem;
+  color: var(--ny-muted);
+}
+
+.product-form__error-message-wrapper:not([hidden]) {
+  padding: 1rem 1.4rem;
+  border-radius: var(--ny-radius-sm);
+  background: rgba(var(--color-foreground), 0.05);
+}
+
+/* Trust box */
+.ny-pdp-trust {
+  padding: 1.6rem 1.8rem;
+  border-radius: var(--ny-radius);
+  background-color: var(--ny-surface);
+}
+
+.ny-pdp-trust__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.ny-pdp-trust__item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+.ny-pdp-trust__item .ny-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  color: rgb(var(--color-foreground));
+}
+
+.ny-pdp-trust__item strong {
+  font-weight: var(--ny-font-weight-medium);
+  color: rgb(var(--color-foreground));
+}
+
+body .ny-pdp-trust__payment {
+  justify-content: flex-start;
+  margin-top: 1.4rem;
+  padding-top: 1.4rem;
+  border-top: 0.1rem solid var(--ny-line);
+}
+
+/* Accordions */
+.product__accordion .summary__title {
+  padding: 0.4rem 0;
+}
+
+.product__accordion .accordion__title {
+  font-family: var(--font-body-family);
+  font-size: 1.5rem;
+  font-weight: var(--ny-font-weight-medium);
+  letter-spacing: 0;
+}
+
+.product__accordion summary {
+  padding: 1.6rem 0;
+}
+
+.product__accordion .accordion__content {
+  color: var(--ny-muted);
+  font-size: 1.5rem;
+  padding-bottom: 1.2rem;
+}
+
+.product__description {
+  color: rgba(var(--color-foreground), 0.8);
+}
+
+.product__view-details {
+  display: none;
+}
+
+/* Pickup availability */
+.product__pickup-availabilities {
+  font-size: 1.4rem;
+}
+
+/* Related products */
+.related-products .title {
+  letter-spacing: -0.024em;
+}
+
+/* --------------------------------------------------------------------------
+   Sticky add-to-cart (mobile)
+   -------------------------------------------------------------------------- */
+
+.ny-sticky-atc {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: 0.8rem 1.2rem calc(0.8rem + env(safe-area-inset-bottom));
+  background-color: rgba(var(--color-background), 0.98);
+  box-shadow: 0 -0.1rem 0 var(--ny-line), 0 -1.2rem 3rem -2rem rgba(43, 43, 47, 0.3);
+  transform: translateY(110%);
+  visibility: hidden;
+  transition: transform 320ms var(--ny-ease), visibility 0s linear 320ms;
+}
+
+.ny-sticky-atc.is-visible {
+  transform: translateY(0);
+  visibility: visible;
+  transition: transform 320ms var(--ny-ease), visibility 0s;
+}
+
+.ny-sticky-atc__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.ny-sticky-atc__image {
+  flex: none;
+  width: 4.8rem;
+  height: 4.8rem;
+  object-fit: cover;
+  border-radius: var(--ny-radius-xs);
+  background-color: var(--ny-surface);
+}
+
+.ny-sticky-atc__info {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.ny-sticky-atc__title {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-size: 1.3rem;
+  font-weight: var(--ny-font-weight-medium);
+  color: rgb(var(--color-foreground));
+}
+
+.ny-sticky-atc__price {
+  font-size: 1.4rem;
+  color: var(--ny-muted);
+}
+
+.ny-sticky-atc .ny-sticky-atc__button {
+  flex: none;
+  min-height: 4.8rem;
+  min-width: 0;
+  max-width: 55%;
+  padding: 0 1.8rem;
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 750px) {
+  .ny-sticky-atc {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  /* Keep content above the sticky bar when it is visible */
+  body:has(.ny-sticky-atc.is-visible) .footer {
+    padding-bottom: calc(8rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ny-sticky-atc,
+  .ny-sticky-atc.is-visible {
+    transition: none;
+  }
+}

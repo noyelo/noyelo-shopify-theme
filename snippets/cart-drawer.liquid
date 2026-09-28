@@ -31,6 +31,7 @@
         <div class="drawer__inner-empty">
           <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
             <div class="cart-drawer__empty-content">
+              {%- render 'noyelo-icon', icon: 'pillow' -%}
               <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
               <button
                 class="drawer__close"
@@ -74,6 +75,7 @@
           </span>
         </button>
       </div>
+      {%- render 'noyelo-free-shipping' -%}
       <cart-drawer-items
         view-event-payload="{{ cart | standard_event_data: 'view', context: 'dialog' | escape }}"
         view-event-trigger="manual"
@@ -588,6 +590,17 @@
             {{ 'sections.cart.checkout' | t }}
           </button>
         </div>
+        {%- if settings.cart_trust_text != blank -%}
+          <p class="ny-cart-trust">{{ settings.cart_trust_text }}</p>
+        {%- endif -%}
+        {%- if settings.cart_show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+          <ul class="ny-payment-icons" role="list">
+            <li class="visually-hidden">{{ 'sections.footer.payment' | t }}</li>
+            {%- for type in shop.enabled_payment_types -%}
+              <li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
       </div>
     </div>
   </div>

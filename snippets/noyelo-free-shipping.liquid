@@ -1,0 +1,40 @@
+{% comment %}
+  Free shipping progress bar. Threshold is set in Theme settings › NOYELO
+  (shop currency). Hidden when the cart uses another currency, so customers in
+  other markets never see a misleading amount.
+
+  Usage:
+  {% render 'noyelo-free-shipping' %}
+{% endcomment %}
+{%- if settings.free_shipping_enabled and settings.free_shipping_threshold > 0 and cart.item_count > 0 -%}
+  {%- if cart.currency.iso_code == shop.currency -%}
+    {%- liquid
+      assign threshold_cents = settings.free_shipping_threshold | times: 100
+      assign cart_total = cart.items_subtotal_price
+      assign remaining = threshold_cents | minus: cart_total
+      assign progress = cart_total | times: 100 | divided_by: threshold_cents | at_most: 100 | at_least: 0
+    -%}
+    <div class="ny-shipping{% if remaining <= 0 %} ny-shipping--done{% endif %}">
+      <p class="ny-shipping__text">
+        {%- if remaining > 0 -%}
+          {%- render 'noyelo-icon', icon: 'truck' -%}
+          {%- assign remaining_html = remaining | money | prepend: '<strong>' | append: '</strong>' -%}
+          <span>{{ settings.free_shipping_text | escape | replace: '[amount]', remaining_html }}</span>
+        {%- else -%}
+          {%- render 'noyelo-icon', icon: 'check' -%}
+          <span><strong>{{ settings.free_shipping_success_text | escape }}</strong></span>
+        {%- endif -%}
+      </p>
+      <div
+        class="ny-shipping__bar"
+        role="progressbar"
+        aria-label="{{ 'noyelo.cart.free_shipping_progress' | t }}"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="{{ progress }}"
+      >
+        <span style="--ny-progress: {{ progress }}%;"></span>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

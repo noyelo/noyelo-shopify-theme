@@ -1,0 +1,52 @@
+{% comment %}
+  Mobile sticky add-to-cart bar. Mirrors the main product form (button state,
+  price) via assets/noyelo.js and triggers the main submit button, so variants,
+  quantity, selling plans and cart drawer behave exactly like the main form.
+
+  Accepts:
+  - product: {Object}
+  - section_id: {String}
+{% endcomment %}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign sticky_image = current_variant.featured_media.preview_image | default: product.featured_media.preview_image
+-%}
+<ny-sticky-atc
+  class="ny-sticky-atc"
+  data-section="{{ section_id }}"
+  role="region"
+  aria-label="{{ 'noyelo.sticky_atc.label' | t }}"
+>
+  <div class="ny-sticky-atc__inner">
+    {%- if sticky_image != blank -%}
+      {{
+        sticky_image
+        | image_url: width: 120
+        | image_tag: width: 48, height: 48, loading: 'lazy', class: 'ny-sticky-atc__image', alt: ''
+      }}
+    {%- endif -%}
+    <div class="ny-sticky-atc__info">
+      <span class="ny-sticky-atc__title">{{ product.title | escape }}</span>
+      <span class="ny-sticky-atc__price" data-ny-sticky-price>
+        {{- current_variant.price | default: product.price | money -}}
+      </span>
+    </div>
+    <button
+      type="button"
+      class="button button--primary ny-sticky-atc__button"
+      data-ny-sticky-button
+      {% unless current_variant.available %}
+        disabled
+      {% endunless %}
+    >
+      <span data-ny-sticky-label>
+        {%- if current_variant.available -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+      </span>
+      {%- render 'loading-spinner' -%}
+    </button>
+  </div>
+</ny-sticky-atc>
