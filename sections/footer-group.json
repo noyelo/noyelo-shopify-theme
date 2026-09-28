@@ -4,21 +4,58 @@
   "sections": {
     "footer": {
       "type": "footer",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "shop": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "service": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Service",
+            "menu": "footer"
+          }
+        },
+        "company": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Unternehmen",
+            "menu": ""
+          }
+        },
+        "legal": {
+          "type": "policies",
+          "settings": {
+            "heading": "Rechtliches"
+          }
+        }
+      },
+      "block_order": [
+        "shop",
+        "service",
+        "company",
+        "legal"
+      ],
       "settings": {
-        "color_scheme": "scheme-1",
-        "newsletter_enable": true,
-        "newsletter_heading": "Subscribe to our emails",
-        "enable_follow_on_shop": true,
+        "color_scheme": "scheme-2",
+        "show_brand": true,
+        "logo_width": 120,
+        "brand_text": "<p>Schlafprodukte, die sich dir anpassen. Entwickelt für erholsame Nächte und entspannte Morgen.</p>",
         "show_social": true,
+        "enable_follow_on_shop": false,
+        "newsletter_enable": false,
+        "newsletter_heading": "Ruhige Post von NOYELO",
+        "newsletter_text": "<p>Schlaftipps, Neuheiten und exklusive Angebote – ohne Spam.</p>",
         "enable_country_selector": true,
         "enable_language_selector": true,
         "payment_enable": true,
-        "show_policy": true,
+        "show_powered_by": false,
         "margin_top": 0,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 72,
+        "padding_bottom": 32
       }
     }
   },

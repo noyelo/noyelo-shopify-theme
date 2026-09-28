@@ -24,6 +24,24 @@
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
           <nav class="menu-drawer__navigation">
+            {%- if section.settings.drawer_show_search -%}
+              <div class="ny-drawer-search">
+                <form action="{{ routes.search_url }}" method="get" role="search">
+                  <label class="visually-hidden" for="HeaderDrawerSearch">{{ 'general.search.search' | t }}</label>
+                  <input
+                    id="HeaderDrawerSearch"
+                    type="search"
+                    name="q"
+                    placeholder="{{ 'general.search.search' | t }}"
+                    autocomplete="off"
+                  >
+                  <input name="options[prefix]" type="hidden" value="last">
+                  <span class="ny-drawer-search__icon" aria-hidden="true">
+                    {{- 'icon-search.svg' | inline_asset_content -}}
+                  </span>
+                </form>
+              </div>
+            {%- endif -%}
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
                 <li>
@@ -139,6 +157,25 @@
               {%- endfor -%}
             </ul>
           </nav>
+          {%- liquid
+            assign drawer_notes = ''
+            if section.settings.drawer_note_1 != blank or section.settings.drawer_note_2 != blank or section.settings.drawer_note_3 != blank
+              assign drawer_notes = 'show'
+            endif
+          -%}
+          {%- if drawer_notes == 'show' -%}
+            <ul class="ny-drawer-trust" role="list">
+              {%- if section.settings.drawer_note_1 != blank -%}
+                <li>{% render 'noyelo-icon', icon: 'truck' %}<span>{{ section.settings.drawer_note_1 }}</span></li>
+              {%- endif -%}
+              {%- if section.settings.drawer_note_2 != blank -%}
+                <li>{% render 'noyelo-icon', icon: 'moon' %}<span>{{ section.settings.drawer_note_2 }}</span></li>
+              {%- endif -%}
+              {%- if section.settings.drawer_note_3 != blank -%}
+                <li>{% render 'noyelo-icon', icon: 'return' %}<span>{{ section.settings.drawer_note_3 }}</span></li>
+              {%- endif -%}
+            </ul>
+          {%- endif -%}
           <div class="menu-drawer__utility-links">
             {%- if show_country_selector or show_language_selector -%}
               <div class="menu-drawer__localization header-localization">

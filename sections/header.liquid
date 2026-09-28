@@ -105,6 +105,16 @@
     padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
   }
 
+  :root {
+    --ny-header-height-estimate: 64px;
+  }
+
+  @media screen and (min-width: 990px) {
+    :root {
+      --ny-header-height-estimate: {{ section.settings.padding_top | plus: section.settings.padding_bottom | plus: 44 | at_least: 76 }}px;
+    }
+  }
+
   .section-header {
     position: sticky; /* This is for fixing a Safari z-index issue. PR #2147 */
     margin-bottom: {{ section.settings.margin_bottom | times: 0.75 | round: 0 }}px;
@@ -146,7 +156,7 @@
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if section.settings.transparent_on_home and request.page_type == 'index' %} header-wrapper--overlay{% if section.settings.overlay_text == 'light' %} header-wrapper--overlay-light{% endif %}{% endif %}"
 >
   {%- liquid
     assign social_links = false
@@ -203,6 +213,20 @@
                 sizes: sizes,
                 preload: true
             }}
+            {%- if section.settings.overlay_logo != blank and section.settings.transparent_on_home and request.page_type == 'index' -%}
+              {%- assign overlay_logo_height = settings.logo_width | divided_by: section.settings.overlay_logo.aspect_ratio -%}
+              {{
+                section.settings.overlay_logo
+                | image_url: width: 600
+                | image_tag:
+                  class: 'header__heading-logo header__logo-overlay',
+                  widths: widths,
+                  height: overlay_logo_height,
+                  width: settings.logo_width,
+                  alt: logo_alt,
+                  sizes: sizes
+              }}
+            {%- endif -%}
           </div>
         {%- else -%}
           <span class="h2">{{ shop.name }}</span>
@@ -246,6 +270,20 @@
                 sizes: sizes,
                 preload: true
             }}
+            {%- if section.settings.overlay_logo != blank and section.settings.transparent_on_home and request.page_type == 'index' -%}
+              {%- assign overlay_logo_height = settings.logo_width | divided_by: section.settings.overlay_logo.aspect_ratio -%}
+              {{
+                section.settings.overlay_logo
+                | image_url: width: 600
+                | image_tag:
+                  class: 'header__heading-logo header__logo-overlay',
+                  widths: widths,
+                  height: overlay_logo_height,
+                  width: settings.logo_width,
+                  alt: logo_alt,
+                  sizes: sizes
+              }}
+            {%- endif -%}
           </div>
         {%- else -%}
           <span class="h2">{{ shop.name }}</span>
@@ -600,6 +638,67 @@
       "id": "show_line_separator",
       "default": true,
       "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "header",
+      "content": "NOYELO: Transparenter Header"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_on_home",
+      "default": true,
+      "label": "Auf der Startseite transparent über dem Hero",
+      "info": "Greift nur, wenn die erste Section der Startseite ein NOYELO-Hero ist. Beim Scrollen wird der Header wieder deckend."
+    },
+    {
+      "type": "select",
+      "id": "overlay_text",
+      "label": "Textfarbe im transparenten Zustand",
+      "options": [
+        {
+          "value": "dark",
+          "label": "Dunkel (für helle Hero-Bilder)"
+        },
+        {
+          "value": "light",
+          "label": "Hell (für dunkle Hero-Bilder)"
+        }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "image_picker",
+      "id": "overlay_logo",
+      "label": "Alternatives Logo für transparenten Zustand",
+      "info": "Optional, z. B. eine helle Logo-Version bei heller Textfarbe."
+    },
+    {
+      "type": "header",
+      "content": "NOYELO: Mobiles Menü"
+    },
+    {
+      "type": "checkbox",
+      "id": "drawer_show_search",
+      "default": true,
+      "label": "Suchfeld im mobilen Menü anzeigen"
+    },
+    {
+      "type": "text",
+      "id": "drawer_note_1",
+      "label": "Hinweis 1 (Versand-Icon)",
+      "default": "Kostenloser Versand ab 50 €"
+    },
+    {
+      "type": "text",
+      "id": "drawer_note_2",
+      "label": "Hinweis 2 (Mond-Icon)",
+      "default": "30 Nächte zuhause testen"
+    },
+    {
+      "type": "text",
+      "id": "drawer_note_3",
+      "label": "Hinweis 3 (Rückgabe-Icon)",
+      "default": "Einfache Rückgabe"
     },
     {
       "type": "header",
