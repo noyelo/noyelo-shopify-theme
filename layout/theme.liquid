@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
+    <meta name="theme-color" content="{{ settings.color_schemes['scheme-1'].settings.background }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- if settings.favicon != blank -%}
@@ -58,6 +58,7 @@
     <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'standard-actions-override.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'noyelo.js' | asset_url }}" defer="defer"></script>
 
     {%- if settings.animations_reveal_on_scroll -%}
       <script src="{{ 'animations.js' | asset_url }}" defer="defer"></script>
@@ -69,6 +70,7 @@
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+      assign body_font_medium = settings.type_body_font | font_modify: 'weight', '500'
     %}
 
     {% style %}
@@ -77,6 +79,9 @@
       {{ body_font_italic | font_face: font_display: 'swap' }}
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {%- if body_font_medium -%}
+        {{ body_font_medium | font_face: font_display: 'swap' }}
+      {%- endif -%}
 
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
@@ -244,6 +249,14 @@
         --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
         --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
         --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+
+        --ny-accent: {{ settings.noyelo_accent }};
+        --ny-accent-rgb: {{ settings.noyelo_accent.red }},{{ settings.noyelo_accent.green }},{{ settings.noyelo_accent.blue }};
+        --ny-surface: {{ settings.noyelo_surface }};
+        --ny-surface-rgb: {{ settings.noyelo_surface.red }},{{ settings.noyelo_surface.green }},{{ settings.noyelo_surface.blue }};
+        --ny-font-weight-medium: {% if body_font_medium %}500{% else %}{{ settings.type_body_font.weight | plus: 100 | at_most: 900 }}{% endif %};
+        --logo-width: {{ settings.logo_width }}px;
+        --logo-width-mobile: {{ settings.logo_width_mobile }}px;
       }
 
       *,
@@ -288,6 +301,9 @@
       {{ 'component-price.css' | asset_url | stylesheet_tag }}
       {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
+
+    {{ 'noyelo-base.css' | asset_url | stylesheet_tag }}
+    {{ 'noyelo-sections.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
       {% comment %}theme-check-disable AssetPreload{% endcomment %}

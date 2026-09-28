@@ -1,9 +1,9 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Dawn",
-    "theme_version": "16.0.0",
-    "theme_author": "Shopify",
+    "theme_name": "NOYELO",
+    "theme_version": "1.0.0",
+    "theme_author": "NOYELO",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
   },
@@ -30,6 +30,99 @@
         "id": "favicon",
         "label": "t:settings_schema.logo.settings.favicon.label",
         "info": "t:settings_schema.logo.settings.favicon.info"
+      }
+    ]
+  },
+  {
+    "name": "NOYELO",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Markenfarben"
+      },
+      {
+        "type": "color",
+        "id": "noyelo_accent",
+        "label": "Akzentfarbe",
+        "info": "Für Sterne, Fortschrittsbalken und kleine Highlights.",
+        "default": "#C49B74"
+      },
+      {
+        "type": "color",
+        "id": "noyelo_surface",
+        "label": "Soft-Fläche",
+        "info": "Hintergrund für Karten, Galerie und Info-Boxen.",
+        "default": "#F3EEE7"
+      },
+      {
+        "type": "header",
+        "content": "Logo mobil"
+      },
+      {
+        "type": "range",
+        "id": "logo_width_mobile",
+        "min": 40,
+        "max": 200,
+        "step": 4,
+        "unit": "px",
+        "label": "Logobreite auf Mobilgeräten",
+        "default": 100
+      },
+      {
+        "type": "header",
+        "content": "Kostenloser Versand"
+      },
+      {
+        "type": "checkbox",
+        "id": "free_shipping_enabled",
+        "label": "Fortschrittsanzeige im Warenkorb anzeigen",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Schwellenwert für kostenlosen Versand",
+        "info": "Betrag in der Standardwährung des Shops (z. B. 50 für 50 €). Die Anzeige erscheint nur, wenn der Warenkorb in dieser Währung ist.",
+        "default": 50
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_text",
+        "label": "Text bis zum Schwellenwert",
+        "info": "[amount] wird durch den fehlenden Betrag ersetzt.",
+        "default": "Noch [amount] bis zum kostenlosen Versand"
+      },
+      {
+        "type": "text",
+        "id": "free_shipping_success_text",
+        "label": "Text bei Erreichen",
+        "default": "Dein Versand ist kostenlos."
+      },
+      {
+        "type": "header",
+        "content": "Warenkorb-Vertrauen"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "cart_trust_text",
+        "label": "Vertrauenshinweis unter dem Checkout-Button",
+        "default": "30 Nächte testen · Sichere Zahlung · Einfache Rückgabe"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_payment_icons",
+        "label": "Zahlungsarten im Warenkorb anzeigen",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Produktseite"
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_atc_enabled",
+        "label": "Sticky „In den Warenkorb“ auf Mobilgeräten",
+        "default": true
       }
     ]
   },

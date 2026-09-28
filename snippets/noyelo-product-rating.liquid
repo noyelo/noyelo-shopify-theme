@@ -1,0 +1,41 @@
+{% comment %}
+  Compact rating line: stars + value + review count.
+  Uses Shopify's standard review metafields (reviews.rating / reviews.rating_count),
+  which are filled automatically by most review apps. Falls back to manual values.
+
+  Accepts:
+  - product: {Object} product (optional)
+  - manual_rating: {Number} optional fallback rating
+  - manual_count: {Number} optional fallback review count
+  - link: {String} optional anchor/URL to the reviews
+  - class: {String} optional extra class
+{% endcomment %}
+{%- liquid
+  assign has_rating = false
+  assign r_value = 0
+  assign r_max = 5
+  assign r_count = 0
+
+  if product != blank and product.metafields.reviews.rating.value != blank
+    assign has_rating = true
+    assign r_value = product.metafields.reviews.rating.value.rating
+    assign r_max = product.metafields.reviews.rating.value.scale_max
+    assign r_count = product.metafields.reviews.rating_count.value | default: product.metafields.reviews.rating_count
+  elsif manual_rating != blank and manual_rating > 0
+    assign has_rating = true
+    assign r_value = manual_rating
+    assign r_count = manual_count | default: 0
+  endif
+-%}
+{%- if has_rating -%}
+  {%- assign r_label = r_value | times: 1.0 | round: 1 | append: '' | replace: '.', ',' -%}
+  {%- if link != blank -%}<a href="{{ link }}" class="ny-rating{% if class %} {{ class }}{% endif %}">{%- else -%}<div class="ny-rating{% if class %} {{ class }}{% endif %}">{%- endif -%}
+    {%- render 'noyelo-stars', rating: r_value, max: r_max -%}
+    <span class="ny-rating__value">{{ r_label }}</span>
+    {%- if r_count > 0 -%}
+      <span class="ny-rating__count">
+        {{- 'noyelo.reviews.count' | t: count: r_count -}}
+      </span>
+    {%- endif -%}
+  {%- if link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+{%- endif -%}

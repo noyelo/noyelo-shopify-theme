@@ -1,0 +1,41 @@
+{% comment %}
+  Responsive image with srcset, focal point and a placeholder fallback.
+
+  Accepts:
+  - image: {Object} image object (may be blank)
+  - sizes: {String} sizes attribute
+  - eager: {Boolean} load immediately with high fetch priority (above the fold)
+  - class: {String} optional class
+  - alt: {String} optional alt text override
+  - placeholder: {String} placeholder name (e.g. 'lifestyle-1', 'product-1', 'image')
+
+  Usage:
+  {% render 'noyelo-image', image: section.settings.image, sizes: '100vw', eager: true %}
+{% endcomment %}
+{%- if image != blank -%}
+  {%- liquid
+    assign img_loading = 'lazy'
+    assign img_priority = 'auto'
+    if eager
+      assign img_loading = 'eager'
+      assign img_priority = 'high'
+    endif
+    assign img_alt = alt | default: image.alt | escape
+    assign img_style = 'object-position: ' | append: image.presentation.focal_point
+    assign img_sizes = sizes | default: '100vw'
+  -%}
+  {{
+    image
+    | image_url: width: 3000
+    | image_tag:
+      widths: '360, 540, 720, 900, 1080, 1300, 1600, 2000, 2400, 3000',
+      sizes: img_sizes,
+      loading: img_loading,
+      fetchpriority: img_priority,
+      class: class,
+      alt: img_alt,
+      style: img_style
+  }}
+{%- else -%}
+  {{ placeholder | default: 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+{%- endif -%}
