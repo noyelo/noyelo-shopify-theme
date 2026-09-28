@@ -527,5 +527,28 @@
       "expanded": "ギフトカードカードの受取人フォームを展開しました",
       "collapsed": "ギフトカードカードの受取人フォームを折りたたみました"
     }
+  },
+  "noyelo": {
+    "reviews": {
+      "stars_label": "{{ rating }} out of {{ max }} stars",
+      "count": {
+        "one": "{{ count }} review",
+        "other": "{{ count }} reviews"
+      },
+      "verified": "Verified purchase",
+      "previous": "Previous reviews",
+      "next": "Next reviews"
+    },
+    "comparison": {
+      "feature": "Feature",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "sticky_atc": {
+      "label": "Quick buy"
+    },
+    "cart": {
+      "free_shipping_progress": "Progress towards free shipping"
+    }
   }
 }

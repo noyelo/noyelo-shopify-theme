@@ -527,5 +527,28 @@
       "expanded": "Formular für den Empfänger des Gutscheins erweitert",
       "collapsed": "Formular für den Empfänger des Gutscheins minimiert"
     }
+  },
+  "noyelo": {
+    "reviews": {
+      "stars_label": "{{ rating }} von {{ max }} Sternen",
+      "count": {
+        "one": "{{ count }} Bewertung",
+        "other": "{{ count }} Bewertungen"
+      },
+      "verified": "Verifizierter Kauf",
+      "previous": "Vorherige Bewertungen",
+      "next": "Nächste Bewertungen"
+    },
+    "comparison": {
+      "feature": "Merkmal",
+      "yes": "Ja",
+      "no": "Nein"
+    },
+    "sticky_atc": {
+      "label": "Schnellkauf"
+    },
+    "cart": {
+      "free_shipping_progress": "Fortschritt bis zum kostenlosen Versand"
+    }
   }
 }
