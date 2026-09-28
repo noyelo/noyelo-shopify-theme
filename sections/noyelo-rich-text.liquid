@@ -1,0 +1,155 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-richtext ny-richtext--{{ section.settings.alignment }} color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-richtext__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        {%- if section.settings.heading_tag == 'h1' -%}
+          <h1 class="ny-heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h1>
+        {%- else -%}
+          <h2 class="ny-heading {{ section.settings.heading_size }}">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="ny-lead rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <div class="ny-btn-row">
+          <a href="{{ section.settings.button_link }}" class="button button--primary">
+            {{- section.settings.button_label | escape -}}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Text",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Schlaf ist kein Luxus."
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Überschrift als",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2 (Standard)"
+        },
+        {
+          "value": "h1",
+          "label": "H1 (Seitentitel)"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Größe der Überschrift",
+      "options": [
+        {
+          "value": "h2",
+          "label": "Mittel"
+        },
+        {
+          "value": "h1",
+          "label": "Groß"
+        },
+        {
+          "value": "h0",
+          "label": "Sehr groß"
+        }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Erzähle hier die Geschichte deiner Marke, deiner Werte oder deines Produkts.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button-Text (optional)"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button-Link"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Ausrichtung",
+      "options": [
+        {
+          "value": "left",
+          "label": "Links"
+        },
+        {
+          "value": "center",
+          "label": "Zentriert"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Text"
+    }
+  ]
+}
+{% endschema %}

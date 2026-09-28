@@ -1,0 +1,134 @@
+{
+  "sections": {
+    "faq": {
+      "type": "noyelo-faq",
+      "settings": {
+        "eyebrow": "Hilfe & FAQ",
+        "heading": "Wie können wir helfen?",
+        "text": "<p>Alles, was du über dein neues Kissen wissen möchtest.</p>",
+        "contact_text": "Noch Fragen?",
+        "contact_label": "Schreib uns",
+        "contact_link": "",
+        "open_first": true,
+        "structured_data": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96,
+        "heading_tag": "h1"
+      },
+      "blocks": {
+        "f1": {
+          "type": "question",
+          "settings": {
+            "question": "Wie funktioniert der 30-Nächte-Test?",
+            "answer": "<p>Du schläfst 30 Nächte auf deinem neuen Kissen. Wenn du nicht überzeugt bist, meldest du dich einfach bei uns und wir kümmern uns um die Rückgabe.</p>"
+          }
+        },
+        "f2": {
+          "type": "question",
+          "settings": {
+            "question": "Für welche Schlafposition eignet sich das Kissen?",
+            "answer": "<p>Das Kissen ist besonders für Seiten- und Rückenschläfer entwickelt. Die ergonomische Form stützt den Nacken in beiden Positionen.</p>"
+          }
+        },
+        "f3": {
+          "type": "question",
+          "settings": {
+            "question": "Kann ich den Bezug waschen?",
+            "answer": "<p>Ja. Der Bezug ist abnehmbar und bei 40 °C waschbar. Den Memory-Foam-Kern bitte nicht waschen, sondern nur lüften.</p>"
+          }
+        },
+        "f4": {
+          "type": "question",
+          "settings": {
+            "question": "Riecht das Kissen beim Auspacken?",
+            "answer": "<p>Neuer Schaum kann anfangs leicht riechen. Lass das Kissen nach dem Auspacken ein bis zwei Tage an einem gut belüfteten Ort ruhen.</p>"
+          }
+        },
+        "f5": {
+          "type": "question",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Bestellungen werden in der Regel innerhalb von 1–2 Werktagen versendet. Ab 50 € ist der Versand kostenlos.</p>"
+          }
+        },
+        "f6": {
+          "type": "question",
+          "settings": {
+            "question": "Wie gebe ich ein Kissen zurück?",
+            "answer": "<p>Schreib uns einfach eine kurze Nachricht mit deiner Bestellnummer. Wir senden dir alle Informationen zur Rücksendung.</p>"
+          }
+        },
+        "f7": {
+          "type": "question",
+          "settings": {
+            "question": "Welche Zahlungsarten gibt es?",
+            "answer": "<p>Alle verfügbaren Zahlungsarten siehst du im Checkout, z. B. Kreditkarte, PayPal, Apple Pay oder Klarna.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7"
+      ]
+    },
+    "trial": {
+      "type": "noyelo-trial",
+      "settings": {
+        "number": "30",
+        "unit": "Nächte",
+        "eyebrow": "Ohne Risiko",
+        "heading": "30 Nächte zuhause testen.",
+        "text": "<p>Dein Körper braucht ein paar Nächte, um sich an ein neues Kissen zu gewöhnen. Deshalb nimmst du dir bei uns die Zeit – ganz entspannt in deinem eigenen Bett.</p>",
+        "button_label": "Jetzt testen",
+        "button_link": "shopify://collections/all",
+        "link_label": "",
+        "link_url": "",
+        "color_scheme": "scheme-3",
+        "outer_scheme": "scheme-1",
+        "padding_top": 48,
+        "padding_bottom": 48
+      },
+      "blocks": {
+        "s1": {
+          "type": "step",
+          "settings": {
+            "icon": "package",
+            "title": "Bestellen",
+            "text": "Bequem nach Hause geliefert."
+          }
+        },
+        "s2": {
+          "type": "step",
+          "settings": {
+            "icon": "moon",
+            "title": "30 Nächte probeschlafen",
+            "text": "Ganz in Ruhe, in deinem Bett."
+          }
+        },
+        "s3": {
+          "type": "step",
+          "settings": {
+            "icon": "heart",
+            "title": "Behalten oder zurückgeben",
+            "text": "Passt es nicht, gibst du es einfach zurück."
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
+    }
+  },
+  "order": [
+    "faq",
+    "trial"
+  ]
+}

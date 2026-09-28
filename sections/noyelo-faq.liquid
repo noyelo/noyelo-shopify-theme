@@ -1,0 +1,234 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div id="faq" class="ny-faq color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-faq__grid">
+      <div class="ny-faq__intro{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          {%- if section.settings.heading_tag == 'h1' -%}
+            <h1 class="ny-heading h1">{{ section.settings.heading }}</h1>
+          {%- else -%}
+            <h2 class="ny-heading h1">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="ny-lead">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.contact_label != blank and section.settings.contact_link != blank -%}
+          <a href="{{ section.settings.contact_link }}" class="ny-faq__contact">
+            <span class="ny-faq__contact-icon">{%- render 'noyelo-icon', icon: 'chat' -%}</span>
+            <span>
+              {%- if section.settings.contact_text != blank -%}
+                <span class="ny-faq__contact-text">{{ section.settings.contact_text | escape }}</span>
+              {%- endif -%}
+              <span class="ny-faq__contact-label">{{ section.settings.contact_label | escape }}</span>
+            </span>
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="ny-faq__list">
+        {%- for block in section.blocks -%}
+          <details
+            class="ny-faq__item"
+            name="faq-{{ section.id }}"
+            {% if forloop.first and section.settings.open_first %}
+              open
+            {% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <summary class="ny-faq__question">
+              <span>{{ block.settings.question | escape }}</span>
+              <span class="ny-faq__toggle" aria-hidden="true">{%- render 'noyelo-icon', icon: 'plus' -%}</span>
+            </summary>
+            <div class="ny-faq__answer rte">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  {%- if section.settings.structured_data and section.blocks.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for block in section.blocks -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.question | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.answer | strip_html | json }}
+              }
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO FAQ",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "FAQ"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Häufige Fragen"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Überschrift als",
+      "options": [
+        {
+          "value": "h2",
+          "label": "H2 (Standard)"
+        },
+        {
+          "value": "h1",
+          "label": "H1 (eigene FAQ-Seite)"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Alles, was du über dein neues Kissen wissen möchtest.</p>"
+    },
+    {
+      "type": "text",
+      "id": "contact_text",
+      "label": "Kontakt – Einleitung",
+      "default": "Noch Fragen?"
+    },
+    {
+      "type": "text",
+      "id": "contact_label",
+      "label": "Kontakt – Linktext",
+      "default": "Schreib uns"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Kontakt – Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Erste Frage geöffnet anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "structured_data",
+      "label": "FAQ-Daten für Suchmaschinen ausgeben",
+      "info": "Nur in einer FAQ-Section pro Seite aktivieren.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Frage",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Frage",
+          "default": "Wie funktioniert der 30-Nächte-Test?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Antwort",
+          "default": "<p>Du schläfst 30 Nächte auf deinem neuen Kissen. Wenn du nicht überzeugt bist, meldest du dich einfach bei uns.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO FAQ",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "Wie funktioniert der 30-Nächte-Test?",
+            "answer": "<p>Du schläfst 30 Nächte auf deinem neuen Kissen. Wenn du nicht überzeugt bist, meldest du dich einfach bei uns.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Kann ich den Bezug waschen?",
+            "answer": "<p>Ja. Der Bezug ist abnehmbar und bei 40 °C waschbar. Den Memory-Foam-Kern bitte nicht waschen.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Für welche Schlafposition eignet sich das Kissen?",
+            "answer": "<p>Das Kissen eignet sich besonders für Seiten- und Rückenschläfer.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,367 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+{%- liquid
+  assign product = section.settings.product
+  assign variant = product.selected_or_first_available_variant
+  assign media_image = section.settings.image | default: product.featured_media.preview_image
+  assign product_url = product.url | default: routes.all_products_collection_url
+  assign form_id = 'FeaturedProductForm-' | append: section.id
+  assign show_atc = false
+  if section.settings.cta_mode == 'add_to_cart' and product != blank
+    assign show_atc = true
+  endif
+-%}
+
+{%- if show_atc -%}
+  <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<div class="ny-feature color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-feature__grid ny-feature__grid--media-{{ section.settings.media_position }}">
+      <div class="ny-feature__media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <a
+          href="{{ product_url }}"
+          class="ny-feature__image ny-media"
+          tabindex="-1"
+          aria-hidden="true"
+        >
+          {%- render 'noyelo-image',
+            image: media_image,
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            placeholder: 'product-1'
+          -%}
+        </a>
+        {%- if section.settings.badge != blank -%}
+          <span class="ny-feature__badge">{{ section.settings.badge | escape }}</span>
+        {%- endif -%}
+      </div>
+
+      <div class="ny-feature__content{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+
+        <h2 class="ny-feature__title h1">
+          {%- if section.settings.heading != blank -%}
+            {{ section.settings.heading }}
+          {%- elsif product != blank -%}
+            {{ product.title | escape }}
+          {%- else -%}
+            {{ 'onboarding.product_title' | t }}
+          {%- endif -%}
+        </h2>
+
+        {%- if section.settings.show_rating -%}
+          {%- render 'noyelo-product-rating',
+            product: product,
+            manual_rating: section.settings.manual_rating,
+            manual_count: section.settings.manual_count,
+            link: product_url,
+            class: 'ny-feature__rating'
+          -%}
+        {%- endif -%}
+
+        <div class="ny-feature__text ny-lead">
+          {%- if section.settings.description != blank -%}
+            {{ section.settings.description }}
+          {%- elsif product.description != blank -%}
+            <p>{{ product.description | strip_html | truncatewords: 32 }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="ny-checklist ny-feature__list" role="list">
+            {%- for block in section.blocks -%}
+              <li {{ block.shopify_attributes }}>
+                {%- render 'noyelo-icon', icon: 'check' -%}
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        <div class="ny-feature__buy">
+          <div class="ny-feature__price">
+            {%- if product != blank -%}
+              {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+            {%- else -%}
+              <span class="price price--large">{{ 4900 | money }}</span>
+            {%- endif -%}
+          </div>
+
+          {%- if show_atc -%}
+            <product-form class="product-form ny-feature__form" data-section-id="{{ section.id }}">
+              <div class="product-form__error-message-wrapper" role="alert" hidden>
+                <span class="product-form__error-message"></span>
+              </div>
+              {%- form 'product', product, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                {%- if product.has_only_default_variant -%}
+                  <input type="hidden" name="id" value="{{ variant.id }}">
+                {%- else -%}
+                  <div class="ny-feature__variant">
+                    <label class="visually-hidden" for="FeaturedVariant-{{ section.id }}">
+                      {{- product.options | join: ' / ' -}}
+                    </label>
+                    <div class="select">
+                      <select id="FeaturedVariant-{{ section.id }}" name="id" class="select__select">
+                        {%- for v in product.variants -%}
+                          <option
+                            value="{{ v.id }}"
+                            {% if v.id == variant.id %}
+                              selected
+                            {% endif %}
+                            {% unless v.available %}
+                              disabled
+                            {% endunless %}
+                          >
+                            {{ v.title | escape }} – {{ v.price | money | strip_html }}
+                            {%- unless v.available %} ({{ 'products.product.sold_out' | t }}){% endunless -%}
+                          </option>
+                        {%- endfor -%}
+                      </select>
+                      <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+                    </div>
+                  </div>
+                {%- endif -%}
+                <div class="ny-btn-row">
+                  <button
+                    type="submit"
+                    name="add"
+                    class="button button--large button--primary ny-feature__atc"
+                    {% unless product.available %}
+                      disabled
+                    {% endunless %}
+                  >
+                    <span>
+                      {%- if product.available -%}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                      {%- endif -%}
+                    </span>
+                    {%- render 'loading-spinner' -%}
+                  </button>
+                  {%- if section.settings.link_label != blank -%}
+                    <a href="{{ product_url }}" class="ny-link-arrow">
+                      {{- section.settings.link_label | escape -}}
+                      {%- render 'noyelo-icon', icon: 'arrow-right' -%}
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- endform -%}
+            </product-form>
+          {%- else -%}
+            <div class="ny-btn-row">
+              <a href="{{ product_url }}" class="button button--large button--primary">
+                {{- section.settings.button_label | escape -}}
+                {%- render 'noyelo-icon', icon: 'arrow-right' -%}
+              </a>
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.note != blank -%}
+            <p class="ny-feature__note">
+              {%- render 'noyelo-icon', icon: 'truck' -%}
+              <span>{{ section.settings.note }}</span>
+            </p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Produkt-Highlight",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produkt"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bild (optional)",
+      "info": "Standard: Hauptbild des Produkts."
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge auf dem Bild (optional)",
+      "default": "Bestseller"
+    },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Bildposition (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Links"
+        },
+        {
+          "value": "right",
+          "label": "Rechts"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Inhalt"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Unser Kissen"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift (optional)",
+      "info": "Leer lassen, um den Produktnamen zu verwenden."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Kurzbeschreibung (optional)",
+      "info": "Leer lassen, um den Anfang der Produktbeschreibung zu verwenden."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Bewertung anzeigen",
+      "default": true,
+      "info": "Nutzt die Review-Metafelder des Produkts. Ohne Bewertungen wird nichts angezeigt."
+    },
+    {
+      "type": "number",
+      "id": "manual_rating",
+      "label": "Manuelle Bewertung (optional)",
+      "info": "Nur echte, belegbare Werte verwenden, z. B. 4.8"
+    },
+    {
+      "type": "number",
+      "id": "manual_count",
+      "label": "Anzahl Bewertungen (optional)"
+    },
+    {
+      "type": "select",
+      "id": "cta_mode",
+      "label": "Hauptaktion",
+      "options": [
+        {
+          "value": "add_to_cart",
+          "label": "Direkt in den Warenkorb"
+        },
+        {
+          "value": "link",
+          "label": "Link zur Produktseite"
+        }
+      ],
+      "default": "add_to_cart"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button-Text (bei Link zur Produktseite)",
+      "default": "Kissen entdecken"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Textlink zur Produktseite",
+      "default": "Mehr erfahren"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "note",
+      "label": "Hinweis unter dem Button",
+      "default": "Kostenloser Versand · 30 Nächte testen"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Vorteil",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Passt sich Kopf und Nacken an"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Produkt-Highlight",
+      "blocks": [
+        {
+          "type": "point",
+          "settings": {
+            "text": "Passt sich Kopf und Nacken an"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "Atmungsaktiver, abnehmbarer Bezug"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "30 Nächte zuhause testen"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,254 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+{%- liquid
+  assign review_blocks = section.blocks | where: 'type', 'review'
+  assign app_blocks = section.blocks | where: 'type', '@app'
+  assign rating_product = section.settings.product
+  if rating_product == blank and product != blank
+    assign rating_product = product
+  endif
+-%}
+
+<div
+  id="reviews"
+  class="ny-reviews color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+>
+  <ny-carousel class="page-width ny-reviews__carousel">
+    <div class="ny-reviews__head{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="ny-section-intro">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ny-heading h1" id="ReviewsHeading-{{ section.id }}">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- render 'noyelo-product-rating',
+          product: rating_product,
+          manual_rating: section.settings.manual_rating,
+          manual_count: section.settings.manual_count,
+          class: 'ny-reviews__summary'
+        -%}
+      </div>
+
+      {%- if review_blocks.size > 1 -%}
+        <div class="ny-reviews__nav" data-ny-controls>
+          <button type="button" class="ny-round-button" data-ny-prev aria-controls="ReviewsTrack-{{ section.id }}">
+            <span class="visually-hidden">{{ 'noyelo.reviews.previous' | t }}</span>
+            <span class="ny-round-button__icon ny-round-button__icon--prev">{%- render 'noyelo-icon', icon: 'arrow-right' -%}</span>
+          </button>
+          <button type="button" class="ny-round-button" data-ny-next aria-controls="ReviewsTrack-{{ section.id }}">
+            <span class="visually-hidden">{{ 'noyelo.reviews.next' | t }}</span>
+            <span class="ny-round-button__icon">{%- render 'noyelo-icon', icon: 'arrow-right' -%}</span>
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if review_blocks.size > 0 -%}
+        <ul
+          id="ReviewsTrack-{{ section.id }}"
+          class="ny-reviews__track ny-scroller"
+          role="list"
+          data-ny-track
+          tabindex="0"
+          {% if section.settings.heading != blank %}
+            aria-labelledby="ReviewsHeading-{{ section.id }}"
+          {% endif %}
+        >
+          {%- for block in review_blocks -%}
+            <li class="ny-review" {{ block.shopify_attributes }}>
+              <article class="ny-review__card">
+                {%- render 'noyelo-stars', rating: block.settings.rating -%}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="ny-review__title h4">{{ block.settings.title | escape }}</h3>
+                {%- endif -%}
+                <div class="ny-review__text">{{ block.settings.text }}</div>
+                <footer class="ny-review__meta">
+                  {%- if block.settings.image != blank -%}
+                    {{
+                      block.settings.image
+                      | image_url: width: 96
+                      | image_tag: width: 40, height: 40, loading: 'lazy', class: 'ny-review__avatar', alt: ''
+                    }}
+                  {%- else -%}
+                    <span class="ny-review__initial" aria-hidden="true">{{ block.settings.author | slice: 0 | upcase }}</span>
+                  {%- endif -%}
+                  <span class="ny-review__who">
+                    <span class="ny-review__author">{{ block.settings.author | escape }}</span>
+                    {%- if block.settings.verified -%}
+                      <span class="ny-review__verified">
+                        {%- render 'noyelo-icon', icon: 'shield' -%}
+                        {{ 'noyelo.reviews.verified' | t }}
+                      </span>
+                    {%- elsif block.settings.detail != blank -%}
+                      <span class="ny-review__detail">{{ block.settings.detail | escape }}</span>
+                    {%- endif -%}
+                  </span>
+                </footer>
+              </article>
+            </li>
+          {%- endfor -%}
+        </ul>
+    {%- endif -%}
+
+    {%- if app_blocks.size > 0 -%}
+      <div class="ny-reviews__apps">
+        {%- for block in app_blocks -%}
+          {% render block %}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </ny-carousel>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Bewertungen",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 16,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Tipp: Installiere eine Shopify-Review-App (z. B. Judge.me, Okendo, Yotpo) und füge ihr Widget hier als App-Block hinzu. Manuelle Bewertungen nur mit echten Kundenstimmen verwenden."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Bewertungen"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Was unsere Kund:innen sagen"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produkt für Gesamtbewertung (optional)",
+      "info": "Auf Produktseiten wird automatisch das aktuelle Produkt verwendet."
+    },
+    {
+      "type": "number",
+      "id": "manual_rating",
+      "label": "Manuelle Gesamtbewertung (optional)",
+      "info": "Wird nur ohne Review-Metafelder verwendet, z. B. 4.8"
+    },
+    {
+      "type": "number",
+      "id": "manual_count",
+      "label": "Anzahl Bewertungen (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "review",
+      "name": "Bewertung",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Sterne",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel (optional)",
+          "default": "Endlich ohne Nackenverspannung"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Bewertungstext",
+          "default": "<p>Hier steht eine echte Bewertung einer Kundin oder eines Kunden. Ersetze diesen Text vor der Veröffentlichung.</p>"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Name",
+          "default": "Kundin"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "„Verifizierter Kauf“ anzeigen",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Zusatz (z. B. „Seitenschläferin“)",
+          "info": "Wird angezeigt, wenn „Verifizierter Kauf“ deaktiviert ist."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Profilbild (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Bewertungen",
+      "blocks": [
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        },
+        {
+          "type": "review"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

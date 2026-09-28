@@ -1,0 +1,298 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-split color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-split__grid ny-split__grid--image-{{ section.settings.image_position }} ny-split__grid--{{ section.settings.vertical_alignment }}">
+      <div class="ny-split__media{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <div class="ny-split__image ny-media ny-media--{{ section.settings.image_ratio }}">
+          {%- render 'noyelo-image',
+            image: section.settings.image,
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            placeholder: 'lifestyle-1'
+          -%}
+        </div>
+        {%- if section.settings.image_caption != blank -%}
+          <p class="ny-split__caption">{{ section.settings.image_caption }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="ny-split__content{% if section.settings.content_card %} ny-split__content--card{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ny-heading h1">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="ny-split__text ny-lead">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- liquid
+          assign points = section.blocks | where: 'type', 'point'
+          assign stats = section.blocks | where: 'type', 'stat'
+        -%}
+        {%- if points.size > 0 -%}
+          <ul class="ny-checklist ny-split__list" role="list">
+            {%- for block in points -%}
+              <li {{ block.shopify_attributes }}>
+                {%- render 'noyelo-icon', icon: block.settings.icon -%}
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if stats.size > 0 -%}
+          <dl class="ny-stats">
+            {%- for block in stats -%}
+              <div class="ny-stat" {{ block.shopify_attributes }}>
+                <dt class="ny-stat__label">{{ block.settings.label }}</dt>
+                <dd class="ny-stat__value">{{ block.settings.value | escape }}</dd>
+              </div>
+            {%- endfor -%}
+          </dl>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank -%}
+          <div class="ny-btn-row">
+            <a
+              {% if section.settings.button_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.button_link }}"
+              {% endif %}
+              class="button {% if section.settings.button_style == 'secondary' %}button--secondary{% else %}button--primary{% endif %}"
+            >
+              {{- section.settings.button_label | escape -}}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Bild & Text",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bild",
+      "info": "Funktioniert gut mit Produktaufnahmen, Material-Nahaufnahmen, Querschnitten oder Lifestyle-Bildern."
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Bildformat",
+      "options": [
+        {
+          "value": "portrait",
+          "label": "Hochformat (4:5)"
+        },
+        {
+          "value": "square",
+          "label": "Quadratisch"
+        },
+        {
+          "value": "landscape",
+          "label": "Querformat (4:3)"
+        }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Bildposition (Desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Links"
+        },
+        {
+          "value": "right",
+          "label": "Rechts"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "image_caption",
+      "label": "Bildunterschrift (optional)"
+    },
+    {
+      "type": "header",
+      "content": "Inhalt"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Material"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Weich an der Oberfläche. Stabil im Kern."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Beschreibe hier ein Detail deines Produkts – zum Beispiel das Material, die Verarbeitung oder das Schlafgefühl.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button-Text (optional)"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button-Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button-Stil",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Gefüllt"
+        },
+        {
+          "value": "secondary",
+          "label": "Kontur"
+        }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertikale Ausrichtung",
+      "options": [
+        {
+          "value": "top",
+          "label": "Oben"
+        },
+        {
+          "value": "center",
+          "label": "Mitte"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "content_card",
+      "label": "Text in weicher Karte darstellen",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Aufzählungspunkt",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "default": "check"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Abnehmbarer, waschbarer Bezug"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Kennzahl",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Wert",
+          "default": "4 Schichten"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "label",
+          "label": "Beschreibung",
+          "default": "für Halt & Komfort"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Bild & Text",
+      "blocks": [
+        {
+          "type": "point",
+          "settings": {
+            "icon": "check",
+            "text": "Abnehmbarer, waschbarer Bezug"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "icon": "check",
+            "text": "Formstabil – auch nach vielen Nächten"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

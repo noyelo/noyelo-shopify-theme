@@ -1,0 +1,173 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-trust color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="visually-hidden">{{ section.settings.heading | escape }}</h2>
+    {%- endif -%}
+    <ul
+      class="ny-trust__list ny-trust__list--{{ section.settings.style }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      role="list"
+      style="--ny-trust-count: {{ section.blocks.size | at_least: 1 }};"
+    >
+      {%- for block in section.blocks -%}
+        <li class="ny-trust__item" {{ block.shopify_attributes }}>
+          <span class="ny-trust__icon">
+            {%- if block.settings.custom_icon != blank -%}
+              {{
+                block.settings.custom_icon
+                | image_url: width: 96
+                | image_tag: width: 24, height: 24, loading: 'lazy', alt: ''
+              }}
+            {%- else -%}
+              {%- render 'noyelo-icon', icon: block.settings.icon -%}
+            {%- endif -%}
+          </span>
+          <span class="ny-trust__copy">
+            <span class="ny-trust__title">{{ block.settings.title }}</span>
+            {%- if block.settings.text != blank -%}
+              <span class="ny-trust__text">{{ block.settings.text }}</span>
+            {%- endif -%}
+          </span>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Trust-Leiste",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift (nur für Screenreader)",
+      "default": "Deine Vorteile"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Stil",
+      "options": [
+        {
+          "value": "plain",
+          "label": "Schlicht"
+        },
+        {
+          "value": "cards",
+          "label": "Karten"
+        }
+      ],
+      "default": "plain"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Vorteil",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "default": "check"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Eigenes Icon (optional)",
+          "info": "Ersetzt das gewählte Icon. Quadratisch, idealerweise SVG oder PNG."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Titel",
+          "default": "30 Nächte testen"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Trust-Leiste",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "icon": "moon",
+            "title": "30 Nächte testen",
+            "text": "Probeschlafen ohne Risiko"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "truck",
+            "title": "Kostenloser Versand",
+            "text": "Ab 50 € Bestellwert"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "contour",
+            "title": "Ergonomischer Komfort",
+            "text": "Passt sich dir an"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "icon": "return",
+            "title": "Einfache Rückgabe",
+            "text": "Unkompliziert & fair"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,310 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-compare color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-compare__layout">
+      <div class="ny-section-intro ny-compare__intro{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ny-heading h1" id="CompareHeading-{{ section.id }}">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="ny-lead">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <div class="ny-btn-row ny-compare__cta">
+            <a
+              {% if section.settings.button_link == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.button_link }}"
+              {% endif %}
+              class="button button--primary"
+            >
+              {{- section.settings.button_label | escape -}}
+              {%- render 'noyelo-icon', icon: 'arrow-right' -%}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="ny-compare__table-wrap{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <table
+          class="ny-compare__table"
+          {% if section.settings.heading != blank %}
+            aria-labelledby="CompareHeading-{{ section.id }}"
+          {% endif %}
+        >
+          <thead>
+            <tr>
+              <th scope="col" class="ny-compare__feature-head">
+                <span class="visually-hidden">{{ 'noyelo.comparison.feature' | t }}</span>
+              </th>
+              <th scope="col" class="ny-compare__brand">
+                {%- if section.settings.brand_logo != blank -%}
+                  {{
+                    section.settings.brand_logo
+                    | image_url: width: 240
+                    | image_tag: loading: 'lazy', class: 'ny-compare__logo', alt: section.settings.brand_label, widths: '120, 180, 240', sizes: '80px'
+                  }}
+                {%- else -%}
+                  {{ section.settings.brand_label | escape }}
+                {%- endif -%}
+              </th>
+              <th scope="col" class="ny-compare__other">{{ section.settings.other_label | escape }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for block in section.blocks -%}
+              <tr {{ block.shopify_attributes }}>
+                <th scope="row" class="ny-compare__feature">{{ block.settings.feature }}</th>
+                {%- assign values = block.settings.brand_value | append: '|' | append: block.settings.other_value | split: '|' -%}
+                {%- for value in values -%}
+                  {%- liquid
+                    if forloop.first
+                      assign cell_class = 'ny-compare__cell ny-compare__cell--brand'
+                      assign cell_text = block.settings.brand_text
+                    else
+                      assign cell_class = 'ny-compare__cell ny-compare__cell--other'
+                      assign cell_text = block.settings.other_text
+                    endif
+                  -%}
+                  <td class="{{ cell_class }}">
+                    {%- case value -%}
+                      {%- when 'yes' -%}
+                        <span class="ny-compare__mark ny-compare__mark--yes">
+                          {%- render 'noyelo-icon', icon: 'check' -%}
+                        </span>
+                        <span class="visually-hidden">{{ 'noyelo.comparison.yes' | t }}</span>
+                      {%- when 'no' -%}
+                        <span class="ny-compare__mark ny-compare__mark--no">
+                          {%- render 'noyelo-icon', icon: 'minus' -%}
+                        </span>
+                        <span class="visually-hidden">{{ 'noyelo.comparison.no' | t }}</span>
+                      {%- else -%}
+                        <span class="ny-compare__text">{{ cell_text | escape }}</span>
+                    {%- endcase -%}
+                  </td>
+                {%- endfor -%}
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Vergleich",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 10,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Der Unterschied"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "NOYELO vs. normales Kissen"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Ein gutes Kissen ist mehr als eine weiche Füllung. So unterscheidet sich NOYELO von einem gewöhnlichen Kissen.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button-Text (optional)",
+      "default": "Kissen entdecken"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button-Link"
+    },
+    {
+      "type": "header",
+      "content": "Spalten"
+    },
+    {
+      "type": "text",
+      "id": "brand_label",
+      "label": "Spalte 1 – Bezeichnung",
+      "default": "NOYELO"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo",
+      "label": "Spalte 1 – Logo statt Text (optional)"
+    },
+    {
+      "type": "text",
+      "id": "other_label",
+      "label": "Spalte 2 – Bezeichnung",
+      "default": "Normales Kissen"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Zeile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature",
+          "label": "Merkmal",
+          "default": "Ergonomische Unterstützung"
+        },
+        {
+          "type": "select",
+          "id": "brand_value",
+          "label": "Spalte 1",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Ja (Häkchen)"
+            },
+            {
+              "value": "no",
+              "label": "Nein (Strich)"
+            },
+            {
+              "value": "text",
+              "label": "Text"
+            }
+          ],
+          "default": "yes"
+        },
+        {
+          "type": "text",
+          "id": "brand_text",
+          "label": "Spalte 1 – Text",
+          "info": "Nur bei Auswahl „Text“."
+        },
+        {
+          "type": "select",
+          "id": "other_value",
+          "label": "Spalte 2",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Ja (Häkchen)"
+            },
+            {
+              "value": "no",
+              "label": "Nein (Strich)"
+            },
+            {
+              "value": "text",
+              "label": "Text"
+            }
+          ],
+          "default": "no"
+        },
+        {
+          "type": "text",
+          "id": "other_text",
+          "label": "Spalte 2 – Text",
+          "info": "Nur bei Auswahl „Text“."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Vergleich",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "feature": "Ergonomische Unterstützung",
+            "brand_value": "yes",
+            "other_value": "no"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature": "Memory Foam",
+            "brand_value": "yes",
+            "other_value": "no"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature": "Atmungsaktiver Bezug",
+            "brand_value": "yes",
+            "other_value": "no"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature": "Waschbarer Bezug",
+            "brand_value": "yes",
+            "other_value": "no"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "feature": "Testphase",
+            "brand_value": "text",
+            "brand_text": "30 Nächte",
+            "other_value": "no"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

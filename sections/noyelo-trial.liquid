@@ -1,0 +1,238 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-trial color-{{ section.settings.outer_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-trial__card color-{{ section.settings.color_scheme }}{% if section.settings.image != blank %} ny-trial__card--image{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="ny-trial__content">
+        <div class="ny-trial__badge" aria-hidden="true">
+          <span class="ny-trial__number">{{ section.settings.number | escape }}</span>
+          <span class="ny-trial__unit">{{ section.settings.unit | escape }}</span>
+          {%- render 'noyelo-icon', icon: 'moon', class: 'ny-trial__moon' -%}
+        </div>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ny-heading h1">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="ny-lead">{{ section.settings.text }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ol class="ny-trial__steps" role="list">
+            {%- for block in section.blocks -%}
+              <li class="ny-trial__step" {{ block.shopify_attributes }}>
+                <span class="ny-trial__step-icon">{%- render 'noyelo-icon', icon: block.settings.icon -%}</span>
+                <span class="ny-trial__step-copy">
+                  <span class="ny-trial__step-title">{{ block.settings.title }}</span>
+                  {%- if block.settings.text != blank -%}
+                    <span class="ny-trial__step-text">{{ block.settings.text }}</span>
+                  {%- endif -%}
+                </span>
+              </li>
+            {%- endfor -%}
+          </ol>
+        {%- endif -%}
+
+        {%- if section.settings.button_label != blank or section.settings.link_label != blank -%}
+          <div class="ny-btn-row">
+            {%- if section.settings.button_label != blank -%}
+              <a
+                {% if section.settings.button_link == blank %}
+                  role="link" aria-disabled="true"
+                {% else %}
+                  href="{{ section.settings.button_link }}"
+                {% endif %}
+                class="button button--primary"
+              >
+                {{- section.settings.button_label | escape -}}
+              </a>
+            {%- endif -%}
+            {%- if section.settings.link_label != blank and section.settings.link_url != blank -%}
+              <a href="{{ section.settings.link_url }}" class="ny-link-arrow">
+                {{- section.settings.link_label | escape -}}
+                {%- render 'noyelo-icon', icon: 'arrow-right' -%}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.image != blank -%}
+        <div class="ny-trial__media ny-media">
+          {%- render 'noyelo-image', image: section.settings.image, sizes: '(min-width: 990px) 45vw, 100vw' -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Probeschlafen",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "number",
+      "label": "Große Zahl",
+      "default": "30"
+    },
+    {
+      "type": "text",
+      "id": "unit",
+      "label": "Einheit",
+      "default": "Nächte"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Ohne Risiko"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "30 Nächte zuhause testen."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Dein Körper braucht ein paar Nächte, um sich an ein neues Kissen zu gewöhnen. Deshalb nimmst du dir bei uns die Zeit – in deinem eigenen Bett.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bild (optional)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button-Text",
+      "default": "Jetzt testen"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button-Link"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Textlink (optional)",
+      "default": "Details zur Rückgabe"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Textlink-Ziel"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema der Karte",
+      "default": "scheme-3"
+    },
+    {
+      "type": "color_scheme",
+      "id": "outer_scheme",
+      "label": "Farbschema des Hintergrunds",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Schritt",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "default": "package"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Titel",
+          "default": "Bestellen"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Kostenlos geliefert, bequem nach Hause."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Probeschlafen",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "package",
+            "title": "Bestellen",
+            "text": "Bequem nach Hause geliefert."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "moon",
+            "title": "30 Nächte probeschlafen",
+            "text": "Ganz in Ruhe, in deinem Bett."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "heart",
+            "title": "Behalten oder zurückgeben",
+            "text": "Passt es nicht, gibst du es einfach zurück."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

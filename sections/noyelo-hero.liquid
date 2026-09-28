@@ -1,0 +1,423 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+{%- liquid
+  assign is_first = false
+  if section.index == 1
+    assign is_first = true
+  endif
+
+  assign image = section.settings.image
+  assign image_mobile = section.settings.image_mobile | default: image
+  assign layout = section.settings.layout
+  assign heading_tag = 'h2'
+  if is_first and request.page_type != 'index'
+    assign heading_tag = 'h1'
+  endif
+-%}
+
+<div
+  class="ny-hero ny-hero--{{ layout }} ny-hero--{{ section.settings.height }} ny-hero--mobile-{{ section.settings.mobile_order }} ny-hero--under-header color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  style="--ny-hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+>
+  <div class="ny-hero__media-wrap{% if layout == 'split' %} page-width{% endif %}">
+    <div class="ny-hero__grid">
+      <div class="ny-hero__media ny-media{% if image_mobile != image %} ny-hero__media--art{% endif %}">
+        {%- if image != blank -%}
+          {%- liquid
+            assign fetch_priority = 'auto'
+            assign img_loading = 'lazy'
+            if is_first
+              assign fetch_priority = 'high'
+              assign img_loading = 'eager'
+            endif
+            if layout == 'split'
+              assign desktop_sizes = '(min-width: 990px) 55vw, 100vw'
+            else
+              assign desktop_sizes = '100vw'
+            endif
+          -%}
+          <picture>
+            {%- if image_mobile != image -%}
+              <source
+                media="(max-width: 749px)"
+                srcset="
+                  {{ image_mobile | image_url: width: 400 }} 400w,
+                  {{ image_mobile | image_url: width: 600 }} 600w,
+                  {{ image_mobile | image_url: width: 800 }} 800w,
+                  {{ image_mobile | image_url: width: 1100 }} 1100w,
+                  {{ image_mobile | image_url: width: 1400 }} 1400w
+                "
+                sizes="100vw"
+                width="{{ image_mobile.width }}"
+                height="{{ image_mobile.height }}"
+              >
+            {%- endif -%}
+            {%- assign img_style = 'object-position: ' | append: image.presentation.focal_point -%}
+            {{
+              image
+              | image_url: width: 3000
+              | image_tag:
+                widths: '400, 600, 800, 1100, 1400, 1800, 2200, 2600, 3000',
+                sizes: desktop_sizes,
+                loading: img_loading,
+                fetchpriority: fetch_priority,
+                alt: image.alt,
+                style: img_style
+            }}
+          </picture>
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <div class="ny-hero__content{% if layout == 'overlay' %} page-width{% endif %} ny-hero__content--{{ section.settings.content_alignment }}">
+        <div class="ny-hero__inner{% if settings.animations_reveal_on_scroll and is_first == false %} scroll-trigger animate--slide-in{% endif %}">
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <{{ heading_tag }} class="ny-hero__heading {{ section.settings.heading_size }}">
+              {{- section.settings.heading -}}
+            </{{ heading_tag }}>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="ny-hero__text ny-lead">{{ section.settings.text }}</div>
+          {%- endif -%}
+
+          {%- if section.settings.button_label != blank or section.settings.button_label_2 != blank -%}
+            <div class="ny-btn-row ny-hero__buttons">
+              {%- if section.settings.button_label != blank -%}
+                <a
+                  {% if section.settings.button_link == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ section.settings.button_link }}"
+                  {% endif %}
+                  class="button button--large button--primary"
+                >
+                  {{- section.settings.button_label | escape -}}
+                  {%- render 'noyelo-icon', icon: 'arrow-right' -%}
+                </a>
+              {%- endif -%}
+              {%- if section.settings.button_label_2 != blank -%}
+                <a
+                  {% if section.settings.button_link_2 == blank %}
+                    role="link" aria-disabled="true"
+                  {% else %}
+                    href="{{ section.settings.button_link_2 }}"
+                  {% endif %}
+                  class="button button--large button--secondary"
+                >
+                  {{- section.settings.button_label_2 | escape -}}
+                </a>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if section.blocks.size > 0 -%}
+            <ul class="ny-hero__usps" role="list">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'usp' -%}
+                    <li class="ny-hero__usp" {{ block.shopify_attributes }}>
+                      {%- render 'noyelo-icon', icon: block.settings.icon -%}
+                      <span>{{ block.settings.text }}</span>
+                    </li>
+                  {%- when 'rating' -%}
+                    <li class="ny-hero__usp ny-hero__usp--rating" {{ block.shopify_attributes }}>
+                      {%- render 'noyelo-product-rating',
+                        product: block.settings.product,
+                        manual_rating: block.settings.manual_rating,
+                        manual_count: block.settings.manual_count
+                      -%}
+                      {%- if block.settings.text != blank -%}
+                        <span>{{ block.settings.text }}</span>
+                      {%- endif -%}
+                    </li>
+                {%- endcase -%}
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Hero",
+  "tag": "section",
+  "class": "section ny-section-hero",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "split",
+          "label": "Text links, Bild rechts"
+        },
+        {
+          "value": "overlay",
+          "label": "Vollflächiges Bild mit Text"
+        }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Höhe (Desktop)",
+      "options": [
+        {
+          "value": "compact",
+          "label": "Kompakt"
+        },
+        {
+          "value": "medium",
+          "label": "Mittel"
+        },
+        {
+          "value": "large",
+          "label": "Groß"
+        }
+      ],
+      "default": "medium"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bild",
+      "info": "Empfohlen: mind. 2400 px breit. Fokuspunkt im Bild-Editor festlegen."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Bild mobil (optional)",
+      "info": "Eigener Bildausschnitt für Smartphones, z. B. im Hochformat."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "label": "Bild-Abdunklung (nur Vollbild-Layout)",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Inhalt"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Das neue NOYELO Kissen"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Besser schlafen beginnt hier."
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Größe der Überschrift",
+      "options": [
+        {
+          "value": "h0",
+          "label": "Sehr groß"
+        },
+        {
+          "value": "h1",
+          "label": "Groß"
+        }
+      ],
+      "default": "h0"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Ergonomischer Memory Foam, der sich deinem Nacken anpasst – für ruhige Nächte und entspannte Morgen.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button 1 – Text",
+      "default": "Kissen entdecken"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button 1 – Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Button 2 – Text (optional)"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Button 2 – Link"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Textausrichtung",
+      "options": [
+        {
+          "value": "left",
+          "label": "Links"
+        },
+        {
+          "value": "center",
+          "label": "Zentriert"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_order",
+      "label": "Reihenfolge mobil",
+      "options": [
+        {
+          "value": "image-first",
+          "label": "Bild zuerst"
+        },
+        {
+          "value": "text-first",
+          "label": "Text zuerst"
+        }
+      ],
+      "default": "image-first",
+      "info": "Nur für das Layout „Text links, Bild rechts“."
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "Kurz-Vorteil",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "check", "label": "Häkchen" },
+            { "value": "moon", "label": "Mond" },
+            { "value": "truck", "label": "Versand" },
+            { "value": "return", "label": "Rückgabe" },
+            { "value": "shield", "label": "Schutz" },
+            { "value": "cloud", "label": "Wolke / Komfort" },
+            { "value": "star", "label": "Stern" },
+            { "value": "heart", "label": "Herz" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "30 Nächte testen"
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Bewertung",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Produkt",
+          "info": "Zeigt die Durchschnittsbewertung aus den Review-Metafeldern des Produkts (von Review-Apps befüllt)."
+        },
+        {
+          "type": "number",
+          "id": "manual_rating",
+          "label": "Manuelle Bewertung (optional)",
+          "info": "Nur echte, belegbare Werte verwenden, z. B. 4.8"
+        },
+        {
+          "type": "number",
+          "id": "manual_count",
+          "label": "Anzahl Bewertungen (optional)"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Zusatztext (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Hero",
+      "blocks": [
+        {
+          "type": "usp",
+          "settings": {
+            "icon": "moon",
+            "text": "30 Nächte testen"
+          }
+        },
+        {
+          "type": "usp",
+          "settings": {
+            "icon": "truck",
+            "text": "Kostenloser Versand"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

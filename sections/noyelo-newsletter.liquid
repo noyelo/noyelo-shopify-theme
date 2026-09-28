@@ -1,0 +1,152 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-newsletter color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-newsletter__inner{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ny-heading h2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="ny-lead">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- form 'customer', id: 'NewsletterSection', class: 'ny-newsletter-form ny-newsletter__form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="ny-newsletter-form__row">
+          <label class="visually-hidden" for="NewsletterSection-{{ section.id }}">{{ 'newsletter.label' | t }}</label>
+          <input
+            id="NewsletterSection-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            class="ny-newsletter-form__input"
+            value="{{ form.email }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+            {% if form.errors %}
+              autofocus
+              aria-invalid="true"
+              aria-describedby="NewsletterSection-error"
+            {% elsif form.posted_successfully? %}
+              aria-describedby="NewsletterSection-success"
+            {% endif %}
+            placeholder="{{ 'newsletter.label' | t }}"
+            required
+          >
+          <button type="submit" class="button button--primary ny-newsletter-form__button" name="commit">
+            {%- if section.settings.button_label != blank -%}
+              {{- section.settings.button_label | escape -}}
+            {%- else -%}
+              {{- 'newsletter.button_label' | t -}}
+            {%- endif -%}
+          </button>
+        </div>
+        {%- if form.errors -%}
+          <p class="ny-form-message ny-form-message--error" id="NewsletterSection-error" role="alert">
+            {{- form.errors.translated_fields.email | capitalize }}
+            {{ form.errors.messages.email -}}
+          </p>
+        {%- endif -%}
+        {%- if form.posted_successfully? -%}
+          <p class="ny-form-message ny-form-message--success" id="NewsletterSection-success" tabindex="-1" autofocus>
+            {% render 'noyelo-icon', icon: 'check' %}
+            {{- 'newsletter.success' | t -}}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if section.settings.privacy_text != blank -%}
+        <div class="ny-newsletter__privacy">{{ section.settings.privacy_text }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Newsletter",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Anmeldungen werden als Kund:innen mit Marketing-Einwilligung in Shopify gespeichert."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Ruhige Post von NOYELO"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Schlaftipps, Neuheiten und exklusive Angebote – ohne Spam.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button-Text",
+      "default": "Anmelden"
+    },
+    {
+      "type": "richtext",
+      "id": "privacy_text",
+      "label": "Datenschutzhinweis",
+      "default": "<p>Abmeldung jederzeit möglich. Mehr in unserer Datenschutzerklärung.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Newsletter"
+    }
+  ]
+}
+{% endschema %}

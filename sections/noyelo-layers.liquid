@@ -1,0 +1,235 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-layers color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-layers__grid">
+      <div class="ny-layers__intro{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ny-heading h1">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="ny-lead">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="ny-layers__visual{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.image != blank -%}
+          <div class="ny-layers__image ny-media">
+            {%- render 'noyelo-image', image: section.settings.image, sizes: '(min-width: 990px) 50vw, 100vw' -%}
+          </div>
+        {%- else -%}
+          <div class="ny-layers__diagram" aria-hidden="true">
+            {%- for block in section.blocks -%}
+              <div
+                class="ny-layer-band ny-layer-band--{{ block.settings.texture }}"
+                style="--ny-layer-color: {{ block.settings.color }}; --ny-layer-size: {{ block.settings.thickness }};"
+                data-layer="{{ forloop.index }}"
+              >
+                <span class="ny-layer-band__num">{{ forloop.index }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <ol class="ny-layers__list" role="list">
+        {%- for block in section.blocks -%}
+          <li
+            class="ny-layer{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {% if settings.animations_reveal_on_scroll %}
+              data-cascade style="--animation-order: {{ forloop.index }};"
+            {% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <span class="ny-layer__num" style="--ny-layer-color: {{ block.settings.color }};" aria-hidden="true">
+              {{- forloop.index -}}
+            </span>
+            <div class="ny-layer__copy">
+              <h3 class="ny-layer__title h3">{{ block.settings.title }}</h3>
+              {%- if block.settings.text != blank -%}
+                <div class="ny-layer__text">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Aufbau / Schichten",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Aufbau"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Vier Schichten für einen ruhigen Schlaf."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Querschnitt-Bild (optional)",
+      "info": "Ohne Bild wird automatisch eine grafische Schichtdarstellung aus den Farben der Blöcke erzeugt."
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "layer",
+      "name": "Schicht",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Titel",
+          "default": "Atmungsaktiver Bezug"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und waschbar.</p>"
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Farbe in der Grafik",
+          "default": "#F6F1EA"
+        },
+        {
+          "type": "range",
+          "id": "thickness",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Dicke in der Grafik",
+          "default": 2
+        },
+        {
+          "type": "select",
+          "id": "texture",
+          "label": "Struktur in der Grafik",
+          "options": [
+            {
+              "value": "smooth",
+              "label": "Glatt"
+            },
+            {
+              "value": "knit",
+              "label": "Gewebe"
+            },
+            {
+              "value": "foam",
+              "label": "Schaum (Poren)"
+            }
+          ],
+          "default": "smooth"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Aufbau / Schichten",
+      "blocks": [
+        {
+          "type": "layer",
+          "settings": {
+            "title": "Atmungsaktiver Bezug",
+            "text": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und waschbar.</p>",
+            "color": "#F6F1EA",
+            "thickness": 1,
+            "texture": "knit"
+          }
+        },
+        {
+          "type": "layer",
+          "settings": {
+            "title": "Komfortschicht",
+            "text": "<p>Eine sanfte Auflage, die sich beim Hinlegen angenehm weich anfühlt.</p>",
+            "color": "#EDE3D6",
+            "thickness": 2,
+            "texture": "smooth"
+          }
+        },
+        {
+          "type": "layer",
+          "settings": {
+            "title": "Memory-Foam-Kern",
+            "text": "<p>Reagiert auf Wärme und Gewicht und passt sich Kopf und Nacken an.</p>",
+            "color": "#D9C6AE",
+            "thickness": 4,
+            "texture": "foam"
+          }
+        },
+        {
+          "type": "layer",
+          "settings": {
+            "title": "Stützende Basis",
+            "text": "<p>Ein stabiles Fundament, das die Form auch nach vielen Nächten hält.</p>",
+            "color": "#B89F84",
+            "thickness": 2,
+            "texture": "smooth"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
