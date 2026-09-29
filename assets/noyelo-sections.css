@@ -1777,7 +1777,8 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
 }
 
 .ny-hero--overlay .ny-hero__media > picture > img {
-  object-position: 70% 50%;
+  /* anchored to the bottom: the clouds fade into the page white exactly at the section edge */
+  object-position: 70% 100%;
 }
 
 @media screen and (max-width: 749px) {
