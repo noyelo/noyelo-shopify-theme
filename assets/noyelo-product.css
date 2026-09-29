@@ -9,8 +9,10 @@
   overflow: hidden;
 }
 
-.product__media-wrapper .product-media-container {
-  background-color: var(--ny-surface);
+/* Product photos are shot on white: no tinted frame around them */
+.product__media-wrapper .product-media-container,
+.product__media-wrapper .product-media-container .media {
+  background-color: transparent;
 }
 
 .product__media-list .media > *,
@@ -19,13 +21,13 @@
 }
 
 .product-media-container.media-fit-contain img {
-  padding: 4%;
+  padding: 0;
 }
 
 .thumbnail-list .thumbnail {
   border-radius: var(--ny-radius-sm);
   overflow: hidden;
-  background-color: var(--ny-surface);
+  background-color: transparent;
 }
 
 .thumbnail-list .thumbnail[aria-current] {

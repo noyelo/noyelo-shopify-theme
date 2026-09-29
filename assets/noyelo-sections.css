@@ -1400,8 +1400,9 @@ body .ny-trial__media {
 }
 
 @media screen and (min-width: 990px) {
+  /* image column is the wider one so the landscape night scene (pillow + moon) isn't cropped to a sliver */
   .ny-trial__card--image {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   }
 
   .ny-trial__card--image .ny-trial__steps {
@@ -1781,6 +1782,32 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
   object-position: 70% 100%;
 }
 
+/* Soft fade into the page white at the bottom edge of the hero, independent of how the image is cropped */
+.ny-hero--overlay .ny-hero__grid::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 16%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 92%);
+  pointer-events: none;
+}
+
+/* Desktop: hero height follows the image proportions (1.71 : 1), capped at the viewport height;
+   focal point keeps the pillow clear of the header on wide, short screens */
+@media screen and (min-width: 990px) {
+  .ny-hero--overlay .ny-hero__grid,
+  .ny-hero--overlay.ny-hero--compact .ny-hero__grid,
+  .ny-hero--overlay.ny-hero--large .ny-hero__grid {
+    min-height: min(50vw, calc(100svh - var(--header-height, 7rem) + 4rem));
+  }
+
+  .ny-hero--overlay .ny-hero__media > picture > img {
+    object-position: 70% 62%;
+  }
+}
+
 @media screen and (max-width: 749px) {
   .ny-hero--overlay .ny-hero__grid {
     min-height: 80rem;
@@ -1976,7 +2003,7 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
 
 .ny-trial__media > img,
 .ny-trial__media > picture > img {
-  object-position: 62% 45%;
+  object-position: 54% 60%;
 }
 
 
