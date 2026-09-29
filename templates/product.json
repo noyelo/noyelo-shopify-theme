@@ -123,6 +123,22 @@
             "content": "<p><strong>Kostenloser Versand</strong> ab 50 € Bestellwert. Lieferzeit, Versandkosten und Zahlungsarten findest du unter <a href=\"/pages/versand\">Versand &amp; Zahlung</a>.</p><p><strong>30 Nächte Probeschlafen:</strong> Passt es nicht, gibst du das Kissen einfach zurück – so geht's: <a href=\"/pages/rueckgabe\">Rückgabe &amp; Erstattung</a>. Dein gesetzliches <a href=\"/pages/widerruf\">Widerrufsrecht</a> bleibt davon unberührt.</p>"
           }
         },
+        "trial": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "30 Nächte Probeschlafen",
+            "icon": "none",
+            "content": "<p>Ein neues Kissen braucht ein paar Nächte Eingewöhnung. Deshalb hast du 30 Nächte Zeit, dein NOYELO Kissen in Ruhe zu Hause zu testen. Passt es nicht, meldest du dich einfach bei uns und wir kümmern uns um die Rückgabe.</p><p>Die Garantiebedingungen findest du in unseren <a href=\"/pages/agb\">AGB</a>. Dein gesetzliches Widerrufsrecht bleibt davon unberührt.</p>"
+          }
+        },
+        "fit": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Für wen ist das Kissen geeignet?",
+            "icon": "none",
+            "content": "<p><strong>Seitenschläfer:</strong> Die Höhe füllt den Abstand zwischen Schulter und Kopf, damit die Wirbelsäule gerade bleibt.</p><p><strong>Rückenschläfer:</strong> Der Memory-Schaum stützt den Nacken, ohne den Kopf nach vorne zu drücken.</p><p><strong>Bauchschläfer:</strong> bevorzugen meist ein flacheres Kissen – teste in Ruhe, dafür gibt es die 30 Nächte.</p>"
+          }
+        },
         "offers": {
           "type": "noyelo_offers",
           "settings": {
@@ -157,6 +173,8 @@
         "specs",
         "material",
         "care",
+        "fit",
+        "trial",
         "shipping"
       ]
     },
@@ -296,14 +314,37 @@
         "m2"
       ]
     },
+    "materials": {
+      "type": "noyelo-benefits",
+      "settings": {
+        "layout": "cards",
+        "columns_desktop": 4,
+        "eyebrow": "Materialien",
+        "heading": "Was in deinem Kissen steckt.",
+        "text": "<p>Vier Schichten, jede mit einer eigenen Aufgabe – für Halt, Komfort und ein frisches Schlafgefühl.</p>",
+        "intro_alignment": "center",
+        "button_label": "",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "mat1": { "type": "benefit", "settings": { "icon": "air", "title": "Abnehmbarer Bezug", "text": "<p>Weicher, atmungsaktiver Strick. Einfach abnehmen und waschen.</p>" } },
+        "mat2": { "type": "benefit", "settings": { "icon": "feather", "title": "Komfortschicht", "text": "<p>Perforierte Auflage für sanfte Druckentlastung beim Hinlegen.</p>" } },
+        "mat3": { "type": "benefit", "settings": { "icon": "cloud", "title": "Memory-Schaum-Kern", "text": "<p>Reagiert auf Wärme und Druck und passt sich Kopf und Nacken an.</p>" } },
+        "mat4": { "type": "benefit", "settings": { "icon": "layers", "title": "Stützbasis", "text": "<p>Festes Fundament, das die ergonomische Form Nacht für Nacht hält.</p>" } }
+      },
+      "block_order": ["mat1", "mat2", "mat3", "mat4"]
+    },
     "hotspots": {
       "type": "noyelo-hotspots",
       "settings": {
         "eyebrow": "Aufbau",
         "heading": "Vier Schichten für einen ruhigen Schlaf.",
         "text": "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>",
-        "default_art": "product-image-4",
-        "image_width": 60,
+        "default_art": "layers-cut",
+        "image_width": 90,
         "hint": "Fahre über die Punkte oder tippe sie an, um mehr zu erfahren.",
         "anchor": "aufbau",
         "color_scheme": "scheme-2",
@@ -317,9 +358,9 @@
             "title": "Abnehmbarer Bezug",
             "text": "<p>Weich und atmungsaktiv – für ein frisches Schlafgefühl. Der Bezug lässt sich zum Waschen einfach abnehmen.</p>",
             "label": "",
-            "card_position": "left",
-            "x": 53,
-            "y": 24
+            "card_position": "right",
+            "x": 37,
+            "y": 30
           }
         },
         "h2": {
@@ -329,8 +370,8 @@
             "text": "<p>Die perforierte Auflage gibt beim Hinlegen sanft nach und sorgt für spürbare Druckentlastung.</p>",
             "label": "",
             "card_position": "left",
-            "x": 62,
-            "y": 39
+            "x": 71,
+            "y": 43
           }
         },
         "h3": {
@@ -340,8 +381,8 @@
             "text": "<p>Passt sich an: Der Schaum reagiert auf Körperwärme und Druck und formt sich nach Kopf und Nacken.</p>",
             "label": "",
             "card_position": "left",
-            "x": 62,
-            "y": 54
+            "x": 63,
+            "y": 47
           }
         },
         "h4": {
@@ -351,8 +392,8 @@
             "text": "<p>Das feste Fundament gibt stabile Unterstützung und hält die ergonomische Form Nacht für Nacht.</p>",
             "label": "",
             "card_position": "left",
-            "x": 62,
-            "y": 66
+            "x": 57,
+            "y": 54
           }
         }
       },
@@ -629,6 +670,7 @@
     "story_material",
     "comparison",
     "hotspots",
+    "materials",
     "faq",
     "reviews",
     "related-products"

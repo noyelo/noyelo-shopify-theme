@@ -21,7 +21,7 @@
     assign media_ratio = spot_image.aspect_ratio
   else
     case section.settings.default_art
-      when 'layers'
+      when 'layers', 'layers-cut'
         assign media_ratio = 1.3333
       when 'product-main', 'product-ice'
         assign media_ratio = 1
@@ -168,6 +168,7 @@
       "id": "default_art",
       "label": "Standardbild",
       "options": [
+        { "value": "layers-cut", "label": "NOYELO Kissen im Querschnitt (Rendering)" },
         { "value": "product-image-1", "label": "Produktfoto 1" },
         { "value": "product-image-2", "label": "Produktfoto 2" },
         { "value": "product-image-3", "label": "Produktfoto 3" },
@@ -181,7 +182,7 @@
         { "value": "product-cloud", "label": "Produkt auf Wolken (hoch)" },
         { "value": "hero", "label": "Kissen auf Wolken (quer)" }
       ],
-      "default": "product-image-4",
+      "default": "layers-cut",
       "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist. „Produktfoto N“ = N-tes Bild des angezeigten Produkts (auf anderen Seiten: Hauptprodukt)."
     },
     {
@@ -303,9 +304,9 @@
           "settings": {
             "title": "Abnehmbarer Bezug",
             "text": "<p>Weich und atmungsaktiv – für ein frisches Schlafgefühl. Der Bezug lässt sich zum Waschen einfach abnehmen.</p>",
-            "card_position": "left",
-            "x": 53,
-            "y": 24
+            "card_position": "right",
+            "x": 37,
+            "y": 30
           }
         },
         {
@@ -314,8 +315,8 @@
             "title": "Komfortschicht",
             "text": "<p>Die perforierte Auflage gibt beim Hinlegen sanft nach und sorgt für spürbare Druckentlastung.</p>",
             "card_position": "left",
-            "x": 62,
-            "y": 39
+            "x": 71,
+            "y": 43
           }
         },
         {
@@ -324,8 +325,8 @@
             "title": "Memory-Schaum-Kern",
             "text": "<p>Passt sich an: Der Schaum reagiert auf Körperwärme und Druck und formt sich nach Kopf und Nacken.</p>",
             "card_position": "left",
-            "x": 62,
-            "y": 54
+            "x": 63,
+            "y": 47
           }
         },
         {
@@ -334,8 +335,8 @@
             "title": "Stützbasis",
             "text": "<p>Das feste Fundament gibt stabile Unterstützung und hält die ergonomische Form Nacht für Nacht.</p>",
             "card_position": "left",
-            "x": 62,
-            "y": 66
+            "x": 57,
+            "y": 54
           }
         }
       ]
