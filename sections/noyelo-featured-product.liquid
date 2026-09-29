@@ -5,9 +5,10 @@
 -%}
 
 {%- liquid
-  assign product = section.settings.product
+  assign product = section.settings.product | default: settings.noyelo_product | default: collections.all.products.first
   assign variant = product.selected_or_first_available_variant
-  assign media_image = section.settings.image | default: product.featured_media.preview_image
+  assign media_index = section.settings.media_index | minus: 1
+  assign media_image = section.settings.image | default: product.media[media_index].preview_image | default: product.featured_media.preview_image
   assign product_url = product.url | default: routes.all_products_collection_url
   assign form_id = 'FeaturedProductForm-' | append: section.id
   assign show_atc = false
@@ -202,6 +203,16 @@
       "info": "Standard: Hauptbild des Produkts."
     },
     {
+      "type": "range",
+      "id": "media_index",
+      "label": "Welches Produktbild verwenden",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 2,
+      "info": "Nummer des Produktbilds (wenn vorhanden, sonst Hauptbild)."
+    },
+    {
       "type": "select",
       "id": "default_art",
       "label": "Standardbild",
@@ -209,6 +220,18 @@
         {
           "value": "none",
           "label": "Keins"
+        },
+        {
+          "value": "product-image-1",
+          "label": "Produktbild 1 (Hauptprodukt)"
+        },
+        {
+          "value": "product-image-2",
+          "label": "Produktbild 2 (Hauptprodukt)"
+        },
+        {
+          "value": "product-image-3",
+          "label": "Produktbild 3 (Hauptprodukt)"
         },
         {
           "value": "hero",

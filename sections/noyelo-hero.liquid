@@ -69,6 +69,15 @@
                 style: img_style
             }}
           </picture>
+        {%- elsif section.settings.default_art contains 'product-image' -%}
+          {%- liquid
+            if layout == 'split'
+              assign art_sizes = '(min-width: 990px) 55vw, 100vw'
+            else
+              assign art_sizes = '100vw'
+            endif
+          -%}
+          {%- render 'noyelo-image', art: section.settings.default_art, sizes: art_sizes, eager: is_first -%}
         {%- elsif section.settings.default_art != 'none' -%}
           {%- liquid
             if layout == 'split'
@@ -88,6 +97,16 @@
           </picture>
         {%- else -%}
           {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+        {%- if layout == 'split' and section.settings.chip_1 != blank or layout == 'split' and section.settings.chip_2 != blank -%}
+          <ul class="ny-hero__chips" role="list">
+            {%- if section.settings.chip_1 != blank -%}
+              <li class="ny-hero__chip">{% render 'noyelo-icon', icon: 'moon' %}<span>{{ section.settings.chip_1 }}</span></li>
+            {%- endif -%}
+            {%- if section.settings.chip_2 != blank -%}
+              <li class="ny-hero__chip">{% render 'noyelo-icon', icon: 'cloud' %}<span>{{ section.settings.chip_2 }}</span></li>
+            {%- endif -%}
+          </ul>
         {%- endif -%}
       </div>
 
@@ -192,7 +211,7 @@
           "label": "Vollflächiges Bild mit Text"
         }
       ],
-      "default": "overlay"
+      "default": "split"
     },
     {
       "type": "select",
@@ -236,6 +255,18 @@
           "label": "Keins"
         },
         {
+          "value": "product-image-1",
+          "label": "Produktbild 1 (Hauptprodukt)"
+        },
+        {
+          "value": "product-image-2",
+          "label": "Produktbild 2 (Hauptprodukt)"
+        },
+        {
+          "value": "product-image-3",
+          "label": "Produktbild 3 (Hauptprodukt)"
+        },
+        {
           "value": "hero",
           "label": "Kissen auf Wolken (quer)"
         },
@@ -264,7 +295,7 @@
           "label": "Nachtszene"
         }
       ],
-      "default": "hero",
+      "default": "product-image-1",
       "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist."
     },
     {
@@ -277,6 +308,18 @@
           "label": "Keins"
         },
         {
+          "value": "product-image-1",
+          "label": "Produktbild 1 (Hauptprodukt)"
+        },
+        {
+          "value": "product-image-2",
+          "label": "Produktbild 2 (Hauptprodukt)"
+        },
+        {
+          "value": "product-image-3",
+          "label": "Produktbild 3 (Hauptprodukt)"
+        },
+        {
           "value": "hero",
           "label": "Kissen auf Wolken (quer)"
         },
@@ -305,7 +348,7 @@
           "label": "Nachtszene"
         }
       ],
-      "default": "hero-mobile"
+      "default": "none"
     },
     {
       "type": "range",
@@ -316,6 +359,18 @@
       "unit": "%",
       "label": "Bild-Abdunklung (nur Vollbild-Layout)",
       "default": 0
+    },
+    {
+      "type": "inline_richtext",
+      "id": "chip_1",
+      "label": "Hinweis-Chip 1 auf dem Bild (Layout Text links)",
+      "default": "30 Nächte testen"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "chip_2",
+      "label": "Hinweis-Chip 2 auf dem Bild",
+      "default": "Memory Foam, ergonomisch geformt"
     },
     {
       "type": "header",

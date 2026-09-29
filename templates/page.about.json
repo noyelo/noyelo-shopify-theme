@@ -19,7 +19,7 @@
     "story": {
       "type": "noyelo-image-text",
       "settings": {
-        "image_ratio": "portrait",
+        "image_ratio": "square",
         "image_position": "left",
         "image_caption": "",
         "eyebrow": "Unsere Idee",
@@ -33,7 +33,7 @@
         "color_scheme": "scheme-1",
         "padding_top": 96,
         "padding_bottom": 48,
-        "default_art": "product-cloud"
+        "default_art": "product-image-1"
       },
       "blocks": {},
       "block_order": []

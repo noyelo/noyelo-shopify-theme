@@ -3,10 +3,12 @@
 Dieses Theme basiert auf Dawn 16. Die Shopify-Kernfunktionen (Varianten, Warenkorb, Checkout, Suche, Kundenkonten, Märkte, Übersetzungen, dynamische Quellen) bleiben erhalten. Alles NOYELO-Spezifische ist über den Theme-Editor steuerbar.
 
 ## 0. Look & mitgelieferte Bilder
-- Farbwelt: Weiß, Wolkenblau (`#EEF4FA`, `#DCE8F5`), Navy (`#1E2A44`), goldene Bewertungssterne. Anpassbar unter **Theme-Einstellungen › Farben** und **› NOYELO**.
+- Farbwelt: Warmweiß (`#FBFAF8`), Creme (`#F4F1EC`), Sand (`#E9E3DA`), Anthrazit (`#242428`, passend zum Logo), Akzent Karamell (`#B8977A`), Sterne Honig (`#D4A24C`). Anpassbar unter **Theme-Einstellungen › Farben** und **› NOYELO**.
+- **Hauptprodukt** (Theme-Einstellungen › NOYELO): Seine echten Produktfotos erscheinen automatisch im Hero, im Produkt-Highlight und in weiteren Sections. Ohne Auswahl wird das erste Produkt im Shop genutzt.
+- **Logo & Favicon:** unter **Theme-Einstellungen › Logo** die bereits hochgeladenen Dateien aus der Bibliothek auswählen (dieselben wie bei Horizon).
 - Das Theme bringt eigene, gerenderte NOYELO-Illustrationen mit (Kissen auf Wolken, Produktansichten, Material, Querschnitt, Schlafpositionen, Nachtszene). Sie liegen als `assets/ny-*.webp` im Theme und erscheinen automatisch, solange in einer Section kein eigenes Bild gewählt ist (Einstellung **„Standardbild“**). Eigene Fotos ersetzen sie jederzeit.
 - **Produktbilder** hängen am Produkt, nicht am Theme: Die quadratischen Dateien aus `noyelo-produktbilder.zip` unter **Produkte › NOYELO Kissen › Medien** hochladen.
-- Die Illustrationen zeigen ein Kissen mit weißer Oberseite und hellblauer Seite. Weicht dein echtes Produkt ab, ersetze sie durch Fotos.
+- Die Illustrationen zeigen ein weißes Kissen im NOYELO-Stil; echte Fotos ersetzen sie jederzeit.
 
 ## 1. Logo & Marke
 - **Theme-Einstellungen › Logo:** Logo hochladen (SVG oder PNG mit transparentem Hintergrund) und die Breite festlegen.

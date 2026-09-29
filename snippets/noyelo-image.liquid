@@ -8,21 +8,40 @@
   - class: {String} optional class
   - alt: {String} optional alt text override
   - placeholder: {String} placeholder name (e.g. 'lifestyle-1', 'product-1', 'image')
-  - art: {String} optional built-in NOYELO artwork used when no image is set (see noyelo-art)
+  - art: {String} optional fallback when no image is set:
+      'product-image-1' … 'product-image-6' = image N of the main product (Theme settings › NOYELO),
+      any other key = built-in NOYELO artwork (see noyelo-art)
 
   Usage:
   {% render 'noyelo-image', image: section.settings.image, sizes: '100vw', eager: true %}
 {% endcomment %}
-{%- if image != blank -%}
+{%- liquid
+  assign resolved_image = image
+  assign resolved_art = art
+  assign from_product = false
+  if resolved_image == blank and art contains 'product-image'
+    assign main_product = settings.noyelo_product | default: collections.all.products.first
+    assign media_index = art | remove: 'product-image-' | plus: 0 | minus: 1 | at_least: 0
+    assign resolved_image = main_product.media[media_index].preview_image | default: main_product.featured_image
+    assign from_product = true
+    assign resolved_art = 'product-main'
+  endif
+-%}
+{%- if resolved_image != blank -%}
   {%- liquid
+    assign image = resolved_image
     assign img_loading = 'lazy'
     assign img_priority = 'auto'
     if eager
       assign img_loading = 'eager'
       assign img_priority = 'high'
     endif
-    assign img_alt = alt | default: image.alt | escape
+    assign img_alt = alt | default: image.alt | default: main_product.title | escape
     assign img_style = 'object-position: ' | append: image.presentation.focal_point
+    assign img_class = class
+    if from_product
+      assign img_class = class | append: ' ny-img--product' | strip
+    endif
     assign img_sizes = sizes | default: '100vw'
   -%}
   {{
@@ -33,12 +52,12 @@
       sizes: img_sizes,
       loading: img_loading,
       fetchpriority: img_priority,
-      class: class,
+      class: img_class,
       alt: img_alt,
       style: img_style
   }}
-{%- elsif art != blank and art != 'none' -%}
-  {%- render 'noyelo-art', art: art, sizes: sizes, eager: eager, class: class, alt: alt -%}
+{%- elsif resolved_art != blank and resolved_art != 'none' -%}
+  {%- render 'noyelo-art', art: resolved_art, sizes: sizes, eager: eager, class: class, alt: alt -%}
 {%- else -%}
   {{ placeholder | default: 'image' | placeholder_svg_tag: 'placeholder-svg' }}
 {%- endif -%}

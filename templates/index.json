@@ -3,11 +3,11 @@
     "hero": {
       "type": "noyelo-hero",
       "settings": {
-        "layout": "overlay",
+        "layout": "split",
         "height": "medium",
         "overlay_opacity": 0,
         "eyebrow": "Das neue NOYELO Kissen",
-        "heading": "Besser schlafen beginnt hier.",
+        "heading": "Besser schlafen <em>beginnt hier.</em>",
         "heading_size": "h0",
         "text": "<p>Ergonomischer Memory Foam, der sich deinem Nacken anpasst – für ruhige Nächte und entspannte Morgen.</p>",
         "button_label": "Kissen entdecken",
@@ -17,11 +17,13 @@
         "content_alignment": "left",
         "mobile_order": "image-first",
         "color_scheme": "scheme-2",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "default_art": "hero",
-        "default_art_mobile": "hero-mobile",
-        "mobile_content_position": "top"
+        "padding_top": 24,
+        "padding_bottom": 56,
+        "default_art": "product-image-1",
+        "default_art_mobile": "none",
+        "mobile_content_position": "top",
+        "chip_1": "30 Nächte testen",
+        "chip_2": "Memory Foam, ergonomisch geformt"
       },
       "blocks": {
         "usp-trial": {
@@ -110,7 +112,8 @@
         "color_scheme": "scheme-1",
         "padding_top": 80,
         "padding_bottom": 96,
-        "default_art": "product-main"
+        "default_art": "product-main",
+        "media_index": 2
       },
       "blocks": {
         "p1": {
@@ -152,7 +155,7 @@
         "color_scheme": "scheme-2",
         "padding_top": 96,
         "padding_bottom": 96,
-        "default_art": "product-cloud"
+        "default_art": "product-image-3"
       },
       "blocks": {
         "b1": {
@@ -247,7 +250,7 @@
       "type": "noyelo-layers",
       "settings": {
         "eyebrow": "Aufbau",
-        "heading": "Vier Schichten für einen ruhigen Schlaf.",
+        "heading": "Vier Schichten. <em>Ein ruhiger Schlaf.</em>",
         "text": "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>",
         "color_scheme": "scheme-2",
         "padding_top": 96,
@@ -313,7 +316,7 @@
         "button_link": "shopify://collections/all",
         "brand_label": "NOYELO",
         "other_label": "Normales Kissen",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-5",
         "padding_top": 96,
         "padding_bottom": 96
       },

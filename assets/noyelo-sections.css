@@ -4,13 +4,13 @@
    ========================================================================== */
 
 .color-scheme-1,
-.color-scheme-5,
-.color-scheme-6 {
+.color-scheme-5 {
   --ny-card-bg: var(--ny-surface);
 }
 
 .color-scheme-2,
-.color-scheme-3 {
+.color-scheme-3,
+.color-scheme-6 {
   --ny-card-bg: rgba(255, 255, 255, 0.72);
 }
 
@@ -1976,4 +1976,72 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
 .ny-trial__media > img,
 .ny-trial__media > picture > img {
   object-position: 62% 45%;
+}
+
+
+/* Real product photos (studio shots on white) */
+.ny-media:has(> .ny-img--product) {
+  background-color: #fff;
+}
+
+.ny-media--portrait > .ny-img--product,
+.ny-benefits__center > .ny-img--product,
+.ny-positions__media > .ny-img--product {
+  object-fit: contain;
+  padding: 6%;
+}
+
+/* Hero: floating chips on the media */
+.ny-hero__chips {
+  position: absolute;
+  inset: auto 1.6rem 1.6rem 1.6rem;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  pointer-events: none;
+}
+
+.ny-hero__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.6rem 0.9rem 1.2rem;
+  border-radius: var(--ny-radius-pill);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--ny-shadow-soft);
+  color: #242428;
+  font-size: 1.4rem;
+  font-weight: var(--ny-font-weight-medium);
+  line-height: 1.2;
+}
+
+.ny-hero__chip .ny-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .ny-hero__chips {
+    inset: auto auto 3.2rem 3.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ny-hero__chip:nth-child(2) {
+    margin-left: 4rem;
+  }
+}
+
+/* Two-tone headlines: <em> renders in a softer tone */
+.ny-heading em,
+.ny-hero__heading em {
+  font-style: normal;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+@media screen and (max-width: 749px) {
+  .ny-hero__chips {
+    display: none;
+  }
 }

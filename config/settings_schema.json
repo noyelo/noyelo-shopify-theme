@@ -38,6 +38,16 @@
     "settings": [
       {
         "type": "header",
+        "content": "Hauptprodukt"
+      },
+      {
+        "type": "product",
+        "id": "noyelo_product",
+        "label": "Hauptprodukt (Kissen)",
+        "info": "Seine Produktbilder werden automatisch in Hero, Produkt-Highlight und weiteren Sections verwendet. Leer = erstes Produkt im Shop."
+      },
+      {
+        "type": "header",
         "content": "Markenfarben"
       },
       {
@@ -45,20 +55,20 @@
         "id": "noyelo_accent",
         "label": "Akzentfarbe",
         "info": "Für Sterne, Fortschrittsbalken und kleine Highlights.",
-        "default": "#6C9BD8"
+        "default": "#B8977A"
       },
       {
         "type": "color",
         "id": "noyelo_surface",
         "label": "Soft-Fläche",
         "info": "Hintergrund für Karten, Galerie und Info-Boxen.",
-        "default": "#EEF4FA"
+        "default": "#F4F1EC"
       },
       {
         "type": "color",
         "id": "noyelo_star_color",
         "label": "Sternfarbe (Bewertungen)",
-        "default": "#F2B544"
+        "default": "#D4A24C"
       },
       {
         "type": "header",
