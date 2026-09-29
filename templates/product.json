@@ -58,7 +58,7 @@
           "type": "noyelo_trust",
           "settings": {
             "icon_1": "truck",
-            "text_1": "<strong>Kostenloser Versand</strong> – Lieferung in 2–4 Werktagen",
+            "text_1": "<strong>Kostenloser Versand</strong> ab 50 € Bestellwert",
             "icon_2": "moon",
             "text_2": "<strong>30 Nächte</strong> zuhause testen",
             "icon_3": "return",
@@ -72,12 +72,39 @@
           "type": "description",
           "settings": {}
         },
+        "specs": {
+          "type": "noyelo_specs",
+          "settings": {
+            "heading": "Produktdetails",
+            "open": true,
+            "label_1": "Kern",
+            "value_1": "Memory Foam (viskoelastischer Schaum)",
+            "label_2": "Bezug",
+            "value_2": "Atmungsaktives Gewebe, abnehmbar",
+            "label_3": "Pflege",
+            "value_3": "Bezug waschbar bei 40 °C, Kern nur lüften",
+            "label_4": "Form",
+            "value_4": "Ergonomische Kontur mit zwei Höhen",
+            "label_5": "Geeignet für",
+            "value_5": "Seiten- und Rückenschläfer",
+            "label_6": "Maße (L × B × H)",
+            "value_6": "",
+            "label_7": "Gewicht",
+            "value_7": "",
+            "label_8": "Zertifikate",
+            "value_8": "",
+            "label_9": "Testphase",
+            "value_9": "30 Nächte Probeschlafen",
+            "link_label": "Schichtaufbau ansehen",
+            "link_href": "#aufbau"
+          }
+        },
         "material": {
           "type": "collapsible_tab",
           "settings": {
-            "heading": "Material & Maße",
+            "heading": "Material & Aufbau",
             "icon": "none",
-            "content": "<p>Bezug: atmungsaktives Gewebe, abnehmbar. Kern: Memory Foam. Maße und Gewicht findest du hier – am besten über ein Produkt-Metafeld pflegen.</p>"
+            "content": "<p>Im Inneren steckt ein Kern aus Memory Foam: Der viskoelastische Schaum reagiert auf Körperwärme und Druck und passt sich so der Form von Kopf und Nacken an. Darüber liegt eine sanfte Komfortschicht, außen ein atmungsaktiver, abnehmbarer Bezug.</p><p><a href=\"#aufbau\">Zum Schichtaufbau im Detail</a></p>"
           }
         },
         "care": {
@@ -85,7 +112,7 @@
           "settings": {
             "heading": "Pflegehinweise",
             "icon": "none",
-            "content": "<p>Bezug bei 40 °C waschbar. Memory-Foam-Kern nicht waschen, regelmäßig lüften.</p>"
+            "content": "<ul><li>Bezug abnehmen und bei 40 °C waschen.</li><li>Den Memory-Foam-Kern nicht waschen – regelmäßiges Lüften genügt.</li><li>Nach dem Auspacken ein bis zwei Tage gut auslüften lassen: Neue Schaumprodukte können anfangs leicht riechen.</li></ul>"
           }
         },
         "shipping": {
@@ -93,7 +120,7 @@
           "settings": {
             "heading": "Versand & Rückgabe",
             "icon": "none",
-            "content": "<p>Kostenloser Versand ab 50 €. 30 Nächte testen – passt es nicht, gibst du das Kissen einfach zurück.</p>"
+            "content": "<p><strong>Kostenloser Versand</strong> ab 50 € Bestellwert. Lieferzeit, Versandkosten und Zahlungsarten findest du unter <a href=\"/pages/versand\">Versand & Zahlung</a>.</p><p><strong>30 Nächte Probeschlafen:</strong> Passt es nicht, gibst du das Kissen einfach zurück – so geht's: <a href=\"/pages/rueckgabe\">Rückgabe & Erstattung</a>. Dein gesetzliches <a href=\"/pages/widerruf\">Widerrufsrecht</a> bleibt davon unberührt.</p>"
           }
         },
         "offers": {
@@ -127,6 +154,7 @@
         "buy_buttons",
         "trust",
         "description",
+        "specs",
         "material",
         "care",
         "shipping"
@@ -268,64 +296,67 @@
         "m2"
       ]
     },
-    "layers": {
-      "type": "noyelo-layers",
+    "hotspots": {
+      "type": "noyelo-hotspots",
       "settings": {
         "eyebrow": "Aufbau",
         "heading": "Vier Schichten für einen ruhigen Schlaf.",
         "text": "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>",
+        "default_art": "layers",
+        "image_width": 90,
+        "hint": "Fahre über die Punkte oder tippe sie an, um mehr zu erfahren.",
+        "anchor": "aufbau",
         "color_scheme": "scheme-2",
         "padding_top": 96,
-        "padding_bottom": 96,
-        "default_art": "layers"
+        "padding_bottom": 96
       },
       "blocks": {
-        "l1": {
-          "type": "layer",
+        "h1": {
+          "type": "hotspot",
           "settings": {
             "title": "Atmungsaktiver Bezug",
-            "text": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und waschbar.</p>",
-            "color": "#FFFFFF",
-            "thickness": 1,
-            "texture": "knit"
+            "text": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und bei 40 °C waschbar.</p>",
+            "label": "",
+            "x": 28,
+            "y": 37
           }
         },
-        "l2": {
-          "type": "layer",
+        "h2": {
+          "type": "hotspot",
           "settings": {
             "title": "Komfortschicht",
             "text": "<p>Eine sanfte Auflage, die sich beim Hinlegen angenehm weich anfühlt.</p>",
-            "color": "#F4F1EA",
-            "thickness": 2,
-            "texture": "smooth"
+            "label": "",
+            "x": 46,
+            "y": 42
           }
         },
-        "l3": {
-          "type": "layer",
+        "h3": {
+          "type": "hotspot",
           "settings": {
             "title": "Memory-Foam-Kern",
-            "text": "<p>Reagiert auf Wärme und Gewicht und passt sich Kopf und Nacken an.</p>",
-            "color": "#EFE2CC",
-            "thickness": 4,
-            "texture": "foam"
+            "text": "<p>Reagiert auf Wärme und Gewicht und passt sich Kopf und Nacken an – und kehrt danach in seine Form zurück.</p>",
+            "label": "",
+            "x": 60,
+            "y": 54
           }
         },
-        "l4": {
-          "type": "layer",
+        "h4": {
+          "type": "hotspot",
           "settings": {
             "title": "Stützende Basis",
             "text": "<p>Ein stabiles Fundament, das die Form auch nach vielen Nächten hält.</p>",
-            "color": "#D9E6F4",
-            "thickness": 2,
-            "texture": "smooth"
+            "label": "",
+            "x": 38,
+            "y": 66
           }
         }
       },
       "block_order": [
-        "l1",
-        "l2",
-        "l3",
-        "l4"
+        "h1",
+        "h2",
+        "h3",
+        "h4"
       ]
     },
     "comparison": {
@@ -592,8 +623,8 @@
     "story_product",
     "positions",
     "story_material",
-    "layers",
     "comparison",
+    "hotspots",
     "faq",
     "reviews",
     "related-products"

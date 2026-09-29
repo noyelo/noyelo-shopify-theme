@@ -1,0 +1,304 @@
+/* ==========================================================================
+   NOYELO — image with pulsing hotspots (sections/noyelo-hotspots.liquid)
+   ========================================================================== */
+
+.ny-hotspots .ny-section-intro {
+  margin-bottom: 4rem;
+}
+
+.ny-hotspots__stage {
+  --ny-dot: 3rem;
+  --ny-dot-hit: 4.4rem;
+  display: block;
+  position: relative;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.ny-hotspots__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ny-radius-lg);
+  background-color: var(--ny-surface);
+}
+
+.ny-hotspots__media > img,
+.ny-hotspots__media > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Hotspot anchor: sits exactly on the point, card is positioned relative to it */
+.ny-hotspot {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  z-index: 1;
+  width: 0;
+  height: 0;
+}
+
+.ny-hotspot.is-open,
+.ny-hotspot:focus-within {
+  z-index: 3;
+}
+
+@media (hover: hover) {
+  .ny-hotspot:hover {
+    z-index: 3;
+  }
+}
+
+.ny-hotspot__button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: var(--ny-dot-hit);
+  height: var(--ny-dot-hit);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ny-hotspot__button:focus {
+  outline: none;
+}
+
+.ny-hotspot__button:focus-visible .ny-hotspot__dot {
+  outline: 0.2rem solid rgb(var(--color-foreground));
+  outline-offset: 0.4rem;
+}
+
+.ny-hotspot__dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--ny-dot);
+  height: var(--ny-dot);
+  border-radius: 50%;
+  background-color: rgb(var(--color-button));
+  color: rgb(var(--color-button-text));
+  font-size: 1.3rem;
+  font-weight: var(--ny-font-weight-medium, 500);
+  line-height: 1;
+  box-shadow: 0 0 0 0.3rem rgba(255, 255, 255, 0.9), 0 0.8rem 1.8rem -0.6rem rgba(30, 42, 68, 0.55);
+  transition: transform var(--ny-duration) var(--ny-ease), background-color var(--ny-duration) var(--ny-ease);
+}
+
+/* Two staggered pulse rings behind each dot (on the button, so they stay behind the scaled dot) */
+.ny-hotspot__button::before,
+.ny-hotspot__button::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  width: var(--ny-dot);
+  height: var(--ny-dot);
+  margin: calc(var(--ny-dot) / -2) 0 0 calc(var(--ny-dot) / -2);
+  border-radius: 50%;
+  background-color: rgb(var(--color-button));
+  opacity: 0;
+  animation: ny-hotspot-pulse 2.6s var(--ny-ease) infinite;
+  animation-delay: calc(var(--i, 0) * 0.35s);
+  pointer-events: none;
+}
+
+.ny-hotspot__button::after {
+  animation-delay: calc(var(--i, 0) * 0.35s + 1.3s);
+}
+
+@keyframes ny-hotspot-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  70%,
+  100% {
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+
+.ny-hotspot.is-open .ny-hotspot__dot {
+  transform: scale(1.12);
+}
+
+.ny-hotspot.is-open .ny-hotspot__button::before,
+.ny-hotspot.is-open .ny-hotspot__button::after {
+  animation-play-state: paused;
+  opacity: 0;
+}
+
+@media (hover: hover) {
+  .ny-hotspot:hover .ny-hotspot__dot {
+    transform: scale(1.12);
+  }
+}
+
+/* Info card */
+.ny-hotspot__card {
+  --ny-nudge: 0px;
+  position: absolute;
+  width: min(28rem, calc(100vw - 4rem));
+  padding: 1.6rem 1.8rem;
+  border-radius: var(--ny-radius);
+  background-color: rgb(var(--color-background));
+  color: rgba(var(--color-foreground), 0.82);
+  box-shadow: 0 0 0 0.1rem var(--ny-line), var(--ny-shadow-lift);
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(var(--ny-nudge), 0.8rem);
+  transition: opacity var(--ny-duration) var(--ny-ease), transform var(--ny-duration) var(--ny-ease),
+    visibility 0s linear var(--ny-duration);
+}
+
+/* Invisible bridge between dot and card so the card stays open while the pointer moves over */
+.ny-hotspot__card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.6rem;
+}
+
+.ny-hotspot[data-v='below'] .ny-hotspot__card::before {
+  bottom: 100%;
+}
+
+.ny-hotspot[data-v='above'] .ny-hotspot__card::before {
+  top: 100%;
+}
+
+.ny-hotspot[data-h='start'] .ny-hotspot__card {
+  left: -2.2rem;
+}
+
+.ny-hotspot[data-h='end'] .ny-hotspot__card {
+  right: -2.2rem;
+}
+
+.ny-hotspot[data-v='below'] .ny-hotspot__card {
+  top: 2.8rem;
+}
+
+.ny-hotspot[data-v='above'] .ny-hotspot__card {
+  bottom: 2.8rem;
+  transform: translate(var(--ny-nudge), -0.8rem);
+}
+
+.ny-hotspot.is-open .ny-hotspot__card,
+.ny-hotspot:has(.ny-hotspot__button:focus-visible) .ny-hotspot__card {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(var(--ny-nudge), 0);
+  transition: opacity var(--ny-duration) var(--ny-ease), transform var(--ny-duration) var(--ny-ease), visibility 0s;
+}
+
+@media (hover: hover) {
+  .ny-hotspot:hover .ny-hotspot__card {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(var(--ny-nudge), 0);
+    transition: opacity var(--ny-duration) var(--ny-ease), transform var(--ny-duration) var(--ny-ease), visibility 0s;
+  }
+}
+
+.ny-hotspot__title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0 0 0.6rem;
+  font-size: 1.6rem;
+  font-weight: var(--ny-font-weight-medium, 500);
+  line-height: 1.3;
+  color: rgb(var(--color-foreground));
+}
+
+.ny-hotspot__num {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background-color: var(--ny-surface, rgba(var(--color-foreground), 0.06));
+  box-shadow: inset 0 0 0 0.1rem var(--ny-line);
+  font-size: 1.2rem;
+}
+
+.ny-hotspot__text {
+  font-size: 1.4rem;
+  line-height: 1.55;
+  color: var(--ny-muted);
+}
+
+.ny-hotspot__text > * {
+  margin: 0;
+}
+
+.ny-hotspot__text > * + * {
+  margin-top: 0.6rem;
+}
+
+.ny-hotspots__hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  margin: 2rem 0 0;
+  font-size: 1.4rem;
+  color: var(--ny-muted);
+  text-align: center;
+}
+
+.ny-hotspots__hint .ny-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .ny-hotspots__stage {
+    --ny-dot: 3.4rem;
+    max-width: var(--ny-hotspots-width, 90%);
+  }
+
+  .ny-hotspots .ny-section-intro {
+    margin-bottom: 5.6rem;
+  }
+
+  .ny-hotspot__card {
+    width: 30rem;
+    padding: 2rem 2.2rem;
+  }
+
+  .ny-hotspot__dot {
+    font-size: 1.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ny-hotspot__button::before,
+  .ny-hotspot__button::after {
+    animation: none;
+  }
+
+  .ny-hotspot__dot,
+  .ny-hotspot__card {
+    transition: none;
+  }
+}

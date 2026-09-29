@@ -45,7 +45,9 @@ Weitere gestaltete Vorlagen: `collection` (Kategorie mit Vertrauensleiste + News
 Damit „In den Warenkorb“ funktioniert, muss das Produkt verfügbar sein: **Produkte › Kissen › Inventar** – bei jeder Variante eine Menge eintragen (z. B. 100) **oder** „Weiter verkaufen, wenn nicht vorrätig“ aktivieren. Alternativ „Menge erfassen“ deaktivieren. Das geht nur im Shopify-Admin, nicht über das Theme.
 
 ## 4. Produkt
-- Vorlage `product` enthält: Galerie, Kaufbereich (Bewertung, Preis, Vorteile, Varianten, Menge, Warenkorb-Button, Versand/Testphase/Zahlung), danach Vorteile, Detailbilder, Material, Schichtaufbau, Ergonomie, Vergleich, FAQ, Bewertungen und passende Produkte.
+- Vorlage `product` enthält: Galerie, Kaufbereich (Bewertung, Preis, Vorteile, Varianten, Menge, Warenkorb-Button, Versand/Testphase/Zahlung, Produktdetails, Material & Aufbau, Pflege, Versand & Rückgabe), danach Vorteile, Detailbilder, Schlafpositionen, Material, Vergleich, Schichtaufbau mit Hotspots, FAQ, Bewertungen und passende Produkte.
+- **Produktdetails** (Block „NOYELO Produktdetails“): Tabelle mit bis zu 9 Zeilen. **Maße, Gewicht und Zertifikate vor dem Livegang eintragen** – Zeilen ohne Wert sind im Shop ausgeblendet und im Theme-Editor als Hinweis sichtbar. Werte lassen sich per dynamischer Quelle mit Produkt-Metafeldern verbinden.
+- **Schichtaufbau mit Hotspots** (Section „NOYELO Bild mit Hotspots“, Sprungmarke `#aufbau`): pulsierende Punkte auf dem Querschnitt; Hover (Desktop) oder Antippen (Mobil) zeigt eine Info-Karte. Punkte pro Block per Prozent-Position verschieben. Texte an das echte Produkt anpassen.
 - Bilder für die Storytelling-Sections im Theme-Editor pro Section auswählen, oder über dynamische Quellen mit Produkt-Metafeldern verbinden.
 - Produktbilder möglichst im gleichen Format (z. B. 1:1) hochladen, damit die Galerie ruhig wirkt.
 - **Startseite › NOYELO Produkt-Highlight:** das Hauptkissen auswählen.

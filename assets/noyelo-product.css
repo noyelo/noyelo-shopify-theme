@@ -277,6 +277,61 @@ body .ny-pdp-trust__payment {
   color: rgba(var(--color-foreground), 0.8);
 }
 
+/* Product details (spec table) */
+.ny-specs {
+  display: grid;
+  margin: 0;
+  font-size: 1.45rem;
+  line-height: 1.45;
+}
+
+.ny-specs__row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 38%) 1fr;
+  gap: 1.6rem;
+  padding: 1.1rem 0;
+  border-top: 0.1rem solid var(--ny-line);
+}
+
+.ny-specs__row:first-child {
+  border-top: 0;
+  padding-top: 0.2rem;
+}
+
+.ny-specs dt {
+  color: var(--ny-muted);
+}
+
+.ny-specs dd {
+  margin: 0;
+  color: rgb(var(--color-foreground));
+}
+
+.ny-specs__row--missing dd {
+  font-style: italic;
+  color: rgba(var(--color-foreground), 0.45);
+}
+
+.ny-specs__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+  font-size: 1.45rem;
+  color: rgb(var(--color-foreground));
+  text-underline-offset: 0.3rem;
+}
+
+.ny-specs__link .ny-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  transition: transform var(--ny-duration) var(--ny-ease);
+}
+
+.ny-specs__link:hover .ny-icon {
+  transform: translateX(0.3rem);
+}
+
 .product__view-details {
   display: none;
 }

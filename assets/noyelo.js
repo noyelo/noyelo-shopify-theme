@@ -178,6 +178,96 @@ if (!customElements.get('ny-sticky-atc')) {
   );
 }
 
+/* Image with pulsing hotspots: hover (fine pointers) or tap/click opens a small info card */
+if (!customElements.get('ny-hotspots')) {
+  customElements.define(
+    'ny-hotspots',
+    class NyHotspots extends HTMLElement {
+      connectedCallback() {
+        this.spots = [...this.querySelectorAll('.ny-hotspot')];
+        this.onClick = this.onClick.bind(this);
+        this.onDocClick = this.onDocClick.bind(this);
+        this.onKey = this.onKey.bind(this);
+        this.onBlockSelect = this.onBlockSelect.bind(this);
+        this.onBlockDeselect = this.onBlockDeselect.bind(this);
+
+        this.addEventListener('click', this.onClick);
+        this.addEventListener('keydown', this.onKey);
+        document.addEventListener('click', this.onDocClick);
+        document.addEventListener('shopify:block:select', this.onBlockSelect);
+        document.addEventListener('shopify:block:deselect', this.onBlockDeselect);
+        this.spots.forEach((spot) => {
+          spot.addEventListener('mouseenter', () => this.keepInView(spot));
+          spot.addEventListener('focusin', () => this.keepInView(spot));
+        });
+      }
+
+      disconnectedCallback() {
+        document.removeEventListener('click', this.onDocClick);
+        document.removeEventListener('shopify:block:select', this.onBlockSelect);
+        document.removeEventListener('shopify:block:deselect', this.onBlockDeselect);
+      }
+
+      onClick(event) {
+        const button = event.target.closest('.ny-hotspot__button');
+        if (!button) return;
+        const spot = button.closest('.ny-hotspot');
+        this.toggle(spot, !spot.classList.contains('is-open'));
+      }
+
+      onDocClick(event) {
+        if (!event.target.closest('.ny-hotspot')) this.closeAll();
+      }
+
+      onKey(event) {
+        if (event.key !== 'Escape') return;
+        const open = this.querySelector('.ny-hotspot.is-open, .ny-hotspot:focus-within');
+        this.closeAll();
+        open?.querySelector('.ny-hotspot__button')?.focus();
+      }
+
+      onBlockSelect(event) {
+        const spot = this.spots.find((s) => s.dataset.blockId === event.detail?.blockId);
+        if (spot) this.toggle(spot, true);
+      }
+
+      onBlockDeselect(event) {
+        const spot = this.spots.find((s) => s.dataset.blockId === event.detail?.blockId);
+        if (spot) this.toggle(spot, false);
+      }
+
+      toggle(spot, open) {
+        if (open) this.closeAll(spot);
+        spot.classList.toggle('is-open', open);
+        spot.querySelector('.ny-hotspot__button')?.setAttribute('aria-expanded', String(open));
+        if (open) this.keepInView(spot);
+      }
+
+      closeAll(except) {
+        this.spots.forEach((spot) => {
+          if (spot === except || !spot.classList.contains('is-open')) return;
+          spot.classList.remove('is-open');
+          spot.querySelector('.ny-hotspot__button')?.setAttribute('aria-expanded', 'false');
+        });
+      }
+
+      /* Shift the card sideways so it never leaves the viewport (small screens, dots near the edge) */
+      keepInView(spot) {
+        const card = spot.querySelector('.ny-hotspot__card');
+        if (!card) return;
+        card.style.setProperty('--ny-nudge', '0px');
+        const rect = card.getBoundingClientRect();
+        const margin = 12;
+        const maxRight = document.documentElement.clientWidth - margin;
+        let nudge = 0;
+        if (rect.right > maxRight) nudge = maxRight - rect.right;
+        if (rect.left + nudge < margin) nudge = margin - rect.left;
+        card.style.setProperty('--ny-nudge', `${Math.round(nudge)}px`);
+      }
+    }
+  );
+}
+
 /* Product page: bundle-style quantity offers (sets the form quantity) */
 if (!customElements.get('ny-offers')) {
   customElements.define(

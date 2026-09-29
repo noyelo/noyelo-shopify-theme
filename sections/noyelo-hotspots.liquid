@@ -1,0 +1,305 @@
+{{ 'noyelo-hotspots.css' | asset_url | stylesheet_tag }}
+
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+{%- liquid
+  if section.settings.image != blank
+    assign media_ratio = section.settings.image.aspect_ratio
+  else
+    case section.settings.default_art
+      when 'layers'
+        assign media_ratio = 1.3333
+      when 'product-main', 'product-ice'
+        assign media_ratio = 1
+      when 'material', 'product-cloud'
+        assign media_ratio = 0.8
+      when 'hero'
+        assign media_ratio = 1.7143
+      else
+        assign media_ratio = 1.3333
+    endcase
+  endif
+-%}
+
+<div
+  class="ny-hotspots color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  {% if section.settings.anchor != blank %}
+    id="{{ section.settings.anchor | handleize }}"
+  {% endif %}
+>
+  <div class="page-width">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="ny-section-intro ny-section-intro--center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ny-heading h1">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="ny-lead">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <ny-hotspots
+      class="ny-hotspots__stage{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      style="--ny-hotspots-width: {{ section.settings.image_width }}%;"
+    >
+      <div class="ny-hotspots__media" style="aspect-ratio: {{ media_ratio }};">
+        {%- render 'noyelo-image',
+          image: section.settings.image,
+          sizes: '(min-width: 1200px) 1100px, (min-width: 750px) 90vw, 100vw',
+          art: section.settings.default_art,
+          class: 'ny-hotspots__img'
+        -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign spot_label = block.settings.label | default: forloop.index
+          assign spot_h = 'start'
+          if block.settings.x > 55
+            assign spot_h = 'end'
+          endif
+          assign spot_v = 'below'
+          if block.settings.y > 55
+            assign spot_v = 'above'
+          endif
+        -%}
+        <div
+          class="ny-hotspot"
+          style="--x: {{ block.settings.x }}%; --y: {{ block.settings.y }}%; --i: {{ forloop.index0 }};"
+          data-h="{{ spot_h }}"
+          data-v="{{ spot_v }}"
+          data-block-id="{{ block.id }}"
+          {{ block.shopify_attributes }}
+        >
+          <button
+            type="button"
+            class="ny-hotspot__button"
+            aria-expanded="false"
+            aria-controls="NyHotspot-{{ block.id }}"
+            aria-label="{{ spot_label | escape }}: {{ block.settings.title | strip_html | escape }}"
+          >
+            <span class="ny-hotspot__dot" aria-hidden="true">{{ spot_label | escape }}</span>
+          </button>
+          <div class="ny-hotspot__card" id="NyHotspot-{{ block.id }}">
+            <p class="ny-hotspot__title">
+              <span class="ny-hotspot__num" aria-hidden="true">{{ spot_label | escape }}</span>
+              {{- block.settings.title -}}
+            </p>
+            {%- if block.settings.text != blank -%}
+              <div class="ny-hotspot__text">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </ny-hotspots>
+
+    {%- if section.settings.hint != blank and section.blocks.size > 0 -%}
+      <p class="ny-hotspots__hint">
+        {%- render 'noyelo-icon', icon: 'info' -%}
+        <span>{{ section.settings.hint | escape }}</span>
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Bild mit Hotspots",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Aufbau"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Schicht für Schicht durchdacht."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bild",
+      "info": "Die Punkte werden in Prozent der Bildbreite/-höhe platziert. Nach einem Bildwechsel die Positionen der Punkte prüfen."
+    },
+    {
+      "type": "select",
+      "id": "default_art",
+      "label": "Standardbild",
+      "options": [
+        { "value": "layers", "label": "Querschnitt / Schichten" },
+        { "value": "product-main", "label": "Produkt – Oberseite" },
+        { "value": "product-ice", "label": "Produkt – hellblaue Seite" },
+        { "value": "material", "label": "Material-Nahaufnahme" },
+        { "value": "product-cloud", "label": "Produkt auf Wolken (hoch)" },
+        { "value": "hero", "label": "Kissen auf Wolken (quer)" }
+      ],
+      "default": "layers",
+      "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist."
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Bildbreite (Desktop)",
+      "default": 90
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Hinweis unter dem Bild",
+      "default": "Fahre über die Punkte oder tippe sie an, um mehr zu erfahren."
+    },
+    {
+      "type": "text",
+      "id": "anchor",
+      "label": "Sprungmarke (ID)",
+      "default": "aufbau",
+      "info": "Ermöglicht Links wie #aufbau, z. B. aus den Produktdetails."
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Titel",
+          "default": "Schicht"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Beschriftung im Punkt",
+          "info": "Leer lassen für automatische Nummerierung (1, 2, 3 …)."
+        },
+        {
+          "type": "range",
+          "id": "x",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Position horizontal",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "y",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Position vertikal",
+          "default": 50
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Bild mit Hotspots",
+      "blocks": [
+        {
+          "type": "hotspot",
+          "settings": {
+            "title": "Atmungsaktiver Bezug",
+            "text": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und waschbar.</p>",
+            "x": 28,
+            "y": 37
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "title": "Komfortschicht",
+            "text": "<p>Eine sanfte Auflage, die sich beim Hinlegen angenehm weich anfühlt.</p>",
+            "x": 46,
+            "y": 42
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "title": "Memory-Foam-Kern",
+            "text": "<p>Reagiert auf Wärme und Gewicht und passt sich Kopf und Nacken an.</p>",
+            "x": 60,
+            "y": 54
+          }
+        },
+        {
+          "type": "hotspot",
+          "settings": {
+            "title": "Stützende Basis",
+            "text": "<p>Ein stabiles Fundament, das die Form auch nach vielen Nächten hält.</p>",
+            "x": 38,
+            "y": 66
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
