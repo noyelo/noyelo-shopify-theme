@@ -77,24 +77,24 @@
           "settings": {
             "heading": "Produktdetails",
             "open": true,
-            "label_1": "Kern",
-            "value_1": "Memory Foam (viskoelastischer Schaum)",
+            "label_1": "Aufbau",
+            "value_1": "4 Schichten: Bezug, Komfortschicht, Memory-Schaum-Kern, Stützbasis",
             "label_2": "Bezug",
-            "value_2": "Atmungsaktives Gewebe, abnehmbar",
-            "label_3": "Pflege",
-            "value_3": "Bezug waschbar bei 40 °C, Kern nur lüften",
+            "value_2": "Abnehmbar, weich und atmungsaktiv",
+            "label_3": "Kern",
+            "value_3": "Memory-Schaum (viskoelastisch)",
             "label_4": "Form",
-            "value_4": "Ergonomische Kontur mit zwei Höhen",
+            "value_4": "Ergonomische Konturform",
             "label_5": "Geeignet für",
             "value_5": "Seiten- und Rückenschläfer",
-            "label_6": "Maße (L × B × H)",
-            "value_6": "",
-            "label_7": "Gewicht",
+            "label_6": "Pflege",
+            "value_6": "Bezug waschbar bei 40 °C, Kern nur lüften",
+            "label_7": "Maße (L × B × H)",
             "value_7": "",
-            "label_8": "Zertifikate",
+            "label_8": "Gewicht",
             "value_8": "",
-            "label_9": "Testphase",
-            "value_9": "30 Nächte Probeschlafen",
+            "label_9": "Zertifikate",
+            "value_9": "",
             "link_label": "Schichtaufbau ansehen",
             "link_href": "#aufbau"
           }
@@ -104,7 +104,7 @@
           "settings": {
             "heading": "Material & Aufbau",
             "icon": "none",
-            "content": "<p>Im Inneren steckt ein Kern aus Memory Foam: Der viskoelastische Schaum reagiert auf Körperwärme und Druck und passt sich so der Form von Kopf und Nacken an. Darüber liegt eine sanfte Komfortschicht, außen ein atmungsaktiver, abnehmbarer Bezug.</p><p><a href=\"#aufbau\">Zum Schichtaufbau im Detail</a></p>"
+            "content": "<p>Das NOYELO Kissen ist aus vier Schichten aufgebaut: Außen ein weicher, atmungsaktiver Bezug, den du abnehmen kannst. Darunter eine perforierte Komfortschicht für sanfte Druckentlastung. Im Inneren der Kern aus Memory-Schaum – er reagiert auf Körperwärme und Druck und passt sich Kopf und Nacken an. Die Stützbasis darunter sorgt für stabilen Halt.</p><p><a href=\"#aufbau\">Zum Schichtaufbau im Detail</a></p>"
           }
         },
         "care": {
@@ -112,7 +112,7 @@
           "settings": {
             "heading": "Pflegehinweise",
             "icon": "none",
-            "content": "<ul><li>Bezug abnehmen und bei 40 °C waschen.</li><li>Den Memory-Foam-Kern nicht waschen – regelmäßiges Lüften genügt.</li><li>Nach dem Auspacken ein bis zwei Tage gut auslüften lassen: Neue Schaumprodukte können anfangs leicht riechen.</li></ul>"
+            "content": "<p><strong>Bezug:</strong> abnehmen und bei 40 °C waschen.</p><p><strong>Kern:</strong> nicht waschen – regelmäßiges Lüften genügt.</p><p><strong>Nach dem Auspacken:</strong> ein bis zwei Tage gut auslüften lassen. Neue Schaumprodukte können anfangs leicht riechen.</p>"
           }
         },
         "shipping": {
@@ -120,7 +120,7 @@
           "settings": {
             "heading": "Versand & Rückgabe",
             "icon": "none",
-            "content": "<p><strong>Kostenloser Versand</strong> ab 50 € Bestellwert. Lieferzeit, Versandkosten und Zahlungsarten findest du unter <a href=\"/pages/versand\">Versand & Zahlung</a>.</p><p><strong>30 Nächte Probeschlafen:</strong> Passt es nicht, gibst du das Kissen einfach zurück – so geht's: <a href=\"/pages/rueckgabe\">Rückgabe & Erstattung</a>. Dein gesetzliches <a href=\"/pages/widerruf\">Widerrufsrecht</a> bleibt davon unberührt.</p>"
+            "content": "<p><strong>Kostenloser Versand</strong> ab 50 € Bestellwert. Lieferzeit, Versandkosten und Zahlungsarten findest du unter <a href=\"/pages/versand\">Versand &amp; Zahlung</a>.</p><p><strong>30 Nächte Probeschlafen:</strong> Passt es nicht, gibst du das Kissen einfach zurück – so geht's: <a href=\"/pages/rueckgabe\">Rückgabe &amp; Erstattung</a>. Dein gesetzliches <a href=\"/pages/widerruf\">Widerrufsrecht</a> bleibt davon unberührt.</p>"
           }
         },
         "offers": {
@@ -302,8 +302,8 @@
         "eyebrow": "Aufbau",
         "heading": "Vier Schichten für einen ruhigen Schlaf.",
         "text": "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>",
-        "default_art": "layers",
-        "image_width": 90,
+        "default_art": "product-image-4",
+        "image_width": 60,
         "hint": "Fahre über die Punkte oder tippe sie an, um mehr zu erfahren.",
         "anchor": "aufbau",
         "color_scheme": "scheme-2",
@@ -314,40 +314,44 @@
         "h1": {
           "type": "hotspot",
           "settings": {
-            "title": "Atmungsaktiver Bezug",
-            "text": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und bei 40 °C waschbar.</p>",
+            "title": "Abnehmbarer Bezug",
+            "text": "<p>Weich und atmungsaktiv – für ein frisches Schlafgefühl. Der Bezug lässt sich zum Waschen einfach abnehmen.</p>",
             "label": "",
-            "x": 28,
-            "y": 37
+            "card_position": "left",
+            "x": 53,
+            "y": 24
           }
         },
         "h2": {
           "type": "hotspot",
           "settings": {
             "title": "Komfortschicht",
-            "text": "<p>Eine sanfte Auflage, die sich beim Hinlegen angenehm weich anfühlt.</p>",
+            "text": "<p>Die perforierte Auflage gibt beim Hinlegen sanft nach und sorgt für spürbare Druckentlastung.</p>",
             "label": "",
-            "x": 46,
-            "y": 42
+            "card_position": "left",
+            "x": 62,
+            "y": 39
           }
         },
         "h3": {
           "type": "hotspot",
           "settings": {
-            "title": "Memory-Foam-Kern",
-            "text": "<p>Reagiert auf Wärme und Gewicht und passt sich Kopf und Nacken an – und kehrt danach in seine Form zurück.</p>",
+            "title": "Memory-Schaum-Kern",
+            "text": "<p>Passt sich an: Der Schaum reagiert auf Körperwärme und Druck und formt sich nach Kopf und Nacken.</p>",
             "label": "",
-            "x": 60,
+            "card_position": "left",
+            "x": 62,
             "y": 54
           }
         },
         "h4": {
           "type": "hotspot",
           "settings": {
-            "title": "Stützende Basis",
-            "text": "<p>Ein stabiles Fundament, das die Form auch nach vielen Nächten hält.</p>",
+            "title": "Stützbasis",
+            "text": "<p>Das feste Fundament gibt stabile Unterstützung und hält die ergonomische Form Nacht für Nacht.</p>",
             "label": "",
-            "x": 38,
+            "card_position": "left",
+            "x": 62,
             "y": 66
           }
         }

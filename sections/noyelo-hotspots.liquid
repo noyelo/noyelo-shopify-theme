@@ -7,8 +7,18 @@
 -%}
 
 {%- liquid
-  if section.settings.image != blank
-    assign media_ratio = section.settings.image.aspect_ratio
+  # Image: own upload › product photo N (current product, else main product) › built-in artwork
+  assign spot_image = section.settings.image
+  if spot_image == blank and section.settings.default_art contains 'product-image'
+    assign spot_product = product | default: settings.noyelo_product | default: collections.all.products.first
+    assign spot_index = section.settings.default_art | remove: 'product-image-' | plus: 0 | minus: 1 | at_least: 0
+    assign spot_image = spot_product.media[spot_index].preview_image
+  endif
+
+  assign spot_alt = section.settings.heading | strip_html
+
+  if spot_image != blank
+    assign media_ratio = spot_image.aspect_ratio
   else
     case section.settings.default_art
       when 'layers'
@@ -52,9 +62,10 @@
     >
       <div class="ny-hotspots__media" style="aspect-ratio: {{ media_ratio }};">
         {%- render 'noyelo-image',
-          image: section.settings.image,
+          image: spot_image,
           sizes: '(min-width: 1200px) 1100px, (min-width: 750px) 90vw, 100vw',
           art: section.settings.default_art,
+          alt: spot_alt,
           class: 'ny-hotspots__img'
         -%}
       </div>
@@ -62,10 +73,18 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign spot_label = block.settings.label | default: forloop.index
-          assign spot_h = 'start'
-          if block.settings.x > 55
-            assign spot_h = 'end'
-          endif
+          # 'start' = card opens to the right of the dot, 'end' = to the left
+          case block.settings.card_position
+            when 'left'
+              assign spot_h = 'end'
+            when 'right'
+              assign spot_h = 'start'
+            else
+              assign spot_h = 'start'
+              if block.settings.x > 55
+                assign spot_h = 'end'
+              endif
+          endcase
           assign spot_v = 'below'
           if block.settings.y > 55
             assign spot_v = 'above'
@@ -149,15 +168,21 @@
       "id": "default_art",
       "label": "Standardbild",
       "options": [
-        { "value": "layers", "label": "Querschnitt / Schichten" },
+        { "value": "product-image-1", "label": "Produktfoto 1" },
+        { "value": "product-image-2", "label": "Produktfoto 2" },
+        { "value": "product-image-3", "label": "Produktfoto 3" },
+        { "value": "product-image-4", "label": "Produktfoto 4" },
+        { "value": "product-image-5", "label": "Produktfoto 5" },
+        { "value": "product-image-6", "label": "Produktfoto 6" },
+        { "value": "layers", "label": "Querschnitt / Schichten (Grafik)" },
         { "value": "product-main", "label": "Produkt – Oberseite" },
         { "value": "product-ice", "label": "Produkt – hellblaue Seite" },
         { "value": "material", "label": "Material-Nahaufnahme" },
         { "value": "product-cloud", "label": "Produkt auf Wolken (hoch)" },
         { "value": "hero", "label": "Kissen auf Wolken (quer)" }
       ],
-      "default": "layers",
-      "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist."
+      "default": "product-image-4",
+      "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist. „Produktfoto N“ = N-tes Bild des angezeigten Produkts (auf anderen Seiten: Hauptprodukt)."
     },
     {
       "type": "range",
@@ -236,6 +261,17 @@
           "info": "Leer lassen für automatische Nummerierung (1, 2, 3 …)."
         },
         {
+          "type": "select",
+          "id": "card_position",
+          "label": "Info-Karte öffnet",
+          "options": [
+            { "value": "auto", "label": "Automatisch" },
+            { "value": "left", "label": "Links vom Punkt" },
+            { "value": "right", "label": "Rechts vom Punkt" }
+          ],
+          "default": "auto"
+        },
+        {
           "type": "range",
           "id": "x",
           "min": 0,
@@ -265,36 +301,40 @@
         {
           "type": "hotspot",
           "settings": {
-            "title": "Atmungsaktiver Bezug",
-            "text": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und waschbar.</p>",
-            "x": 28,
-            "y": 37
+            "title": "Abnehmbarer Bezug",
+            "text": "<p>Weich und atmungsaktiv – für ein frisches Schlafgefühl. Der Bezug lässt sich zum Waschen einfach abnehmen.</p>",
+            "card_position": "left",
+            "x": 53,
+            "y": 24
           }
         },
         {
           "type": "hotspot",
           "settings": {
             "title": "Komfortschicht",
-            "text": "<p>Eine sanfte Auflage, die sich beim Hinlegen angenehm weich anfühlt.</p>",
-            "x": 46,
-            "y": 42
+            "text": "<p>Die perforierte Auflage gibt beim Hinlegen sanft nach und sorgt für spürbare Druckentlastung.</p>",
+            "card_position": "left",
+            "x": 62,
+            "y": 39
           }
         },
         {
           "type": "hotspot",
           "settings": {
-            "title": "Memory-Foam-Kern",
-            "text": "<p>Reagiert auf Wärme und Gewicht und passt sich Kopf und Nacken an.</p>",
-            "x": 60,
+            "title": "Memory-Schaum-Kern",
+            "text": "<p>Passt sich an: Der Schaum reagiert auf Körperwärme und Druck und formt sich nach Kopf und Nacken.</p>",
+            "card_position": "left",
+            "x": 62,
             "y": 54
           }
         },
         {
           "type": "hotspot",
           "settings": {
-            "title": "Stützende Basis",
-            "text": "<p>Ein stabiles Fundament, das die Form auch nach vielen Nächten hält.</p>",
-            "x": 38,
+            "title": "Stützbasis",
+            "text": "<p>Das feste Fundament gibt stabile Unterstützung und hält die ergonomische Form Nacht für Nacht.</p>",
+            "card_position": "left",
+            "x": 62,
             "y": 66
           }
         }
