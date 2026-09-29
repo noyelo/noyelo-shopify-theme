@@ -137,6 +137,17 @@
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
+  assign header_logo_class = 'header__heading-logo motion-reduce'
+  assign header_bg = section.settings.color_scheme.settings.background
+  if header_bg != blank
+    assign header_brightness = header_bg | color_brightness
+    if header_brightness < 128 and settings.logo_light == blank
+      assign header_logo_class = header_logo_class | append: ' ny-logo--invert'
+    endif
+  endif
+-%}
+
+{%- liquid
   for block in section.blocks
     if block.type == '@app'
       assign has_app_block = true
@@ -205,7 +216,7 @@
               settings.logo
               | image_url: width: 600
               | image_tag:
-                class: 'header__heading-logo motion-reduce',
+                class: header_logo_class,
                 widths: widths,
                 height: logo_height,
                 width: settings.logo_width,
@@ -229,7 +240,16 @@
             {%- endif -%}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          {%- assign fallback_logo_height = settings.logo_width | times: 207 | divided_by: 1000 -%}
+          <div class="header__heading-logo-wrapper">
+            <img
+              src="{{ 'noyelo-logo.svg' | asset_url }}"
+              alt="{{ shop.name | escape }}"
+              width="{{ settings.logo_width }}"
+              height="{{ fallback_logo_height }}"
+              class="{{ header_logo_class }}"
+            >
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -262,7 +282,7 @@
               settings.logo
               | image_url: width: 600
               | image_tag:
-                class: 'header__heading-logo',
+                class: header_logo_class,
                 widths: widths,
                 height: logo_height,
                 width: settings.logo_width,
@@ -286,7 +306,16 @@
             {%- endif -%}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          {%- assign fallback_logo_height = settings.logo_width | times: 207 | divided_by: 1000 -%}
+          <div class="header__heading-logo-wrapper">
+            <img
+              src="{{ 'noyelo-logo.svg' | asset_url }}"
+              alt="{{ shop.name | escape }}"
+              width="{{ settings.logo_width }}"
+              height="{{ fallback_logo_height }}"
+              class="{{ header_logo_class }}"
+            >
+          </div>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -503,6 +532,8 @@
     "name": {{ shop.name | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% else %}
+      "logo": {{ 'noyelo-logo.svg' | asset_url | prepend: "https:" | json }},
     {% endif %}
     "sameAs": [
       {{ settings.social_twitter_link | json }},

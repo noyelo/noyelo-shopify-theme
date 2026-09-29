@@ -24,7 +24,6 @@
     assign has_social_icons = false
   endif
 
-  assign footer_logo = section.settings.footer_logo | default: settings.logo
 -%}
 
 <footer
@@ -89,28 +88,37 @@
     <div class="ny-footer__grid{% if section.settings.show_brand %} ny-footer__grid--brand{% endif %}">
       {%- if section.settings.show_brand -%}
         <div class="ny-footer__brand">
-          <a href="{{ routes.root_url }}" class="ny-footer__logo">
-            {%- if footer_logo != blank -%}
+          {%- liquid
+            assign footer_bg = section.settings.color_scheme.settings.background
+            assign footer_tone = 'dark'
+            if footer_bg != blank
+              assign footer_brightness = footer_bg | color_brightness
+              if footer_brightness < 128
+                assign footer_tone = 'light'
+              endif
+            endif
+          -%}
+          <a href="{{ routes.root_url }}" class="ny-footer__logo" aria-label="{{ shop.name | escape }}">
+            {%- if section.settings.footer_logo != blank -%}
               {%- liquid
                 assign footer_logo_width = section.settings.logo_width
-                assign footer_logo_height = footer_logo_width | divided_by: footer_logo.aspect_ratio | round
-                assign footer_logo_style = 'width: min(100%, ' | append: footer_logo_width | append: 'px); height: auto;'
+                assign footer_logo_height = footer_logo_width | divided_by: section.settings.footer_logo.aspect_ratio | round
                 assign footer_logo_sizes = footer_logo_width | append: 'px'
               -%}
               {{
-                footer_logo
-                | image_url: width: 480
+                section.settings.footer_logo
+                | image_url: width: 600
                 | image_tag:
                   widths: '160, 240, 320, 480',
                   sizes: footer_logo_sizes,
                   width: footer_logo_width,
                   height: footer_logo_height,
                   loading: 'lazy',
-                  alt: shop.name,
-                  style: footer_logo_style
+                  class: 'ny-logo',
+                  alt: shop.name
               }}
             {%- else -%}
-              <span class="ny-footer__wordmark">{{ shop.name | downcase | escape }}</span>
+              {%- render 'noyelo-logo', width: section.settings.logo_width, tone: footer_tone -%}
             {%- endif -%}
           </a>
           {%- if section.settings.brand_text != blank -%}

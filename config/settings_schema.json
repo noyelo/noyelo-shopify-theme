@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "NOYELO",
-    "theme_version": "1.0.0",
+    "theme_version": "1.3.0",
     "theme_author": "NOYELO",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
@@ -14,6 +14,12 @@
         "type": "image_picker",
         "id": "logo",
         "label": "t:settings_schema.logo.settings.logo_image.label"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_light",
+        "label": "Logo hell (für dunkle Flächen)",
+        "info": "Optional, z. B. eine weiße Version für Footer und dunkle Bereiche. Ohne Auswahl wird das normale Logo automatisch weiß dargestellt."
       },
       {
         "type": "range",
@@ -55,20 +61,20 @@
         "id": "noyelo_accent",
         "label": "Akzentfarbe",
         "info": "Für Sterne, Fortschrittsbalken und kleine Highlights.",
-        "default": "#B8977A"
+        "default": "#6C9BD8"
       },
       {
         "type": "color",
         "id": "noyelo_surface",
         "label": "Soft-Fläche",
         "info": "Hintergrund für Karten, Galerie und Info-Boxen.",
-        "default": "#F4F1EC"
+        "default": "#EEF4FA"
       },
       {
         "type": "color",
         "id": "noyelo_star_color",
         "label": "Sternfarbe (Bewertungen)",
-        "default": "#D4A24C"
+        "default": "#F2B544"
       },
       {
         "type": "header",

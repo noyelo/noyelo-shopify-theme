@@ -14,8 +14,8 @@
   --ny-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ny-duration: 240ms;
   --ny-gutter: 2rem;
-  --ny-shadow-soft: 0 1.2rem 4rem -1.6rem rgba(30, 42, 68, 0.2);
-  --ny-shadow-lift: 0 2rem 5rem -2.4rem rgba(30, 42, 68, 0.3);
+  --ny-shadow-soft: 0 1.2rem 4rem -1.6rem rgba(30, 42, 68, 0.18);
+  --ny-shadow-lift: 0 2rem 5rem -2.4rem rgba(30, 42, 68, 0.28);
   --ny-line: rgba(var(--color-foreground), 0.1);
   --ny-muted: rgba(var(--color-foreground), 0.68);
   --ny-header-bg-transition: background-color var(--ny-duration) var(--ny-ease),
@@ -1431,4 +1431,24 @@ body .skip-to-content-link:focus{
   body .ny-shipping__bar span{
     transition: none;
   }
+}
+
+/* Brand logo (snippet noyelo-logo) */
+body .ny-logo{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+body .ny-logo--invert{
+  filter: brightness(0) invert(1);
+}
+
+body .ny-logo--text{
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2.8rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: rgb(var(--color-foreground));
 }

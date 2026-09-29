@@ -4,13 +4,13 @@
    ========================================================================== */
 
 .color-scheme-1,
-.color-scheme-5 {
+.color-scheme-5,
+.color-scheme-6 {
   --ny-card-bg: var(--ny-surface);
 }
 
 .color-scheme-2,
-.color-scheme-3,
-.color-scheme-6 {
+.color-scheme-3 {
   --ny-card-bg: rgba(255, 255, 255, 0.72);
 }
 

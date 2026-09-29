@@ -1,0 +1,75 @@
+{% comment %}
+  NOYELO brand logo – one source for every place the logo appears
+  (footer, mobile menu, password page). Uses Theme settings › Logo.
+  On dark backgrounds the light logo (Theme settings › NOYELO) is used;
+  without one, the regular logo is rendered white via CSS.
+  Without any logo in the settings, the bundled NOYELO logo (assets/noyelo-logo.svg) is shown.
+
+  Accepts:
+  - width: {Number} display width in px
+  - tone: {String} 'dark' (default) or 'light' for dark backgrounds
+  - class: {String} optional extra class
+  - eager: {Boolean} optional, load immediately
+
+  Usage:
+  {% render 'noyelo-logo', width: 120, tone: 'light' %}
+{% endcomment %}
+{%- liquid
+  assign logo_width = width | default: settings.logo_width
+  assign logo_image = settings.logo
+  assign logo_mod = ''
+  if tone == 'light'
+    if settings.logo_light != blank
+      assign logo_image = settings.logo_light
+    else
+      assign logo_mod = ' ny-logo--invert'
+    endif
+  endif
+-%}
+{%- if logo_image != blank -%}
+  {%- liquid
+    assign logo_height = logo_width | divided_by: logo_image.aspect_ratio | round
+    assign logo_2x = logo_width | times: 2
+    assign logo_3x = logo_width | times: 3
+    assign logo_widths = logo_width | append: ', ' | append: logo_2x | append: ', ' | append: logo_3x
+    assign logo_sizes = logo_width | append: 'px'
+    assign logo_class = 'ny-logo' | append: logo_mod
+    if class
+      assign logo_class = logo_class | append: ' ' | append: class
+    endif
+    assign logo_loading = 'lazy'
+    if eager
+      assign logo_loading = 'eager'
+    endif
+  -%}
+  {{
+    logo_image
+    | image_url: width: 900
+    | image_tag:
+      widths: logo_widths,
+      sizes: logo_sizes,
+      width: logo_width,
+      height: logo_height,
+      loading: logo_loading,
+      class: logo_class,
+      alt: shop.name
+  }}
+{%- else -%}
+  {%- liquid
+    assign fallback_file = 'noyelo-logo.svg'
+    if tone == 'light'
+      assign fallback_file = 'noyelo-logo-white.svg'
+    endif
+    assign fallback_height = logo_width | times: 207 | divided_by: 1000
+  -%}
+  <img
+    src="{{ fallback_file | asset_url }}"
+    alt="{{ shop.name | escape }}"
+    width="{{ logo_width }}"
+    height="{{ fallback_height }}"
+    class="ny-logo{% if class %} {{ class }}{% endif %}"
+    {% unless eager %}
+      loading="lazy"
+    {% endunless %}
+  >
+{%- endif -%}

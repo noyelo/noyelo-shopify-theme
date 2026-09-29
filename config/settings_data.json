@@ -7,72 +7,72 @@
       "color_schemes": {
         "scheme-1": {
           "settings": {
-            "background": "#FBFAF8",
+            "background": "#FFFFFF",
             "background_gradient": "",
-            "text": "#242428",
-            "button": "#242428",
-            "button_label": "#FBFAF8",
-            "secondary_button_label": "#242428",
-            "shadow": "#242428"
+            "text": "#1E2A44",
+            "button": "#1E2A44",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#1E2A44",
+            "shadow": "#1E2A44"
           }
         },
         "scheme-2": {
           "settings": {
-            "background": "#F4F1EC",
+            "background": "#EEF4FA",
             "background_gradient": "",
-            "text": "#242428",
-            "button": "#242428",
-            "button_label": "#FBFAF8",
-            "secondary_button_label": "#242428",
-            "shadow": "#242428"
+            "text": "#1E2A44",
+            "button": "#1E2A44",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#1E2A44",
+            "shadow": "#1E2A44"
           }
         },
         "scheme-3": {
           "settings": {
-            "background": "#E9E3DA",
+            "background": "#DCE8F5",
             "background_gradient": "",
-            "text": "#242428",
-            "button": "#242428",
-            "button_label": "#FBFAF8",
-            "secondary_button_label": "#242428",
-            "shadow": "#242428"
+            "text": "#1E2A44",
+            "button": "#1E2A44",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#1E2A44",
+            "shadow": "#1E2A44"
           }
         },
         "scheme-4": {
           "settings": {
-            "background": "#242428",
+            "background": "#1E2A44",
             "background_gradient": "",
-            "text": "#F7F4EF",
-            "button": "#F7F4EF",
-            "button_label": "#242428",
-            "secondary_button_label": "#F7F4EF",
-            "shadow": "#242428"
+            "text": "#FFFFFF",
+            "button": "#FFFFFF",
+            "button_label": "#1E2A44",
+            "secondary_button_label": "#FFFFFF",
+            "shadow": "#1E2A44"
           }
         },
         "scheme-5": {
           "settings": {
-            "background": "#FFFFFF",
+            "background": "#F8F6F2",
             "background_gradient": "",
-            "text": "#242428",
-            "button": "#242428",
+            "text": "#1E2A44",
+            "button": "#1E2A44",
             "button_label": "#FFFFFF",
-            "secondary_button_label": "#242428",
-            "shadow": "#242428"
+            "secondary_button_label": "#1E2A44",
+            "shadow": "#1E2A44"
           }
         },
         "scheme-6": {
           "settings": {
-            "background": "#E6E9EC",
+            "background": "#FFFFFF",
             "background_gradient": "",
-            "text": "#242428",
-            "button": "#242428",
-            "button_label": "#FBFAF8",
-            "secondary_button_label": "#242428",
-            "shadow": "#242428"
+            "text": "#1E2A44",
+            "button": "#3F6FC0",
+            "button_label": "#FFFFFF",
+            "secondary_button_label": "#1E2A44",
+            "shadow": "#1E2A44"
           }
         }
       },
-      "type_header_font": "dm_sans_n5",
+      "type_header_font": "dm_sans_n7",
       "heading_scale": 100,
       "type_body_font": "dm_sans_n4",
       "body_scale": 100,
@@ -202,8 +202,8 @@
           }
         }
       },
-      "noyelo_accent": "#B8977A",
-      "noyelo_surface": "#F4F1EC",
+      "noyelo_accent": "#6C9BD8",
+      "noyelo_surface": "#EEF4FA",
       "logo_width_mobile": 100,
       "free_shipping_enabled": true,
       "free_shipping_threshold": 50,
@@ -212,7 +212,7 @@
       "cart_trust_text": "30 Nächte testen · Sichere Zahlung · Einfache Rückgabe",
       "cart_show_payment_icons": true,
       "sticky_atc_enabled": true,
-      "noyelo_star_color": "#D4A24C"
+      "noyelo_star_color": "#F2B544"
     }
   }
 }
