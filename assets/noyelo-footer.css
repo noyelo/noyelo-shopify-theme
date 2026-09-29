@@ -47,6 +47,7 @@
 
 .ny-footer__brand {
   display: grid;
+  align-content: start;
   gap: 1.6rem;
   justify-items: start;
   padding-bottom: 3.2rem;

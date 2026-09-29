@@ -1,0 +1,69 @@
+{% comment %}
+  Bundle-style quantity offers for the product page (block type noyelo_offers).
+  Sets the quantity of the main product form via assets/noyelo.js (ny-offers).
+
+  Accepts:
+  - block: {Object} the noyelo_offers block
+  - product: {Object}
+  - product_form_id: {String} id of the main product form
+{% endcomment %}
+{%- liquid
+  assign has_qty_block = section.blocks | where: 'type', 'quantity_selector'
+  assign offer_price = product.selected_or_first_available_variant.price
+-%}
+<ny-offers
+  class="ny-offers"
+  data-section="{{ section.id }}"
+  {% if has_qty_block.size == 0 %}
+    data-own-input
+  {% endif %}
+  {{ block.shopify_attributes }}
+>
+  <fieldset class="ny-offers__fieldset">
+    {%- if block.settings.heading != blank -%}
+      <legend class="ny-offers__legend">{{ block.settings.heading | escape }}</legend>
+    {%- endif -%}
+    {%- for i in (1..3) -%}
+      {%- liquid
+        assign q_key = 'qty_' | append: i
+        assign t_key = 'title_' | append: i
+        assign s_key = 'subtitle_' | append: i
+        assign b_key = 'badge_' | append: i
+        assign offer_qty = block.settings[q_key]
+      -%}
+      {%- if offer_qty > 0 and block.settings[t_key] != blank -%}
+        <label class="ny-offer">
+          <input
+            type="radio"
+            class="ny-offer__input"
+            name="ny-offer-{{ section.id }}"
+            value="{{ offer_qty }}"
+            {% if block.settings.default_option == i %}
+              checked
+            {% endif %}
+          >
+          <span class="ny-offer__radio" aria-hidden="true"></span>
+          <span class="ny-offer__copy">
+            <span class="ny-offer__title">{{ block.settings[t_key] | escape }}</span>
+            {%- if block.settings[s_key] != blank -%}
+              <span class="ny-offer__subtitle">{{ block.settings[s_key] | escape }}</span>
+            {%- endif -%}
+          </span>
+          <span class="ny-offer__side">
+            {%- if block.settings[b_key] != blank -%}
+              <span class="ny-offer__badge">{{ block.settings[b_key] | escape }}</span>
+            {%- endif -%}
+            {%- if block.settings.show_prices -%}
+              <span class="ny-offer__price" data-unit-price="{{ offer_price }}" data-qty="{{ offer_qty }}">
+                {{- offer_price | times: offer_qty | money -}}
+              </span>
+            {%- endif -%}
+          </span>
+        </label>
+      {%- endif -%}
+    {%- endfor -%}
+  </fieldset>
+  {%- if has_qty_block.size == 0 -%}
+    <input type="hidden" name="quantity" value="1" form="{{ product_form_id }}" data-ny-offer-qty>
+  {%- endif -%}
+</ny-offers>

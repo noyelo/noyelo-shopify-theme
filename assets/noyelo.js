@@ -177,3 +177,61 @@ if (!customElements.get('ny-sticky-atc')) {
     }
   );
 }
+
+/* Product page: bundle-style quantity offers (sets the form quantity) */
+if (!customElements.get('ny-offers')) {
+  customElements.define(
+    'ny-offers',
+    class NyOffers extends HTMLElement {
+      connectedCallback() {
+        this.sectionId = this.dataset.section;
+        this.inputs = [...this.querySelectorAll('.ny-offer__input')];
+        this.onChange = this.onChange.bind(this);
+        this.inputs.forEach((input) => input.addEventListener('change', this.onChange));
+
+        const checked = this.inputs.find((input) => input.checked);
+        if (checked) this.applyQuantity(checked.value);
+
+        if (typeof subscribe === 'function' && typeof PUB_SUB_EVENTS !== 'undefined') {
+          this.unsubscribe = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
+            const variant = event?.data?.variant;
+            if (event?.data?.sectionId === this.sectionId && variant) this.updatePrices(variant.price);
+          });
+        }
+      }
+
+      disconnectedCallback() {
+        this.unsubscribe?.();
+      }
+
+      get quantityInput() {
+        if (this.hasAttribute('data-own-input')) return this.querySelector('[data-ny-offer-qty]');
+        return document.getElementById(`Quantity-${this.sectionId}`);
+      }
+
+      onChange(event) {
+        this.applyQuantity(event.target.value);
+      }
+
+      applyQuantity(value) {
+        const input = this.quantityInput;
+        if (!input) return;
+        input.value = value;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      updatePrices(unitPrice) {
+        const currency = window.Shopify?.currency?.active;
+        if (!currency) return;
+        const format = new Intl.NumberFormat(document.documentElement.lang || undefined, {
+          style: 'currency',
+          currency,
+        });
+        this.querySelectorAll('.ny-offer__price').forEach((el) => {
+          const qty = Number(el.dataset.qty) || 1;
+          el.textContent = format.format((unitPrice * qty) / 100);
+        });
+      }
+    }
+  );
+}

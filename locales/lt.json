@@ -573,6 +573,17 @@
     },
     "cart": {
       "free_shipping_progress": "Progress towards free shipping"
+    },
+    "art": {
+      "hero": "The NOYELO pillow resting on soft clouds",
+      "product": "The NOYELO pillow",
+      "product_side": "The NOYELO pillow – light blue side",
+      "material": "Close-up of the soft cover",
+      "layers": "Cross-section of the pillow layers",
+      "pos_side": "Head and spine in side position",
+      "pos_back": "Head and spine in back position",
+      "pos_stomach": "Head and spine in stomach position",
+      "night": "The NOYELO pillow under the night sky"
     }
   }
 }

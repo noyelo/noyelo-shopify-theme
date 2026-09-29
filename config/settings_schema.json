@@ -45,14 +45,20 @@
         "id": "noyelo_accent",
         "label": "Akzentfarbe",
         "info": "Für Sterne, Fortschrittsbalken und kleine Highlights.",
-        "default": "#C49B74"
+        "default": "#6C9BD8"
       },
       {
         "type": "color",
         "id": "noyelo_surface",
         "label": "Soft-Fläche",
         "info": "Hintergrund für Karten, Galerie und Info-Boxen.",
-        "default": "#F3EEE7"
+        "default": "#EEF4FA"
+      },
+      {
+        "type": "color",
+        "id": "noyelo_star_color",
+        "label": "Sternfarbe (Bewertungen)",
+        "default": "#F2B544"
       },
       {
         "type": "header",

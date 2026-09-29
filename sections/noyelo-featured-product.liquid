@@ -33,7 +33,8 @@
           {%- render 'noyelo-image',
             image: media_image,
             sizes: '(min-width: 990px) 50vw, 100vw',
-            placeholder: 'product-1'
+            placeholder: 'product-1',
+            art: section.settings.default_art
           -%}
         </a>
         {%- if section.settings.badge != blank -%}
@@ -182,7 +183,10 @@
   "tag": "section",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "max_blocks": 5,
   "settings": [
@@ -196,6 +200,63 @@
       "id": "image",
       "label": "Bild (optional)",
       "info": "Standard: Hauptbild des Produkts."
+    },
+    {
+      "type": "select",
+      "id": "default_art",
+      "label": "Standardbild",
+      "options": [
+        {
+          "value": "none",
+          "label": "Keins"
+        },
+        {
+          "value": "hero",
+          "label": "Kissen auf Wolken (quer)"
+        },
+        {
+          "value": "hero-mobile",
+          "label": "Kissen auf Wolken (hoch, mobil)"
+        },
+        {
+          "value": "product-main",
+          "label": "Produkt – Oberseite"
+        },
+        {
+          "value": "product-ice",
+          "label": "Produkt – hellblaue Seite"
+        },
+        {
+          "value": "product-cloud",
+          "label": "Produkt auf Wolken (hoch)"
+        },
+        {
+          "value": "material",
+          "label": "Material-Nahaufnahme"
+        },
+        {
+          "value": "layers",
+          "label": "Querschnitt / Schichten"
+        },
+        {
+          "value": "pos-side",
+          "label": "Seitenlage"
+        },
+        {
+          "value": "pos-back",
+          "label": "Rückenlage"
+        },
+        {
+          "value": "pos-stomach",
+          "label": "Bauchlage"
+        },
+        {
+          "value": "night",
+          "label": "Nachtszene"
+        }
+      ],
+      "default": "product-main",
+      "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist."
     },
     {
       "type": "text",

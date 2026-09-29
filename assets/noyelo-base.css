@@ -14,12 +14,19 @@
   --ny-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ny-duration: 240ms;
   --ny-gutter: 2rem;
-  --ny-shadow-soft: 0 1.2rem 4rem -1.6rem rgba(43, 43, 47, 0.18);
-  --ny-shadow-lift: 0 2rem 5rem -2.4rem rgba(43, 43, 47, 0.28);
+  --ny-shadow-soft: 0 1.2rem 4rem -1.6rem rgba(30, 42, 68, 0.2);
+  --ny-shadow-lift: 0 2rem 5rem -2.4rem rgba(30, 42, 68, 0.3);
   --ny-line: rgba(var(--color-foreground), 0.1);
   --ny-muted: rgba(var(--color-foreground), 0.68);
   --ny-header-bg-transition: background-color var(--ny-duration) var(--ny-ease),
     border-color var(--ny-duration) var(--ny-ease), box-shadow var(--ny-duration) var(--ny-ease);
+}
+
+/* Re-evaluate scheme-dependent tokens inside every colour scheme */
+body,
+[class*='color-scheme-'] {
+  --ny-line: rgba(var(--color-foreground), 0.1);
+  --ny-muted: rgba(var(--color-foreground), 0.68);
 }
 
 @media screen and (min-width: 750px) {
@@ -320,7 +327,7 @@ body .ny-stars__fill{
 }
 
 body .ny-stars__fill svg{
-  fill: var(--ny-accent);
+  fill: var(--ny-star, var(--ny-accent));
 }
 
 body .ny-rating{
@@ -938,7 +945,7 @@ body .ny-drawer-trust .ny-icon{
    -------------------------------------------------------------------------- */
 
 body .drawer{
-  background-color: rgba(30, 30, 33, 0.32);
+  background-color: rgba(20, 28, 46, 0.36);
 }
 
 body .drawer__inner{

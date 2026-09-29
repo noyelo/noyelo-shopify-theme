@@ -383,3 +383,113 @@ body .ny-pdp-trust__payment {
     transition: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Bundle-style quantity offers
+   -------------------------------------------------------------------------- */
+
+.ny-offers__fieldset {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.ny-offers__legend {
+  margin-bottom: 1rem;
+  padding: 0;
+  font-size: 1.4rem;
+  font-weight: var(--ny-font-weight-medium);
+  color: rgb(var(--color-foreground));
+}
+
+.ny-offer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  min-height: 6.4rem;
+  padding: 1.2rem 1.6rem;
+  border-radius: var(--ny-radius-sm);
+  box-shadow: inset 0 0 0 0.1rem rgba(var(--color-foreground), 0.16);
+  cursor: pointer;
+  transition: box-shadow var(--ny-duration) var(--ny-ease), background-color var(--ny-duration) var(--ny-ease);
+}
+
+.ny-offer:hover {
+  box-shadow: inset 0 0 0 0.1rem rgba(var(--color-foreground), 0.45);
+}
+
+.ny-offer:has(.ny-offer__input:checked) {
+  background-color: var(--ny-surface);
+  box-shadow: inset 0 0 0 0.2rem rgb(var(--color-foreground));
+}
+
+.ny-offer:has(.ny-offer__input:focus-visible) {
+  outline: 0.2rem solid rgb(var(--color-foreground));
+  outline-offset: 0.2rem;
+}
+
+.ny-offer__input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ny-offer__radio {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.15rem rgba(var(--color-foreground), 0.35);
+  background: rgb(var(--color-background));
+  transition: box-shadow var(--ny-duration) var(--ny-ease);
+}
+
+.ny-offer__input:checked + .ny-offer__radio {
+  box-shadow: inset 0 0 0 0.6rem rgb(var(--color-foreground));
+}
+
+.ny-offer__copy {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.ny-offer__title {
+  font-size: 1.5rem;
+  font-weight: var(--ny-font-weight-medium);
+  color: rgb(var(--color-foreground));
+}
+
+.ny-offer__subtitle {
+  font-size: 1.3rem;
+  color: var(--ny-muted);
+}
+
+.ny-offer__side {
+  display: grid;
+  justify-items: end;
+  gap: 0.4rem;
+  text-align: right;
+}
+
+.ny-offer__badge {
+  padding: 0.3rem 1rem;
+  border-radius: var(--ny-radius-pill);
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  font-size: 1.1rem;
+  font-weight: var(--ny-font-weight-medium);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.ny-offer__price {
+  font-size: 1.5rem;
+  font-weight: var(--ny-font-weight-medium);
+  color: rgb(var(--color-foreground));
+  white-space: nowrap;
+}

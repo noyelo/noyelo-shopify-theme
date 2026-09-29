@@ -549,6 +549,17 @@
     },
     "cart": {
       "free_shipping_progress": "Fortschritt bis zum kostenlosen Versand"
+    },
+    "art": {
+      "hero": "Das NOYELO Kissen auf weichen Wolken",
+      "product": "Das NOYELO Kissen",
+      "product_side": "Das NOYELO Kissen – hellblaue Seite",
+      "material": "Nahaufnahme des weichen Bezugs",
+      "layers": "Querschnitt durch die Schichten des Kissens",
+      "pos_side": "Kopf und Wirbelsäule in Seitenlage",
+      "pos_back": "Kopf und Wirbelsäule in Rückenlage",
+      "pos_stomach": "Kopf und Wirbelsäule in Bauchlage",
+      "night": "Das NOYELO Kissen unter dem Nachthimmel"
     }
   }
 }

@@ -1354,7 +1354,7 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
   width: 4.4rem;
   height: 4.4rem;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.55);
+  background-color: var(--ny-card-bg, rgba(255, 255, 255, 0.55));
   color: rgb(var(--color-foreground));
 }
 
@@ -1379,7 +1379,7 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
   color: var(--ny-muted);
 }
 
-.ny-trial__media {
+body .ny-trial__media {
   min-height: 32rem;
   border-radius: 0;
 }
@@ -1765,4 +1765,215 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
   .ny-benefits--cards .ny-benefit:not(.ny-benefit--has-image) .ny-benefit__title {
     align-self: end;
   }
+}
+
+/* Overlay hero under a transparent header: image runs behind the header */
+body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero--overlay.ny-hero--under-header {
+  padding-top: 0;
+}
+
+body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero--overlay .ny-hero__content {
+  padding-top: calc(var(--header-height, var(--ny-header-height-estimate, 6.4rem)) + 3.2rem);
+}
+
+.ny-hero--overlay .ny-hero__media > picture > img {
+  object-position: 70% 50%;
+}
+
+@media screen and (max-width: 749px) {
+  .ny-hero--overlay .ny-hero__grid {
+    min-height: 80rem;
+  }
+
+  .ny-hero--overlay.ny-hero--mobile-content-top .ny-hero__content {
+    align-items: flex-start;
+  }
+
+  .ny-hero--overlay .ny-hero__media > picture > img {
+    object-position: 50% 100%;
+  }
+
+  .ny-hero--overlay .ny-hero__buttons,
+  .ny-hero--overlay .ny-hero__buttons .button {
+    width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Sleep positions (tabs)
+   -------------------------------------------------------------------------- */
+
+.ny-positions__tabs {
+  min-inline-size: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 3.2rem;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: var(--ny-radius-pill);
+  background-color: var(--ny-card-bg, rgba(var(--color-foreground), 0.05));
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.ny-positions__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.ny-positions__tab {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 4.4rem;
+  padding: 0 2rem;
+  border-radius: var(--ny-radius-pill);
+  font-size: 1.5rem;
+  font-weight: var(--ny-font-weight-medium);
+  color: rgba(var(--color-foreground), 0.75);
+  cursor: pointer;
+  transition: background-color var(--ny-duration) var(--ny-ease), color var(--ny-duration) var(--ny-ease);
+}
+
+.ny-positions__tab:hover {
+  color: rgb(var(--color-foreground));
+}
+
+@media screen and (max-width: 749px) {
+  .ny-positions__tabs {
+    justify-content: flex-start;
+  }
+
+  .ny-positions__tab {
+    padding: 0 1.4rem;
+    font-size: 1.4rem;
+  }
+}
+
+.ny-positions__radio:checked + .ny-positions__tab {
+  background-color: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+}
+
+.ny-positions__radio:focus-visible + .ny-positions__tab {
+  outline: 0.2rem solid rgb(var(--color-foreground));
+  outline-offset: 0.2rem;
+}
+
+.ny-positions__panel {
+  display: none;
+  gap: 3.2rem;
+  align-items: center;
+}
+
+@supports not selector(:has(*)) {
+  .ny-positions__panel:first-child {
+    display: grid;
+  }
+}
+
+.ny-positions__media {
+  aspect-ratio: 7 / 5;
+  border-radius: var(--ny-radius-lg);
+}
+
+.ny-positions__copy {
+  display: grid;
+  gap: 1.6rem;
+  justify-items: start;
+}
+
+.ny-positions__title {
+  margin: 0;
+}
+
+.ny-positions__text p {
+  margin: 0;
+}
+
+.ny-positions__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.4rem 0.6rem 1rem;
+  border-radius: var(--ny-radius-pill);
+  background-color: rgba(var(--ny-accent-rgb), 0.16);
+  color: rgb(var(--color-foreground));
+  font-size: 1.3rem;
+  font-weight: var(--ny-font-weight-medium);
+}
+
+.ny-positions__badge .ny-icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke-width: 2.2;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ny-positions__panel {
+    animation: nyFadeIn 360ms var(--ny-ease);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .ny-positions__panel {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 7.2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Logo bar
+   -------------------------------------------------------------------------- */
+
+.ny-logos__heading {
+  margin: 0 0 2rem;
+  text-align: center;
+  font-family: var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: var(--ny-font-weight-medium);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ny-muted);
+}
+
+.ny-logos__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem 4.8rem;
+}
+
+.ny-logos__img {
+  display: block;
+  width: auto;
+  height: 3.2rem;
+  max-width: 14rem;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.7;
+  transition: opacity var(--ny-duration) var(--ny-ease);
+}
+
+.ny-logos__link:hover .ny-logos__img {
+  opacity: 1;
+}
+
+.ny-logos__name {
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+  color: rgba(var(--color-foreground), 0.55);
+}
+
+.ny-trial__media > img,
+.ny-trial__media > picture > img {
+  object-position: 62% 45%;
 }

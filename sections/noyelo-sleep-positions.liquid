@@ -1,0 +1,266 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+{%- style -%}
+  {%- for block in section.blocks -%}
+    #NyPositions-{{ section.id }}:has(#NyPos-{{ block.id }}:checked) [data-ny-panel="{{ block.id }}"] {
+      display: grid;
+    }
+  {%- endfor -%}
+{%- endstyle -%}
+
+<div class="ny-positions color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width" id="NyPositions-{{ section.id }}">
+    <div class="ny-section-intro ny-section-intro--center{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ny-heading h1" id="NyPositionsHeading-{{ section.id }}">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="ny-lead">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <fieldset class="ny-positions__tabs">
+        <legend class="visually-hidden">{{ section.settings.heading | strip_html | escape }}</legend>
+        {%- for block in section.blocks -%}
+          <input
+            class="ny-positions__radio visually-hidden"
+            type="radio"
+            name="NyPositions-{{ section.id }}"
+            id="NyPos-{{ block.id }}"
+            {% if forloop.first %}
+              checked
+            {% endif %}
+          >
+          <label class="ny-positions__tab" for="NyPos-{{ block.id }}" {{ block.shopify_attributes }}>
+            {{- block.settings.label | escape -}}
+          </label>
+        {%- endfor -%}
+      </fieldset>
+
+      <div class="ny-positions__panels">
+        {%- for block in section.blocks -%}
+          <div class="ny-positions__panel" data-ny-panel="{{ block.id }}">
+            <div class="ny-positions__media ny-media">
+              {%- render 'noyelo-image',
+                image: block.settings.image,
+                sizes: '(min-width: 990px) 55vw, 100vw',
+                art: block.settings.default_art
+              -%}
+            </div>
+            <div class="ny-positions__copy">
+              {%- if block.settings.badge != blank -%}
+                <span class="ny-positions__badge">
+                  {%- render 'noyelo-icon', icon: 'check' -%}
+                  {{ block.settings.badge | escape }}
+                </span>
+              {%- endif -%}
+              <h3 class="ny-positions__title h2">{{ block.settings.title }}</h3>
+              <div class="ny-positions__text ny-lead">{{ block.settings.text }}</div>
+              {%- liquid
+                assign has_points = false
+                if block.settings.point_1 != blank or block.settings.point_2 != blank or block.settings.point_3 != blank
+                  assign has_points = true
+                endif
+              -%}
+              {%- if has_points -%}
+                <ul class="ny-checklist" role="list">
+                  {%- if block.settings.point_1 != blank -%}
+                    <li>{% render 'noyelo-icon', icon: 'check' %}<span>{{ block.settings.point_1 }}</span></li>
+                  {%- endif -%}
+                  {%- if block.settings.point_2 != blank -%}
+                    <li>{% render 'noyelo-icon', icon: 'check' %}<span>{{ block.settings.point_2 }}</span></li>
+                  {%- endif -%}
+                  {%- if block.settings.point_3 != blank -%}
+                    <li>{% render 'noyelo-icon', icon: 'check' %}<span>{{ block.settings.point_3 }}</span></li>
+                  {%- endif -%}
+                </ul>
+              {%- endif -%}
+              {%- if block.settings.button_label != blank and block.settings.button_link != blank -%}
+                <div class="ny-btn-row">
+                  <a href="{{ block.settings.button_link }}" class="button button--primary">
+                    {{- block.settings.button_label | escape -}}
+                    {%- render 'noyelo-icon', icon: 'arrow-right' -%}
+                  </a>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Schlafpositionen",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile",
+      "default": "Für jede Schlafposition"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Wie schläfst du am liebsten?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Die richtige Höhe hält Kopf und Wirbelsäule in einer Linie – egal, wie du liegst.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "position",
+      "name": "Schlafposition",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Tab-Beschriftung",
+          "default": "Seitenschläfer"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Bild"
+        },
+        {
+          "type": "select",
+          "id": "default_art",
+          "label": "Standardbild",
+          "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist.",
+          "options": [
+            { "value": "none", "label": "Keins" },
+            { "value": "pos-side", "label": "Seitenlage" },
+            { "value": "pos-back", "label": "Rückenlage" },
+            { "value": "pos-stomach", "label": "Bauchlage" },
+            { "value": "product-main", "label": "Produkt – Oberseite" },
+            { "value": "product-ice", "label": "Produkt – hellblaue Seite" }
+          ],
+          "default": "pos-side"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Hinweis-Badge",
+          "default": "Besonders geeignet"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Titel",
+          "default": "Halt für die Seitenlage"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Die höhere Nackenrolle füllt den Abstand zwischen Schulter und Kopf.</p>"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "point_1",
+          "label": "Punkt 1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "point_2",
+          "label": "Punkt 2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "point_3",
+          "label": "Punkt 3"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button-Text (optional)"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button-Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Schlafpositionen",
+      "blocks": [
+        {
+          "type": "position",
+          "settings": {
+            "label": "Seitenschläfer",
+            "default_art": "pos-side"
+          }
+        },
+        {
+          "type": "position",
+          "settings": {
+            "label": "Rückenschläfer",
+            "default_art": "pos-back",
+            "title": "Sanft gestützt in Rückenlage"
+          }
+        },
+        {
+          "type": "position",
+          "settings": {
+            "label": "Bauchschläfer",
+            "default_art": "pos-stomach",
+            "title": "Flacher liegen in Bauchlage",
+            "badge": "Mit flacher Seite"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

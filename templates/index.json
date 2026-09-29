@@ -3,9 +3,9 @@
     "hero": {
       "type": "noyelo-hero",
       "settings": {
-        "layout": "split",
+        "layout": "overlay",
         "height": "medium",
-        "overlay_opacity": 10,
+        "overlay_opacity": 0,
         "eyebrow": "Das neue NOYELO Kissen",
         "heading": "Besser schlafen beginnt hier.",
         "heading_size": "h0",
@@ -17,8 +17,11 @@
         "content_alignment": "left",
         "mobile_order": "image-first",
         "color_scheme": "scheme-2",
-        "padding_top": 32,
-        "padding_bottom": 56
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "default_art": "hero",
+        "default_art_mobile": "hero-mobile",
+        "mobile_content_position": "top"
       },
       "blocks": {
         "usp-trial": {
@@ -106,7 +109,8 @@
         "note": "Kostenloser Versand · 30 Nächte testen",
         "color_scheme": "scheme-1",
         "padding_top": 80,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "default_art": "product-main"
       },
       "blocks": {
         "p1": {
@@ -147,7 +151,8 @@
         "button_link": "",
         "color_scheme": "scheme-2",
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "default_art": "product-cloud"
       },
       "blocks": {
         "b1": {
@@ -206,7 +211,8 @@
         "content_card": false,
         "color_scheme": "scheme-1",
         "padding_top": 96,
-        "padding_bottom": 48
+        "padding_bottom": 96,
+        "default_art": "material"
       },
       "blocks": {
         "m1": {
@@ -237,54 +243,16 @@
         "m3"
       ]
     },
-    "story_ergonomics": {
-      "type": "noyelo-image-text",
-      "settings": {
-        "image_ratio": "portrait",
-        "image_position": "right",
-        "image_caption": "",
-        "eyebrow": "Ergonomie",
-        "heading": "Für eine natürliche Haltung im Schlaf.",
-        "text": "<p>Die leicht erhöhte Nackenzone füllt den Raum zwischen Schulter und Kopf. So bleibt deine Wirbelsäule entspannt – egal ob du auf der Seite oder auf dem Rücken schläfst.</p>",
-        "button_label": "Kissen entdecken",
-        "button_link": "shopify://collections/all",
-        "button_style": "secondary",
-        "vertical_alignment": "center",
-        "content_card": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 48,
-        "padding_bottom": 96
-      },
-      "blocks": {
-        "e1": {
-          "type": "stat",
-          "settings": {
-            "value": "Seite & Rücken",
-            "label": "optimiert für beide Schlafpositionen"
-          }
-        },
-        "e2": {
-          "type": "stat",
-          "settings": {
-            "value": "4 Schichten",
-            "label": "für Halt und Komfort"
-          }
-        }
-      },
-      "block_order": [
-        "e1",
-        "e2"
-      ]
-    },
     "layers": {
       "type": "noyelo-layers",
       "settings": {
         "eyebrow": "Aufbau",
         "heading": "Vier Schichten für einen ruhigen Schlaf.",
         "text": "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 96,
-        "padding_bottom": 96
+        "padding_bottom": 96,
+        "default_art": "layers"
       },
       "blocks": {
         "l1": {
@@ -292,7 +260,7 @@
           "settings": {
             "title": "Atmungsaktiver Bezug",
             "text": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und waschbar.</p>",
-            "color": "#F6F1EA",
+            "color": "#FFFFFF",
             "thickness": 1,
             "texture": "knit"
           }
@@ -302,7 +270,7 @@
           "settings": {
             "title": "Komfortschicht",
             "text": "<p>Eine sanfte Auflage, die sich beim Hinlegen angenehm weich anfühlt.</p>",
-            "color": "#EDE3D6",
+            "color": "#F4F1EA",
             "thickness": 2,
             "texture": "smooth"
           }
@@ -312,7 +280,7 @@
           "settings": {
             "title": "Memory-Foam-Kern",
             "text": "<p>Reagiert auf Wärme und Gewicht und passt sich Kopf und Nacken an.</p>",
-            "color": "#D9C6AE",
+            "color": "#EFE2CC",
             "thickness": 4,
             "texture": "foam"
           }
@@ -322,7 +290,7 @@
           "settings": {
             "title": "Stützende Basis",
             "text": "<p>Ein stabiles Fundament, das die Form auch nach vielen Nächten hält.</p>",
-            "color": "#B89F84",
+            "color": "#D9E6F4",
             "thickness": 2,
             "texture": "smooth"
           }
@@ -345,7 +313,7 @@
         "button_link": "shopify://collections/all",
         "brand_label": "NOYELO",
         "other_label": "Normales Kissen",
-        "color_scheme": "scheme-2",
+        "color_scheme": "scheme-1",
         "padding_top": 96,
         "padding_bottom": 96
       },
@@ -414,7 +382,7 @@
       "settings": {
         "eyebrow": "Bewertungen",
         "heading": "Was unsere Kund:innen sagen",
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding_top": 96,
         "padding_bottom": 96
       },
@@ -483,10 +451,11 @@
         "button_link": "shopify://collections/all",
         "link_label": "",
         "link_url": "",
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-4",
         "outer_scheme": "scheme-1",
         "padding_top": 48,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "default_art": "night"
       },
       "blocks": {
         "s1": {
@@ -592,15 +561,133 @@
         "padding_top": 80,
         "padding_bottom": 80
       }
+    },
+    "positions": {
+      "type": "noyelo-sleep-positions",
+      "settings": {
+        "eyebrow": "Für jede Schlafposition",
+        "heading": "Wie schläfst du am liebsten?",
+        "text": "<p>Die richtige Höhe hält Kopf und Wirbelsäule in einer Linie – so können Nacken und Schultern nachts wirklich entspannen.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "side": {
+          "type": "position",
+          "settings": {
+            "label": "Seitenschläfer",
+            "default_art": "pos-side",
+            "badge": "Besonders geeignet",
+            "title": "Halt für die Seitenlage",
+            "text": "<p>Die erhöhte Nackenzone füllt den Abstand zwischen Schulter und Kopf. So bleibt die Wirbelsäule gerade und die Schulter wird entlastet.</p>",
+            "point_1": "Stabile Nackenstütze",
+            "point_2": "Entlastet die Schulter",
+            "point_3": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "back": {
+          "type": "position",
+          "settings": {
+            "label": "Rückenschläfer",
+            "default_art": "pos-back",
+            "badge": "Besonders geeignet",
+            "title": "Sanft gestützt in Rückenlage",
+            "text": "<p>Der Kopf liegt in der sanften Mulde, der Nacken wird von der Kontur getragen – ohne dass der Kopf nach vorne kippt.</p>",
+            "point_1": "Mulde für stabile Kopflage",
+            "point_2": "Natürliche Nackenkurve",
+            "point_3": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "stomach": {
+          "type": "position",
+          "settings": {
+            "label": "Bauchschläfer",
+            "default_art": "pos-stomach",
+            "badge": "Eingeschränkt geeignet",
+            "title": "Tipp für Bauchschläfer",
+            "text": "<p>In Bauchlage sollte der Kopf möglichst flach liegen. Nutze die niedrigere Seite der Kontur oder teste in Ruhe, was sich für dich gut anfühlt – dafür gibt es die Testphase.</p>",
+            "point_1": "",
+            "point_2": "",
+            "point_3": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "side",
+        "back",
+        "stomach"
+      ]
+    },
+    "logos": {
+      "type": "noyelo-logo-bar",
+      "disabled": true,
+      "settings": {
+        "heading": "Bekannt aus",
+        "color_scheme": "scheme-1",
+        "padding_top": 32,
+        "padding_bottom": 32
+      },
+      "blocks": {
+        "l1": {
+          "type": "logo",
+          "settings": {
+            "name": "Logo 1",
+            "link": ""
+          }
+        },
+        "l2": {
+          "type": "logo",
+          "settings": {
+            "name": "Logo 2",
+            "link": ""
+          }
+        },
+        "l3": {
+          "type": "logo",
+          "settings": {
+            "name": "Logo 3",
+            "link": ""
+          }
+        },
+        "l4": {
+          "type": "logo",
+          "settings": {
+            "name": "Logo 4",
+            "link": ""
+          }
+        },
+        "l5": {
+          "type": "logo",
+          "settings": {
+            "name": "Logo 5",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "l1",
+        "l2",
+        "l3",
+        "l4",
+        "l5"
+      ]
     }
   },
   "order": [
     "hero",
     "trust",
+    "logos",
     "featured",
     "benefits",
+    "positions",
     "story_material",
-    "story_ergonomics",
     "layers",
     "comparison",
     "reviews",

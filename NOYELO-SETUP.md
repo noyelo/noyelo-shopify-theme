@@ -2,6 +2,12 @@
 
 Dieses Theme basiert auf Dawn 16. Die Shopify-Kernfunktionen (Varianten, Warenkorb, Checkout, Suche, Kundenkonten, Märkte, Übersetzungen, dynamische Quellen) bleiben erhalten. Alles NOYELO-Spezifische ist über den Theme-Editor steuerbar.
 
+## 0. Look & mitgelieferte Bilder
+- Farbwelt: Weiß, Wolkenblau (`#EEF4FA`, `#DCE8F5`), Navy (`#1E2A44`), goldene Bewertungssterne. Anpassbar unter **Theme-Einstellungen › Farben** und **› NOYELO**.
+- Das Theme bringt eigene, gerenderte NOYELO-Illustrationen mit (Kissen auf Wolken, Produktansichten, Material, Querschnitt, Schlafpositionen, Nachtszene). Sie liegen als `assets/ny-*.webp` im Theme und erscheinen automatisch, solange in einer Section kein eigenes Bild gewählt ist (Einstellung **„Standardbild“**). Eigene Fotos ersetzen sie jederzeit.
+- **Produktbilder** hängen am Produkt, nicht am Theme: Die quadratischen Dateien aus `noyelo-produktbilder.zip` unter **Produkte › NOYELO Kissen › Medien** hochladen.
+- Die Illustrationen zeigen ein Kissen mit weißer Oberseite und hellblauer Seite. Weicht dein echtes Produkt ab, ersetze sie durch Fotos.
+
 ## 1. Logo & Marke
 - **Theme-Einstellungen › Logo:** Logo hochladen (SVG oder PNG mit transparentem Hintergrund) und die Breite festlegen.
 - **Theme-Einstellungen › NOYELO:** Akzentfarbe, Soft-Fläche, Logobreite mobil, Schwellenwert für kostenlosen Versand, Vertrauenshinweis im Warenkorb, Sticky-Warenkorb-Button auf Mobilgeräten.
@@ -28,6 +34,11 @@ Im Footer (Theme-Editor › Footer) die Spalte „Unternehmen“ mit dem neuen M
 - Bilder für die Storytelling-Sections im Theme-Editor pro Section auswählen, oder über dynamische Quellen mit Produkt-Metafeldern verbinden.
 - Produktbilder möglichst im gleichen Format (z. B. 1:1) hochladen, damit die Galerie ruhig wirkt.
 - **Startseite › NOYELO Produkt-Highlight:** das Hauptkissen auswählen.
+
+## 4b. Neue Elemente
+- **Mengen-Angebote** (Produktseite, Block „NOYELO Mengen-Angebote“): 1 / 2 / 4 Kissen. Setzt nur die Menge. Rabatte wie „2 Kissen sparen“ bitte als automatischen Rabatt unter **Rabatte** anlegen und erst dann im Text bewerben.
+- **Schlafpositionen** (Section mit Tabs): Seiten-, Rücken-, Bauchschläfer. Texte an dein Produkt anpassen.
+- **Logo-Leiste „Bekannt aus“** ist auf der Startseite angelegt, aber **ausgeblendet**. Nur mit echten Presse-/Testerwähnungen und geklärten Logo-Rechten einblenden.
 
 ## 5. Bewertungen
 - Die Sterne neben dem Produktnamen lesen die Standard-Metafelder `reviews.rating` und `reviews.rating_count`. Die meisten Review-Apps (Judge.me, Okendo, Yotpo usw.) befüllen sie automatisch.

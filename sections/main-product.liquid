@@ -708,6 +708,8 @@
                       {%- endif -%}
                     {%- endfor -%}
                   </ul>
+                {%- when 'noyelo_offers' -%}
+                  {%- render 'noyelo-offers', block: block, product: product, product_form_id: product_form_id -%}
                 {%- when 'noyelo_trust' -%}
                   <div class="ny-pdp-trust" {{ block.shopify_attributes }}>
                     <ul class="ny-pdp-trust__list" role="list">
@@ -871,6 +873,129 @@
       ]
     },
     {
+      "type": "noyelo_offers",
+      "name": "NOYELO Mengen-Angebote",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Mengen-Auswahl im Stil eines Bundle-Angebots. Setzt die Menge im Warenkorb. Rabatte (z. B. „2 für X €“) bitte zusätzlich als automatischen Rabatt unter Rabatte anlegen – das Theme berechnet keine Rabatte."
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Überschrift",
+          "default": "Wähle dein Set"
+        },
+        {
+          "type": "header",
+          "content": "Option 1"
+        },
+        {
+          "type": "range",
+          "id": "qty_1",
+          "label": "Menge (0 = ausblenden)",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "title_1",
+          "label": "Titel",
+          "default": "1 Kissen"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_1",
+          "label": "Untertitel",
+          "default": "Für dich allein"
+        },
+        {
+          "type": "text",
+          "id": "badge_1",
+          "label": "Badge (optional)"
+        },
+        {
+          "type": "header",
+          "content": "Option 2"
+        },
+        {
+          "type": "range",
+          "id": "qty_2",
+          "label": "Menge (0 = ausblenden)",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "default": 2
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "label": "Titel",
+          "default": "2 Kissen"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_2",
+          "label": "Untertitel",
+          "default": "Für dich und deine:n Partner:in"
+        },
+        {
+          "type": "text",
+          "id": "badge_2",
+          "label": "Badge (optional)",
+          "default": "Beliebt"
+        },
+        {
+          "type": "header",
+          "content": "Option 3"
+        },
+        {
+          "type": "range",
+          "id": "qty_3",
+          "label": "Menge (0 = ausblenden)",
+          "min": 0,
+          "max": 10,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "Titel",
+          "default": "4 Kissen"
+        },
+        {
+          "type": "text",
+          "id": "subtitle_3",
+          "label": "Untertitel",
+          "default": "Für die ganze Familie"
+        },
+        {
+          "type": "text",
+          "id": "badge_3",
+          "label": "Badge (optional)"
+        },
+        {
+          "type": "range",
+          "id": "default_option",
+          "label": "Vorausgewählte Option",
+          "min": 1,
+          "max": 3,
+          "step": 1,
+          "default": 1
+        },
+        {
+          "type": "checkbox",
+          "id": "show_prices",
+          "label": "Gesamtpreis je Option anzeigen",
+          "default": true
+        }
+      ]
+    },
+    {
       "type": "noyelo_trust",
       "name": "NOYELO Vertrauen & Versand",
       "limit": 2,
@@ -879,7 +1004,104 @@
           "type": "select",
           "id": "icon_1",
           "label": "Zeile 1 – Icon",
-          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "options": [
+            {
+              "value": "check",
+              "label": "Häkchen"
+            },
+            {
+              "value": "moon",
+              "label": "Mond"
+            },
+            {
+              "value": "truck",
+              "label": "Versand"
+            },
+            {
+              "value": "return",
+              "label": "Rückgabe"
+            },
+            {
+              "value": "shield",
+              "label": "Schutz / Garantie"
+            },
+            {
+              "value": "cloud",
+              "label": "Wolke / Komfort"
+            },
+            {
+              "value": "pillow",
+              "label": "Kissen"
+            },
+            {
+              "value": "layers",
+              "label": "Schichten"
+            },
+            {
+              "value": "air",
+              "label": "Luft / Atmungsaktiv"
+            },
+            {
+              "value": "leaf",
+              "label": "Blatt / Natur"
+            },
+            {
+              "value": "wash",
+              "label": "Waschbar"
+            },
+            {
+              "value": "contour",
+              "label": "Ergonomische Kontur"
+            },
+            {
+              "value": "spine",
+              "label": "Wirbelsäule"
+            },
+            {
+              "value": "feather",
+              "label": "Feder / Druckentlastung"
+            },
+            {
+              "value": "temperature",
+              "label": "Temperatur"
+            },
+            {
+              "value": "heart",
+              "label": "Herz"
+            },
+            {
+              "value": "star",
+              "label": "Stern"
+            },
+            {
+              "value": "sparkle",
+              "label": "Funkeln"
+            },
+            {
+              "value": "calendar",
+              "label": "Kalender"
+            },
+            {
+              "value": "lock",
+              "label": "Schloss / Sicher"
+            },
+            {
+              "value": "package",
+              "label": "Paket"
+            },
+            {
+              "value": "chat",
+              "label": "Chat / Service"
+            },
+            {
+              "value": "pin",
+              "label": "Standort"
+            },
+            {
+              "value": "none",
+              "label": "Kein Icon"
+            }
+          ],
           "default": "truck"
         },
         {
@@ -892,7 +1114,104 @@
           "type": "select",
           "id": "icon_2",
           "label": "Zeile 2 – Icon",
-          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "options": [
+            {
+              "value": "check",
+              "label": "Häkchen"
+            },
+            {
+              "value": "moon",
+              "label": "Mond"
+            },
+            {
+              "value": "truck",
+              "label": "Versand"
+            },
+            {
+              "value": "return",
+              "label": "Rückgabe"
+            },
+            {
+              "value": "shield",
+              "label": "Schutz / Garantie"
+            },
+            {
+              "value": "cloud",
+              "label": "Wolke / Komfort"
+            },
+            {
+              "value": "pillow",
+              "label": "Kissen"
+            },
+            {
+              "value": "layers",
+              "label": "Schichten"
+            },
+            {
+              "value": "air",
+              "label": "Luft / Atmungsaktiv"
+            },
+            {
+              "value": "leaf",
+              "label": "Blatt / Natur"
+            },
+            {
+              "value": "wash",
+              "label": "Waschbar"
+            },
+            {
+              "value": "contour",
+              "label": "Ergonomische Kontur"
+            },
+            {
+              "value": "spine",
+              "label": "Wirbelsäule"
+            },
+            {
+              "value": "feather",
+              "label": "Feder / Druckentlastung"
+            },
+            {
+              "value": "temperature",
+              "label": "Temperatur"
+            },
+            {
+              "value": "heart",
+              "label": "Herz"
+            },
+            {
+              "value": "star",
+              "label": "Stern"
+            },
+            {
+              "value": "sparkle",
+              "label": "Funkeln"
+            },
+            {
+              "value": "calendar",
+              "label": "Kalender"
+            },
+            {
+              "value": "lock",
+              "label": "Schloss / Sicher"
+            },
+            {
+              "value": "package",
+              "label": "Paket"
+            },
+            {
+              "value": "chat",
+              "label": "Chat / Service"
+            },
+            {
+              "value": "pin",
+              "label": "Standort"
+            },
+            {
+              "value": "none",
+              "label": "Kein Icon"
+            }
+          ],
           "default": "moon"
         },
         {
@@ -905,7 +1224,104 @@
           "type": "select",
           "id": "icon_3",
           "label": "Zeile 3 – Icon",
-          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "options": [
+            {
+              "value": "check",
+              "label": "Häkchen"
+            },
+            {
+              "value": "moon",
+              "label": "Mond"
+            },
+            {
+              "value": "truck",
+              "label": "Versand"
+            },
+            {
+              "value": "return",
+              "label": "Rückgabe"
+            },
+            {
+              "value": "shield",
+              "label": "Schutz / Garantie"
+            },
+            {
+              "value": "cloud",
+              "label": "Wolke / Komfort"
+            },
+            {
+              "value": "pillow",
+              "label": "Kissen"
+            },
+            {
+              "value": "layers",
+              "label": "Schichten"
+            },
+            {
+              "value": "air",
+              "label": "Luft / Atmungsaktiv"
+            },
+            {
+              "value": "leaf",
+              "label": "Blatt / Natur"
+            },
+            {
+              "value": "wash",
+              "label": "Waschbar"
+            },
+            {
+              "value": "contour",
+              "label": "Ergonomische Kontur"
+            },
+            {
+              "value": "spine",
+              "label": "Wirbelsäule"
+            },
+            {
+              "value": "feather",
+              "label": "Feder / Druckentlastung"
+            },
+            {
+              "value": "temperature",
+              "label": "Temperatur"
+            },
+            {
+              "value": "heart",
+              "label": "Herz"
+            },
+            {
+              "value": "star",
+              "label": "Stern"
+            },
+            {
+              "value": "sparkle",
+              "label": "Funkeln"
+            },
+            {
+              "value": "calendar",
+              "label": "Kalender"
+            },
+            {
+              "value": "lock",
+              "label": "Schloss / Sicher"
+            },
+            {
+              "value": "package",
+              "label": "Paket"
+            },
+            {
+              "value": "chat",
+              "label": "Chat / Service"
+            },
+            {
+              "value": "pin",
+              "label": "Standort"
+            },
+            {
+              "value": "none",
+              "label": "Kein Icon"
+            }
+          ],
           "default": "return"
         },
         {
@@ -918,7 +1334,104 @@
           "type": "select",
           "id": "icon_4",
           "label": "Zeile 4 – Icon",
-          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "options": [
+            {
+              "value": "check",
+              "label": "Häkchen"
+            },
+            {
+              "value": "moon",
+              "label": "Mond"
+            },
+            {
+              "value": "truck",
+              "label": "Versand"
+            },
+            {
+              "value": "return",
+              "label": "Rückgabe"
+            },
+            {
+              "value": "shield",
+              "label": "Schutz / Garantie"
+            },
+            {
+              "value": "cloud",
+              "label": "Wolke / Komfort"
+            },
+            {
+              "value": "pillow",
+              "label": "Kissen"
+            },
+            {
+              "value": "layers",
+              "label": "Schichten"
+            },
+            {
+              "value": "air",
+              "label": "Luft / Atmungsaktiv"
+            },
+            {
+              "value": "leaf",
+              "label": "Blatt / Natur"
+            },
+            {
+              "value": "wash",
+              "label": "Waschbar"
+            },
+            {
+              "value": "contour",
+              "label": "Ergonomische Kontur"
+            },
+            {
+              "value": "spine",
+              "label": "Wirbelsäule"
+            },
+            {
+              "value": "feather",
+              "label": "Feder / Druckentlastung"
+            },
+            {
+              "value": "temperature",
+              "label": "Temperatur"
+            },
+            {
+              "value": "heart",
+              "label": "Herz"
+            },
+            {
+              "value": "star",
+              "label": "Stern"
+            },
+            {
+              "value": "sparkle",
+              "label": "Funkeln"
+            },
+            {
+              "value": "calendar",
+              "label": "Kalender"
+            },
+            {
+              "value": "lock",
+              "label": "Schloss / Sicher"
+            },
+            {
+              "value": "package",
+              "label": "Paket"
+            },
+            {
+              "value": "chat",
+              "label": "Chat / Service"
+            },
+            {
+              "value": "pin",
+              "label": "Standort"
+            },
+            {
+              "value": "none",
+              "label": "Kein Icon"
+            }
+          ],
           "default": "lock"
         },
         {

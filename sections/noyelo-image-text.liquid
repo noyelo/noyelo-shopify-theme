@@ -12,7 +12,8 @@
           {%- render 'noyelo-image',
             image: section.settings.image,
             sizes: '(min-width: 990px) 50vw, 100vw',
-            placeholder: 'lifestyle-1'
+            placeholder: 'lifestyle-1',
+            art: section.settings.default_art
           -%}
         </div>
         {%- if section.settings.image_caption != blank -%}
@@ -82,7 +83,10 @@
   "tag": "section",
   "class": "section",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "max_blocks": 8,
   "settings": [
@@ -91,6 +95,63 @@
       "id": "image",
       "label": "Bild",
       "info": "Funktioniert gut mit Produktaufnahmen, Material-Nahaufnahmen, Querschnitten oder Lifestyle-Bildern."
+    },
+    {
+      "type": "select",
+      "id": "default_art",
+      "label": "Standardbild",
+      "options": [
+        {
+          "value": "none",
+          "label": "Keins"
+        },
+        {
+          "value": "hero",
+          "label": "Kissen auf Wolken (quer)"
+        },
+        {
+          "value": "hero-mobile",
+          "label": "Kissen auf Wolken (hoch, mobil)"
+        },
+        {
+          "value": "product-main",
+          "label": "Produkt – Oberseite"
+        },
+        {
+          "value": "product-ice",
+          "label": "Produkt – hellblaue Seite"
+        },
+        {
+          "value": "product-cloud",
+          "label": "Produkt auf Wolken (hoch)"
+        },
+        {
+          "value": "material",
+          "label": "Material-Nahaufnahme"
+        },
+        {
+          "value": "layers",
+          "label": "Querschnitt / Schichten"
+        },
+        {
+          "value": "pos-side",
+          "label": "Seitenlage"
+        },
+        {
+          "value": "pos-back",
+          "label": "Rückenlage"
+        },
+        {
+          "value": "pos-stomach",
+          "label": "Bauchlage"
+        },
+        {
+          "value": "night",
+          "label": "Nachtszene"
+        }
+      ],
+      "default": "material",
+      "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist."
     },
     {
       "type": "select",
@@ -243,7 +304,104 @@
           "type": "select",
           "id": "icon",
           "label": "Icon",
-          "options": [{"value": "check", "label": "Häkchen"}, {"value": "moon", "label": "Mond"}, {"value": "truck", "label": "Versand"}, {"value": "return", "label": "Rückgabe"}, {"value": "shield", "label": "Schutz / Garantie"}, {"value": "cloud", "label": "Wolke / Komfort"}, {"value": "pillow", "label": "Kissen"}, {"value": "layers", "label": "Schichten"}, {"value": "air", "label": "Luft / Atmungsaktiv"}, {"value": "leaf", "label": "Blatt / Natur"}, {"value": "wash", "label": "Waschbar"}, {"value": "contour", "label": "Ergonomische Kontur"}, {"value": "spine", "label": "Wirbelsäule"}, {"value": "feather", "label": "Feder / Druckentlastung"}, {"value": "temperature", "label": "Temperatur"}, {"value": "heart", "label": "Herz"}, {"value": "star", "label": "Stern"}, {"value": "sparkle", "label": "Funkeln"}, {"value": "calendar", "label": "Kalender"}, {"value": "lock", "label": "Schloss / Sicher"}, {"value": "package", "label": "Paket"}, {"value": "chat", "label": "Chat / Service"}, {"value": "pin", "label": "Standort"}, {"value": "none", "label": "Kein Icon"}],
+          "options": [
+            {
+              "value": "check",
+              "label": "Häkchen"
+            },
+            {
+              "value": "moon",
+              "label": "Mond"
+            },
+            {
+              "value": "truck",
+              "label": "Versand"
+            },
+            {
+              "value": "return",
+              "label": "Rückgabe"
+            },
+            {
+              "value": "shield",
+              "label": "Schutz / Garantie"
+            },
+            {
+              "value": "cloud",
+              "label": "Wolke / Komfort"
+            },
+            {
+              "value": "pillow",
+              "label": "Kissen"
+            },
+            {
+              "value": "layers",
+              "label": "Schichten"
+            },
+            {
+              "value": "air",
+              "label": "Luft / Atmungsaktiv"
+            },
+            {
+              "value": "leaf",
+              "label": "Blatt / Natur"
+            },
+            {
+              "value": "wash",
+              "label": "Waschbar"
+            },
+            {
+              "value": "contour",
+              "label": "Ergonomische Kontur"
+            },
+            {
+              "value": "spine",
+              "label": "Wirbelsäule"
+            },
+            {
+              "value": "feather",
+              "label": "Feder / Druckentlastung"
+            },
+            {
+              "value": "temperature",
+              "label": "Temperatur"
+            },
+            {
+              "value": "heart",
+              "label": "Herz"
+            },
+            {
+              "value": "star",
+              "label": "Stern"
+            },
+            {
+              "value": "sparkle",
+              "label": "Funkeln"
+            },
+            {
+              "value": "calendar",
+              "label": "Kalender"
+            },
+            {
+              "value": "lock",
+              "label": "Schloss / Sicher"
+            },
+            {
+              "value": "package",
+              "label": "Paket"
+            },
+            {
+              "value": "chat",
+              "label": "Chat / Service"
+            },
+            {
+              "value": "pin",
+              "label": "Standort"
+            },
+            {
+              "value": "none",
+              "label": "Kein Icon"
+            }
+          ],
           "default": "check"
         },
         {

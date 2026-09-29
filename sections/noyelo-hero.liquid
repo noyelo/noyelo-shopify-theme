@@ -20,12 +20,12 @@
 -%}
 
 <div
-  class="ny-hero ny-hero--{{ layout }} ny-hero--{{ section.settings.height }} ny-hero--mobile-{{ section.settings.mobile_order }} ny-hero--under-header color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  class="ny-hero ny-hero--{{ layout }} ny-hero--{{ section.settings.height }} ny-hero--mobile-{{ section.settings.mobile_order }} ny-hero--mobile-content-{{ section.settings.mobile_content_position }} ny-hero--under-header color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
   style="--ny-hero-overlay: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
 >
   <div class="ny-hero__media-wrap{% if layout == 'split' %} page-width{% endif %}">
     <div class="ny-hero__grid">
-      <div class="ny-hero__media ny-media{% if image_mobile != image %} ny-hero__media--art{% endif %}">
+      <div class="ny-hero__media ny-media">
         {%- if image != blank -%}
           {%- liquid
             assign fetch_priority = 'auto'
@@ -68,6 +68,23 @@
                 alt: image.alt,
                 style: img_style
             }}
+          </picture>
+        {%- elsif section.settings.default_art != 'none' -%}
+          {%- liquid
+            if layout == 'split'
+              assign art_sizes = '(min-width: 990px) 55vw, 100vw'
+            else
+              assign art_sizes = '100vw'
+            endif
+          -%}
+          <picture>
+            {%- if section.settings.default_art_mobile != 'none' -%}
+              {%- capture mobile_art_srcset -%}
+                {%- render 'noyelo-art', art: section.settings.default_art_mobile, mode: 'srcset' -%}
+              {%- endcapture -%}
+              <source media="(max-width: 749px)" srcset="{{ mobile_art_srcset | strip }}" sizes="100vw">
+            {%- endif -%}
+            {%- render 'noyelo-art', art: section.settings.default_art, sizes: art_sizes, eager: is_first -%}
           </picture>
         {%- else -%}
           {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -154,7 +171,10 @@
   "tag": "section",
   "class": "section ny-section-hero",
   "disabled_on": {
-    "groups": ["header", "footer"]
+    "groups": [
+      "header",
+      "footer"
+    ]
   },
   "max_blocks": 4,
   "settings": [
@@ -172,7 +192,7 @@
           "label": "Vollflächiges Bild mit Text"
         }
       ],
-      "default": "split"
+      "default": "overlay"
     },
     {
       "type": "select",
@@ -207,6 +227,87 @@
       "info": "Eigener Bildausschnitt für Smartphones, z. B. im Hochformat."
     },
     {
+      "type": "select",
+      "id": "default_art",
+      "label": "Standardbild",
+      "options": [
+        {
+          "value": "none",
+          "label": "Keins"
+        },
+        {
+          "value": "hero",
+          "label": "Kissen auf Wolken (quer)"
+        },
+        {
+          "value": "hero-mobile",
+          "label": "Kissen auf Wolken (hoch)"
+        },
+        {
+          "value": "product-main",
+          "label": "Produkt – Oberseite"
+        },
+        {
+          "value": "product-ice",
+          "label": "Produkt – hellblaue Seite"
+        },
+        {
+          "value": "product-cloud",
+          "label": "Produkt auf Wolken (hoch)"
+        },
+        {
+          "value": "material",
+          "label": "Material-Nahaufnahme"
+        },
+        {
+          "value": "night",
+          "label": "Nachtszene"
+        }
+      ],
+      "default": "hero",
+      "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist."
+    },
+    {
+      "type": "select",
+      "id": "default_art_mobile",
+      "label": "Standardbild mobil",
+      "options": [
+        {
+          "value": "none",
+          "label": "Keins"
+        },
+        {
+          "value": "hero",
+          "label": "Kissen auf Wolken (quer)"
+        },
+        {
+          "value": "hero-mobile",
+          "label": "Kissen auf Wolken (hoch)"
+        },
+        {
+          "value": "product-main",
+          "label": "Produkt – Oberseite"
+        },
+        {
+          "value": "product-ice",
+          "label": "Produkt – hellblaue Seite"
+        },
+        {
+          "value": "product-cloud",
+          "label": "Produkt auf Wolken (hoch)"
+        },
+        {
+          "value": "material",
+          "label": "Material-Nahaufnahme"
+        },
+        {
+          "value": "night",
+          "label": "Nachtszene"
+        }
+      ],
+      "default": "hero-mobile"
+    },
+    {
       "type": "range",
       "id": "overlay_opacity",
       "min": 0,
@@ -214,7 +315,7 @@
       "step": 5,
       "unit": "%",
       "label": "Bild-Abdunklung (nur Vollbild-Layout)",
-      "default": 10
+      "default": 0
     },
     {
       "type": "header",
@@ -309,6 +410,22 @@
       "info": "Nur für das Layout „Text links, Bild rechts“."
     },
     {
+      "type": "select",
+      "id": "mobile_content_position",
+      "label": "Textposition mobil (Vollbild-Layout)",
+      "options": [
+        {
+          "value": "top",
+          "label": "Oben"
+        },
+        {
+          "value": "bottom",
+          "label": "Unten"
+        }
+      ],
+      "default": "top"
+    },
+    {
       "type": "header",
       "content": "Design"
     },
@@ -349,14 +466,38 @@
           "id": "icon",
           "label": "Icon",
           "options": [
-            { "value": "check", "label": "Häkchen" },
-            { "value": "moon", "label": "Mond" },
-            { "value": "truck", "label": "Versand" },
-            { "value": "return", "label": "Rückgabe" },
-            { "value": "shield", "label": "Schutz" },
-            { "value": "cloud", "label": "Wolke / Komfort" },
-            { "value": "star", "label": "Stern" },
-            { "value": "heart", "label": "Herz" }
+            {
+              "value": "check",
+              "label": "Häkchen"
+            },
+            {
+              "value": "moon",
+              "label": "Mond"
+            },
+            {
+              "value": "truck",
+              "label": "Versand"
+            },
+            {
+              "value": "return",
+              "label": "Rückgabe"
+            },
+            {
+              "value": "shield",
+              "label": "Schutz"
+            },
+            {
+              "value": "cloud",
+              "label": "Wolke / Komfort"
+            },
+            {
+              "value": "star",
+              "label": "Stern"
+            },
+            {
+              "value": "heart",
+              "label": "Herz"
+            }
           ],
           "default": "check"
         },
