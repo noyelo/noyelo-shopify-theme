@@ -146,6 +146,42 @@
   }
 }
 
+/* Light variant: white dots for bright product photos */
+.ny-hotspots--dots-light .ny-hotspot__dot {
+  background-color: #fff;
+  color: #1e2a44;
+  box-shadow: 0 0 0 0.1rem rgba(30, 42, 68, 0.14), 0 0.6rem 1.8rem -0.4rem rgba(30, 42, 68, 0.45);
+}
+
+.ny-hotspot__core {
+  display: block;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background-color: #1e2a44;
+  transition: transform var(--ny-duration) var(--ny-ease);
+}
+
+.ny-hotspots--dots-light .ny-hotspot__button::before,
+.ny-hotspots--dots-light .ny-hotspot__button::after {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 0 0.1rem rgba(30, 42, 68, 0.22);
+}
+
+.ny-hotspots--dots-light .ny-hotspot.is-open .ny-hotspot__core {
+  transform: scale(1.35);
+}
+
+@media (hover: hover) {
+  .ny-hotspots--dots-light .ny-hotspot:hover .ny-hotspot__core {
+    transform: scale(1.35);
+  }
+}
+
+.ny-hotspots--dots-light .ny-hotspots__media {
+  background-color: transparent;
+}
+
 /* Info card */
 .ny-hotspot__card {
   --ny-nudge: 0px;

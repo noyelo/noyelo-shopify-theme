@@ -23,7 +23,7 @@
     case section.settings.default_art
       when 'layers', 'layers-cut'
         assign media_ratio = 1.3333
-      when 'product-main', 'product-ice'
+      when 'product-main', 'product-ice', 'layers-photo'
         assign media_ratio = 1
       when 'material', 'product-cloud'
         assign media_ratio = 0.8
@@ -57,7 +57,7 @@
     {%- endif -%}
 
     <ny-hotspots
-      class="ny-hotspots__stage{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+      class="ny-hotspots__stage ny-hotspots--dots-{{ section.settings.dot_style | default: 'dark' }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
       style="--ny-hotspots-width: {{ section.settings.image_width }}%;"
     >
       <div class="ny-hotspots__media" style="aspect-ratio: {{ media_ratio }};">
@@ -105,7 +105,13 @@
             aria-controls="NyHotspot-{{ block.id }}"
             aria-label="{{ spot_label | escape }}: {{ block.settings.title | strip_html | escape }}"
           >
-            <span class="ny-hotspot__dot" aria-hidden="true">{{ spot_label | escape }}</span>
+            <span class="ny-hotspot__dot" aria-hidden="true">
+              {%- if section.settings.dot_style == 'light' -%}
+                <span class="ny-hotspot__core"></span>
+              {%- else -%}
+                {{- spot_label | escape -}}
+              {%- endif -%}
+            </span>
           </button>
           <div class="ny-hotspot__card" id="NyHotspot-{{ block.id }}">
             <p class="ny-hotspot__title">
@@ -168,6 +174,7 @@
       "id": "default_art",
       "label": "Standardbild",
       "options": [
+        { "value": "layers-photo", "label": "NOYELO Kissen – Schichten (Foto)" },
         { "value": "layers-cut", "label": "NOYELO Kissen im Querschnitt (Rendering)" },
         { "value": "product-image-1", "label": "Produktfoto 1" },
         { "value": "product-image-2", "label": "Produktfoto 2" },
@@ -182,7 +189,7 @@
         { "value": "product-cloud", "label": "Produkt auf Wolken (hoch)" },
         { "value": "hero", "label": "Kissen auf Wolken (quer)" }
       ],
-      "default": "layers-cut",
+      "default": "layers-photo",
       "info": "Wird angezeigt, solange kein eigenes Bild ausgewählt ist. „Produktfoto N“ = N-tes Bild des angezeigten Produkts (auf anderen Seiten: Hauptprodukt)."
     },
     {
@@ -194,6 +201,16 @@
       "unit": "%",
       "label": "Bildbreite (Desktop)",
       "default": 90
+    },
+    {
+      "type": "select",
+      "id": "dot_style",
+      "label": "Punkte",
+      "options": [
+        { "value": "light", "label": "Weiß (für helle Bilder)" },
+        { "value": "dark", "label": "Dunkel mit Nummer" }
+      ],
+      "default": "light"
     },
     {
       "type": "text",
@@ -299,46 +316,10 @@
     {
       "name": "NOYELO Bild mit Hotspots",
       "blocks": [
-        {
-          "type": "hotspot",
-          "settings": {
-            "title": "Abnehmbarer Bezug",
-            "text": "<p>Weich und atmungsaktiv – für ein frisches Schlafgefühl. Der Bezug lässt sich zum Waschen einfach abnehmen.</p>",
-            "card_position": "right",
-            "x": 37,
-            "y": 30
-          }
-        },
-        {
-          "type": "hotspot",
-          "settings": {
-            "title": "Komfortschicht",
-            "text": "<p>Die perforierte Auflage gibt beim Hinlegen sanft nach und sorgt für spürbare Druckentlastung.</p>",
-            "card_position": "left",
-            "x": 71,
-            "y": 43
-          }
-        },
-        {
-          "type": "hotspot",
-          "settings": {
-            "title": "Memory-Schaum-Kern",
-            "text": "<p>Passt sich an: Der Schaum reagiert auf Körperwärme und Druck und formt sich nach Kopf und Nacken.</p>",
-            "card_position": "left",
-            "x": 63,
-            "y": 47
-          }
-        },
-        {
-          "type": "hotspot",
-          "settings": {
-            "title": "Stützbasis",
-            "text": "<p>Das feste Fundament gibt stabile Unterstützung und hält die ergonomische Form Nacht für Nacht.</p>",
-            "card_position": "left",
-            "x": 57,
-            "y": 54
-          }
-        }
+        { "type": "hotspot", "settings": { "title": "Bezug", "text": "<p>Kühlend und atmungsaktiv. Der weiche Strickbezug lässt sich zum Waschen einfach abnehmen.</p>", "x": 57, "y": 18 } },
+        { "type": "hotspot", "settings": { "title": "Kühlende Mesh-Lage", "text": "<p>Die luftdurchlässige 3D-Mesh-Lage sorgt für Luftzirkulation und ein frisches Schlafgefühl.</p>", "card_position": "left", "x": 64, "y": 42 } },
+        { "type": "hotspot", "settings": { "title": "Memory Foam", "text": "<p>Reagiert auf Körperwärme und Druck und passt sich Kopf und Nacken an – für spürbare Entlastung.</p>", "x": 56, "y": 66 } },
+        { "type": "hotspot", "settings": { "title": "Stützender Kern", "text": "<p>Das feste Fundament gibt stabilen Halt und hält die ergonomische Form Nacht für Nacht.</p>", "card_position": "left", "x": 61, "y": 82 } }
       ]
     }
   ]
