@@ -8,6 +8,7 @@
   - class: {String} optional class
   - alt: {String} optional alt text override
   - placeholder: {String} placeholder name (e.g. 'lifestyle-1', 'product-1', 'image')
+  - art: {String} optional built-in NOYELO artwork used when no image is set (see noyelo-art)
 
   Usage:
   {% render 'noyelo-image', image: section.settings.image, sizes: '100vw', eager: true %}
@@ -36,6 +37,8 @@
       alt: img_alt,
       style: img_style
   }}
+{%- elsif art != blank and art != 'none' -%}
+  {%- render 'noyelo-art', art: art, sizes: sizes, eager: eager, class: class, alt: alt -%}
 {%- else -%}
   {{ placeholder | default: 'image' | placeholder_svg_tag: 'placeholder-svg' }}
 {%- endif -%}

@@ -1,0 +1,111 @@
+{% comment %}
+  Built-in NOYELO default artwork (theme assets ny-<art>-<width>.webp).
+  Used when no image has been chosen in the theme editor.
+
+  Accepts:
+  - art: {String} artwork key, e.g. 'hero', 'product-main'
+  - sizes: {String} sizes attribute
+  - eager: {Boolean} load immediately (above the fold)
+  - class: {String} optional class
+  - alt: {String} optional alt text
+  - mode: {String} optional; 'srcset' outputs only the srcset string (for <picture> sources)
+
+  Usage:
+  {% render 'noyelo-art', art: 'product-main', sizes: '50vw' %}
+{% endcomment %}
+{%- liquid
+  case art
+    when 'hero'
+      assign art_widths = '800,1400,2000,2400'
+      assign art_w = 2400
+      assign art_h = 1400
+      assign art_alt = 'noyelo.art.hero' | t
+    when 'hero-mobile'
+      assign art_widths = '600,900,1200'
+      assign art_w = 1200
+      assign art_h = 1800
+      assign art_alt = 'noyelo.art.hero' | t
+    when 'product-main'
+      assign art_widths = '600,1000,1500'
+      assign art_w = 1500
+      assign art_h = 1500
+      assign art_alt = 'noyelo.art.product' | t
+    when 'product-ice'
+      assign art_widths = '600,1000,1500'
+      assign art_w = 1500
+      assign art_h = 1500
+      assign art_alt = 'noyelo.art.product_side' | t
+    when 'product-cloud'
+      assign art_widths = '600,1000,1400'
+      assign art_w = 1400
+      assign art_h = 1750
+      assign art_alt = 'noyelo.art.product' | t
+    when 'material'
+      assign art_widths = '600,1000,1400'
+      assign art_w = 1400
+      assign art_h = 1750
+      assign art_alt = 'noyelo.art.material' | t
+    when 'layers'
+      assign art_widths = '800,1400,2000'
+      assign art_w = 2000
+      assign art_h = 1500
+      assign art_alt = 'noyelo.art.layers' | t
+    when 'pos-side'
+      assign art_widths = '600,1000,1400'
+      assign art_w = 1400
+      assign art_h = 1000
+      assign art_alt = 'noyelo.art.pos_side' | t
+    when 'pos-back'
+      assign art_widths = '600,1000,1400'
+      assign art_w = 1400
+      assign art_h = 1000
+      assign art_alt = 'noyelo.art.pos_back' | t
+    when 'pos-stomach'
+      assign art_widths = '600,1000,1400'
+      assign art_w = 1400
+      assign art_h = 1000
+      assign art_alt = 'noyelo.art.pos_stomach' | t
+    when 'night'
+      assign art_widths = '800,1400,1800'
+      assign art_w = 1800
+      assign art_h = 1400
+      assign art_alt = 'noyelo.art.night' | t
+    else
+      assign art_widths = ''
+  endcase
+-%}
+{%- if art_widths != '' -%}
+  {%- liquid
+    assign width_list = art_widths | split: ','
+    assign art_srcset = ''
+    for aw in width_list
+      assign art_file = 'ny-' | append: art | append: '-' | append: aw | append: '.webp'
+      assign art_url = art_file | asset_url
+      assign art_srcset = art_srcset | append: art_url | append: ' ' | append: aw | append: 'w'
+      unless forloop.last
+        assign art_srcset = art_srcset | append: ', '
+      endunless
+    endfor
+    assign art_default = 'ny-' | append: art | append: '-' | append: width_list[1] | append: '.webp'
+  -%}
+  {%- if mode == 'srcset' -%}
+    {{- art_srcset -}}
+  {%- else -%}
+  <img
+    src="{{ art_default | asset_url }}"
+    srcset="{{ art_srcset }}"
+    sizes="{{ sizes | default: '100vw' }}"
+    width="{{ art_w }}"
+    height="{{ art_h }}"
+    alt="{{ alt | default: art_alt | escape }}"
+    {% if class %}
+      class="{{ class }}"
+    {% endif %}
+    {% if eager %}
+      loading="eager" fetchpriority="high"
+    {% else %}
+      loading="lazy"
+    {% endif %}
+  >
+  {%- endif -%}
+{%- endif -%}
