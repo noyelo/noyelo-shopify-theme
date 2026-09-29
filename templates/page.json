@@ -1,14 +1,34 @@
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "header": {
+      "type": "noyelo-page-header",
       "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
+        "eyebrow": "",
+        "heading": "",
+        "text": "",
+        "default_art": "none",
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "content": {
+      "type": "noyelo-page-content",
+      "settings": {
+        "show_title": false,
+        "show_help": true,
+        "help_heading": "Noch Fragen?",
+        "help_text": "<p>Unser Service-Team hilft dir gern weiter – persönlich und schnell.</p>",
+        "help_button_label": "Kontakt aufnehmen",
+        "help_button_link": "/pages/kontakt",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 80
       }
     }
   },
   "order": [
-    "main"
+    "header",
+    "content"
   ]
 }

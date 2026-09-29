@@ -1,0 +1,241 @@
+{
+  "sections": {
+    "header": {
+      "type": "noyelo-page-header",
+      "settings": {
+        "eyebrow": "Kissenberater",
+        "heading": "Welches Kissen passt zu dir?",
+        "text": "<p>Deine Schlafposition entscheidet, wie hoch und wie fest dein Kissen sein sollte. In zwei Minuten weißt du, worauf es ankommt.</p>",
+        "default_art": "pos-side",
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
+        "padding_bottom": 64
+      }
+    },
+    "positions": {
+      "type": "noyelo-sleep-positions",
+      "settings": {
+        "eyebrow": "Für jede Schlafposition",
+        "heading": "Wie schläfst du am liebsten?",
+        "text": "<p>Die richtige Höhe hält Kopf und Wirbelsäule in einer Linie – so können Nacken und Schultern nachts wirklich entspannen.</p>",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "side": {
+          "type": "position",
+          "settings": {
+            "label": "Seitenschläfer",
+            "default_art": "pos-side",
+            "badge": "Besonders geeignet",
+            "title": "Halt für die Seitenlage",
+            "text": "<p>Die erhöhte Nackenzone füllt den Abstand zwischen Schulter und Kopf. So bleibt die Wirbelsäule gerade und die Schulter wird entlastet.</p>",
+            "point_1": "Stabile Nackenstütze",
+            "point_2": "Entlastet die Schulter",
+            "point_3": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "back": {
+          "type": "position",
+          "settings": {
+            "label": "Rückenschläfer",
+            "default_art": "pos-back",
+            "badge": "Besonders geeignet",
+            "title": "Sanft gestützt in Rückenlage",
+            "text": "<p>Der Kopf liegt in der sanften Mulde, der Nacken wird von der Kontur getragen – ohne dass der Kopf nach vorne kippt.</p>",
+            "point_1": "Mulde für stabile Kopflage",
+            "point_2": "Natürliche Nackenkurve",
+            "point_3": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "stomach": {
+          "type": "position",
+          "settings": {
+            "label": "Bauchschläfer",
+            "default_art": "pos-stomach",
+            "badge": "Eingeschränkt geeignet",
+            "title": "Tipp für Bauchschläfer",
+            "text": "<p>In Bauchlage sollte der Kopf möglichst flach liegen. Nutze die niedrigere Seite der Kontur oder teste in Ruhe, was sich für dich gut anfühlt – dafür gibt es die Testphase.</p>",
+            "point_1": "",
+            "point_2": "",
+            "point_3": "",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "side",
+        "back",
+        "stomach"
+      ]
+    },
+    "comparison": {
+      "type": "noyelo-comparison",
+      "settings": {
+        "eyebrow": "Der Unterschied",
+        "heading": "NOYELO vs. normales Kissen",
+        "text": "<p>Ein gutes Kissen ist mehr als eine weiche Füllung. So unterscheidet sich NOYELO von einem gewöhnlichen Kissen.</p>",
+        "button_label": "Kissen entdecken",
+        "button_link": "shopify://collections/all",
+        "brand_label": "NOYELO",
+        "other_label": "Normales Kissen",
+        "color_scheme": "scheme-1",
+        "padding_top": 96,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "c1": {
+          "type": "row",
+          "settings": {
+            "feature": "Ergonomische Unterstützung",
+            "brand_value": "yes",
+            "brand_text": "",
+            "other_value": "no",
+            "other_text": ""
+          }
+        },
+        "c2": {
+          "type": "row",
+          "settings": {
+            "feature": "Memory Foam",
+            "brand_value": "yes",
+            "brand_text": "",
+            "other_value": "no",
+            "other_text": ""
+          }
+        },
+        "c3": {
+          "type": "row",
+          "settings": {
+            "feature": "Atmungsaktiver Bezug",
+            "brand_value": "yes",
+            "brand_text": "",
+            "other_value": "no",
+            "other_text": ""
+          }
+        },
+        "c4": {
+          "type": "row",
+          "settings": {
+            "feature": "Waschbarer Bezug",
+            "brand_value": "yes",
+            "brand_text": "",
+            "other_value": "text",
+            "other_text": "Selten"
+          }
+        },
+        "c5": {
+          "type": "row",
+          "settings": {
+            "feature": "Testphase",
+            "brand_value": "text",
+            "brand_text": "30 Nächte",
+            "other_value": "no",
+            "other_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ]
+    },
+    "featured": {
+      "type": "noyelo-featured-product",
+      "settings": {
+        "badge": "Bestseller",
+        "media_position": "left",
+        "eyebrow": "Unser Kissen",
+        "heading": "",
+        "description": "<p>Das NOYELO Kissen verbindet anpassungsfähigen Memory Foam mit einer ergonomischen Form. Es stützt deinen Nacken, entlastet die Schultern und fühlt sich trotzdem wunderbar weich an.</p>",
+        "show_rating": true,
+        "cta_mode": "add_to_cart",
+        "button_label": "Kissen entdecken",
+        "link_label": "Mehr erfahren",
+        "note": "Kostenloser Versand · 30 Nächte testen",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 96,
+        "media_index": 1
+      },
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "text": "Passt sich Kopf und Nacken an"
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "text": "Atmungsaktiver, abnehmbarer Bezug"
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "text": "Für Seiten- und Rückenschläfer"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ]
+    },
+    "faq": {
+      "type": "noyelo-faq",
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Häufige Fragen",
+        "heading_tag": "h2",
+        "text": "",
+        "contact_text": "Noch Fragen?",
+        "contact_label": "Schreib uns",
+        "contact_link": "/pages/kontakt",
+        "open_first": true,
+        "structured_data": true,
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Wie merke ich, dass mein Kissen nicht passt?",
+            "answer": "<p>Typische Anzeichen sind Nackenverspannungen am Morgen, eingeschlafene Arme oder häufiges Umlagern in der Nacht.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Wie lange dauert die Eingewöhnung?",
+            "answer": "<p>Die meisten brauchen ein bis zwei Wochen. Deshalb hast du 30 Nächte Zeit zum Testen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2"
+      ]
+    }
+  },
+  "order": [
+    "header",
+    "positions",
+    "comparison",
+    "featured",
+    "faq"
+  ]
+}

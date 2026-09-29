@@ -560,6 +560,14 @@
       "pos_back": "Kopf und Wirbelsäule in Rückenlage",
       "pos_stomach": "Kopf und Wirbelsäule in Bauchlage",
       "night": "Das NOYELO Kissen unter dem Nachthimmel"
+    },
+    "general": {
+      "breadcrumbs": "Brotkrümelnavigation",
+      "home": "Startseite",
+      "page_content_hint": "Hier erscheint der Text, den du unter Onlineshop › Seiten eingibst."
+    },
+    "contact": {
+      "order_number": "Bestellnummer (optional)"
     }
   }
 }

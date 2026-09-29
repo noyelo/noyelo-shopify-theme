@@ -1,23 +1,27 @@
-<style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
-  }
-
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
-    }
-  }
-</style>
-
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+<div class="ny-404 page-width">
+  <div class="ny-404__inner">
+    <p class="ny-404__code" aria-hidden="true">{{ 'templates.404.subtext' | t }}</p>
+    <h1 class="ny-404__title h1">{{ 'templates.404.title' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="ny-404__search">
+      <label class="visually-hidden" for="NotFoundSearch">{{ 'general.search.search' | t }}</label>
+      <input
+        class="ny-field__input"
+        id="NotFoundSearch"
+        type="search"
+        name="q"
+        placeholder="{{ 'general.search.search' | t }}"
+        autocomplete="off"
+      >
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" class="ny-404__search-button" aria-label="{{ 'general.search.search' | t }}">
+        <span class="svg-wrapper">{{- 'icon-search.svg' | inline_asset_content -}}</span>
+      </button>
+    </form>
+    <div class="ny-btn-row ny-404__actions">
+      <a href="{{ routes.all_products_collection_url }}" class="button button--primary">
+        {{- 'general.continue_shopping' | t -}}
+      </a>
+      <a href="{{ routes.root_url }}" class="button button--secondary">{{ 'noyelo.general.home' | t }}</a>
+    </div>
+  </div>
 </div>

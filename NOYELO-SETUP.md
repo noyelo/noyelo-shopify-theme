@@ -19,17 +19,30 @@ Dieses Theme basiert auf Dawn 16. Die Shopify-Kernfunktionen (Varianten, Warenko
 | Menü | Handle | Inhalt |
 | --- | --- | --- |
 | Hauptmenü | `main-menu` | Kissen · Schlafzubehör · Über NOYELO · FAQ |
-| Footer | `footer` | Versand · Rückgabe · Kontakt · FAQ |
+| Footer | `footer` | Versand & Zahlung · Rückgabe · Kontakt · FAQ · Kissen-Ratgeber |
 | Unternehmen (neu anlegen) | frei wählbar | Über NOYELO · Kontakt · … |
 
 Im Footer (Theme-Editor › Footer) die Spalte „Unternehmen“ mit dem neuen Menü verbinden. Die Spalte **Rechtliches** listet automatisch alle Richtlinien aus **Einstellungen › Richtlinien** (Impressum, Datenschutz, AGB, Widerruf, Versand).
 
 ## 3. Seiten & Vorlagen
-| Seite | Vorlage |
-| --- | --- |
-| Über NOYELO | `page.about` |
-| FAQ | `page.faq` |
-| Versand, Kontakt, … | Standard (`page` / `page.contact`) |
+Unter **Onlineshop › Seiten › Seite hinzufügen** anlegen, rechts unter „Theme-Vorlage“ die passende Vorlage wählen. Die URL-Handles in Klammern werden von den Buttons im Theme verlinkt (z. B. „Kontakt aufnehmen“ → `/pages/kontakt`).
+
+| Seite (Handle) | Vorlage | Inhalt |
+| --- | --- | --- |
+| Über NOYELO (`ueber-uns`) | `page.about` | Markengeschichte, Werte, Testphase, Newsletter |
+| FAQ (`faq`) | `page.faq` | Fragen & Antworten mit FAQ-Schema für Google |
+| Kontakt (`kontakt`) | `page.contact` | Kontaktformular (Name, E-Mail, Bestellnummer, Nachricht), Servicezeiten |
+| Versand & Zahlung (`versand`) | `page.shipping` | Seitenkopf, 4 Info-Karten, Seitentext, FAQ |
+| Rückgabe & Erstattung (`rueckgabe`) | `page.returns` | Seitenkopf, 30-Nächte-Test, Seitentext, FAQ |
+| Kissen-Ratgeber (`ratgeber`) | `page.guide` | Schlafpositionen, Vergleich, Produkt-Highlight, FAQ |
+| Alle anderen Textseiten | `page` (Standard) | Seitenkopf mit Breadcrumbs + Text + Hilfe-Box |
+
+Der Text, den du im Seiten-Editor schreibst, erscheint in der Section **NOYELO Seiteninhalt**. Rechtstexte (Impressum, Datenschutz, AGB, Widerruf, Versand) unter **Einstellungen › Richtlinien** pflegen – sie werden automatisch im NOYELO-Stil angezeigt und im Footer verlinkt.
+
+Weitere gestaltete Vorlagen: `collection` (Kategorie mit Vertrauensleiste + Newsletter), `cart` (Warenkorbseite mit Versandfortschritt), `404` (Suche + Produktempfehlung).
+
+## 3b. Bestand zum Testen
+Damit „In den Warenkorb“ funktioniert, muss das Produkt verfügbar sein: **Produkte › Kissen › Inventar** – bei jeder Variante eine Menge eintragen (z. B. 100) **oder** „Weiter verkaufen, wenn nicht vorrätig“ aktivieren. Alternativ „Menge erfassen“ deaktivieren. Das geht nur im Shopify-Admin, nicht über das Theme.
 
 ## 4. Produkt
 - Vorlage `product` enthält: Galerie, Kaufbereich (Bewertung, Preis, Vorteile, Varianten, Menge, Warenkorb-Button, Versand/Testphase/Zahlung), danach Vorteile, Detailbilder, Material, Schichtaufbau, Ergonomie, Vergleich, FAQ, Bewertungen und passende Produkte.

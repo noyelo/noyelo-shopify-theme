@@ -1,0 +1,158 @@
+{
+  "sections": {
+    "header": {
+      "type": "noyelo-page-header",
+      "settings": {
+        "eyebrow": "Service",
+        "heading": "",
+        "text": "<p>Schnell bei dir, sicher bezahlt. Hier findest du alle Infos zu Lieferung, Versandkosten und Zahlungsarten.</p>",
+        "default_art": "product-main",
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "icon": "truck",
+            "text": "Kostenloser Versand ab 50 €"
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "icon": "lock",
+            "text": "Sicher bezahlen"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2"
+      ]
+    },
+    "cards": {
+      "type": "noyelo-benefits",
+      "settings": {
+        "layout": "cards",
+        "columns_desktop": 4,
+        "eyebrow": "Auf einen Blick",
+        "heading": "Das Wichtigste in Kürze",
+        "text": "",
+        "intro_alignment": "left",
+        "button_label": "",
+        "button_link": "",
+        "default_art": "none",
+        "color_scheme": "scheme-1",
+        "padding_top": 80,
+        "padding_bottom": 48
+      },
+      "blocks": {
+        "c1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "truck",
+            "title": "Versandkosten",
+            "text": "<p>Ab 50 € Bestellwert versenden wir kostenlos. Darunter siehst du die Versandkosten transparent im Checkout.</p>"
+          }
+        },
+        "c2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "calendar",
+            "title": "Lieferzeit",
+            "text": "<p>In der Regel ist deine Bestellung in 2–4 Werktagen bei dir. Du erhältst eine Versandbestätigung mit Sendungsverfolgung.</p>"
+          }
+        },
+        "c3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "lock",
+            "title": "Zahlungsarten",
+            "text": "<p>Alle verfügbaren Zahlungsarten – z. B. Karte, PayPal oder Apple Pay – siehst du sicher verschlüsselt im Checkout.</p>"
+          }
+        },
+        "c4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "pin",
+            "title": "Lieferländer",
+            "text": "<p>In welche Länder wir liefern, wird dir im Checkout anhand deiner Adresse angezeigt.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ]
+    },
+    "content": {
+      "type": "noyelo-page-content",
+      "settings": {
+        "show_title": false,
+        "show_help": true,
+        "help_heading": "Noch Fragen?",
+        "help_text": "<p>Unser Service-Team hilft dir gern weiter – persönlich und schnell.</p>",
+        "help_button_label": "Kontakt aufnehmen",
+        "help_button_link": "/pages/kontakt",
+        "color_scheme": "scheme-1",
+        "padding_top": 64,
+        "padding_bottom": 80
+      }
+    },
+    "faq": {
+      "type": "noyelo-faq",
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "Fragen zu Versand & Zahlung",
+        "heading_tag": "h2",
+        "text": "",
+        "contact_text": "Noch Fragen?",
+        "contact_label": "Schreib uns",
+        "contact_link": "/pages/kontakt",
+        "open_first": true,
+        "structured_data": true,
+        "color_scheme": "scheme-2",
+        "padding_top": 80,
+        "padding_bottom": 96
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Wann wird meine Bestellung verschickt?",
+            "answer": "<p>Bestellungen werden in der Regel innerhalb von 1–2 Werktagen versendet. Sobald dein Paket unterwegs ist, bekommst du eine E-Mail mit Sendungsverfolgung.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Kann ich meine Lieferadresse noch ändern?",
+            "answer": "<p>Schreib uns möglichst schnell mit deiner Bestellnummer. Solange das Paket noch nicht versendet ist, passen wir die Adresse gern an.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Ist die Zahlung sicher?",
+            "answer": "<p>Ja. Die Zahlung läuft über den verschlüsselten Shopify-Checkout. Deine Zahlungsdaten werden nicht bei uns gespeichert.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ]
+    }
+  },
+  "order": [
+    "header",
+    "cards",
+    "content",
+    "faq"
+  ]
+}

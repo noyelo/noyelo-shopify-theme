@@ -1,0 +1,171 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+{%- liquid
+  assign title = section.settings.heading
+  if title == blank
+    assign title = page.title | default: collection.title | default: blog.title | escape
+  endif
+  assign has_media = false
+  if section.settings.image != blank or section.settings.default_art != 'none'
+    assign has_media = true
+  endif
+-%}
+
+<div class="ny-page-header color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding{% if has_media %} ny-page-header--media{% endif %}">
+  <div class="page-width">
+    <div class="ny-page-header__grid">
+      <div class="ny-page-header__content{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <nav class="ny-breadcrumbs" aria-label="{{ 'noyelo.general.breadcrumbs' | t }}">
+          <ol role="list">
+            <li><a href="{{ routes.root_url }}">{{ 'noyelo.general.home' | t }}</a></li>
+            <li aria-current="page">{{ title | strip_html }}</li>
+          </ol>
+        </nav>
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="ny-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        <h1 class="ny-page-header__title h0">{{ title }}</h1>
+        {%- if section.settings.text != blank -%}
+          <div class="ny-lead">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.blocks.size > 0 -%}
+          <ul class="ny-page-header__points" role="list">
+            {%- for block in section.blocks -%}
+              <li {{ block.shopify_attributes }}>
+                {%- render 'noyelo-icon', icon: block.settings.icon -%}
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+      {%- if has_media -%}
+        <div class="ny-page-header__media ny-media">
+          {%- render 'noyelo-image',
+            image: section.settings.image,
+            sizes: '(min-width: 990px) 45vw, 100vw',
+            art: section.settings.default_art,
+            eager: true
+          -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Seitenkopf",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Kleine Überzeile"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "info": "Leer lassen, um den Seitentitel zu verwenden."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Einleitung"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Bild (optional)"
+    },
+    {
+      "type": "select",
+      "id": "default_art",
+      "label": "Standardbild",
+      "options": [
+        { "value": "none", "label": "Keins" },
+        { "value": "product-image-1", "label": "Produktbild 1 (Hauptprodukt)" },
+        { "value": "hero", "label": "Kissen auf Wolken" },
+        { "value": "product-main", "label": "Produkt – Oberseite" },
+        { "value": "product-ice", "label": "Produkt – hellblaue Seite" },
+        { "value": "product-cloud", "label": "Produkt auf Wolken (hoch)" },
+        { "value": "material", "label": "Material-Nahaufnahme" },
+        { "value": "layers", "label": "Querschnitt / Schichten" },
+        { "value": "pos-side", "label": "Seitenlage" },
+        { "value": "night", "label": "Nachtszene" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Kurz-Vorteil",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "check", "label": "Häkchen" },
+            { "value": "truck", "label": "Versand" },
+            { "value": "moon", "label": "Mond" },
+            { "value": "return", "label": "Rückgabe" },
+            { "value": "lock", "label": "Sicher" },
+            { "value": "chat", "label": "Service" },
+            { "value": "heart", "label": "Herz" }
+          ],
+          "default": "check"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Kostenloser Versand ab 50 €"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Seitenkopf"
+    }
+  ]
+}
+{% endschema %}

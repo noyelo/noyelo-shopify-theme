@@ -572,6 +572,14 @@
       "pos_back": "Head and spine in back position",
       "pos_stomach": "Head and spine in stomach position",
       "night": "The NOYELO pillow under the night sky"
+    },
+    "general": {
+      "breadcrumbs": "Breadcrumbs",
+      "home": "Home",
+      "page_content_hint": "The text you enter under Online Store › Pages appears here."
+    },
+    "contact": {
+      "order_number": "Order number (optional)"
     }
   }
 }

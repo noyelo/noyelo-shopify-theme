@@ -1,0 +1,127 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-page-content color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-page-content__grid{% if section.settings.show_help %} ny-page-content__grid--aside{% endif %}">
+      <div class="ny-page-content__body">
+        {%- if section.settings.show_title -%}
+          <h1 class="ny-page-content__title h1">{{ page.title | escape }}</h1>
+        {%- endif -%}
+        {%- if page.content != blank -%}
+          <div class="ny-prose rte">{{ page.content }}</div>
+        {%- elsif request.design_mode -%}
+          <div class="ny-prose rte">
+            <p>{{ 'noyelo.general.page_content_hint' | t }}</p>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_help -%}
+        <aside class="ny-help-card" aria-label="{{ section.settings.help_heading | escape }}">
+          <span class="ny-help-card__icon">{%- render 'noyelo-icon', icon: 'chat' -%}</span>
+          <h2 class="ny-help-card__title h3">{{ section.settings.help_heading | escape }}</h2>
+          {%- if section.settings.help_text != blank -%}
+            <div class="ny-help-card__text">{{ section.settings.help_text }}</div>
+          {%- endif -%}
+          {%- if section.settings.help_button_label != blank and section.settings.help_button_link != blank -%}
+            <a href="{{ section.settings.help_button_link }}" class="button button--secondary button--small">
+              {{- section.settings.help_button_label | escape -}}
+            </a>
+          {%- endif -%}
+        </aside>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Seiteninhalt",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Zeigt den Text, den du unter Onlineshop › Seiten für diese Seite eingibst."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Seitentitel anzeigen",
+      "info": "Deaktivieren, wenn darüber ein NOYELO Seitenkopf steht.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Hilfe-Box"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_help",
+      "label": "Hilfe-Box neben dem Text anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "help_heading",
+      "label": "Überschrift",
+      "default": "Noch Fragen?"
+    },
+    {
+      "type": "richtext",
+      "id": "help_text",
+      "label": "Text",
+      "default": "<p>Unser Service-Team hilft dir gern weiter – persönlich und schnell.</p>"
+    },
+    {
+      "type": "text",
+      "id": "help_button_label",
+      "label": "Button-Text",
+      "default": "Kontakt aufnehmen"
+    },
+    {
+      "type": "url",
+      "id": "help_button_link",
+      "label": "Button-Link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Seiteninhalt"
+    }
+  ]
+}
+{% endschema %}

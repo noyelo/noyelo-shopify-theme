@@ -1,0 +1,237 @@
+{%- render 'noyelo-section-padding',
+  section_id: section.id,
+  top: section.settings.padding_top,
+  bottom: section.settings.padding_bottom
+-%}
+
+<div class="ny-contact color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="ny-contact__grid">
+      <div class="ny-contact__info">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="ny-heading h2">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="ny-lead">{{ section.settings.text }}</div>
+        {%- endif -%}
+        <ul class="ny-contact__channels" role="list">
+          {%- for block in section.blocks -%}
+            <li class="ny-contact__channel" {{ block.shopify_attributes }}>
+              <span class="ny-contact__channel-icon">{%- render 'noyelo-icon', icon: block.settings.icon -%}</span>
+              <span class="ny-contact__channel-copy">
+                <span class="ny-contact__channel-title">{{ block.settings.title | escape }}</span>
+                {%- if block.settings.use_shop_email and shop.email != blank -%}
+                  <a href="mailto:{{ shop.email }}" class="ny-contact__channel-value">{{ shop.email }}</a>
+                {%- elsif block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}" class="ny-contact__channel-value">{{ block.settings.value }}</a>
+                {%- else -%}
+                  <span class="ny-contact__channel-value">{{ block.settings.value }}</span>
+                {%- endif -%}
+              </span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="ny-contact__form-card">
+        {%- form 'contact', id: 'ContactForm', class: 'ny-contact-form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="ny-contact-form__status ny-contact-form__status--success" tabindex="-1" autofocus role="status">
+              {%- render 'noyelo-icon', icon: 'check' -%}
+              {{ 'templates.contact.form.post_success' | t }}
+            </p>
+          {%- elsif form.errors -%}
+            <div class="ny-contact-form__status ny-contact-form__status--error" role="alert">
+              <p>{{ 'templates.contact.form.error_heading' | t }}</p>
+              <ul>
+                <li>
+                  <a href="#ContactForm-email">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</a>
+                </li>
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="ny-contact-form__row">
+            <div class="ny-field">
+              <label class="ny-field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+              <input
+                class="ny-field__input"
+                autocomplete="name"
+                type="text"
+                id="ContactForm-name"
+                name="contact[{{ 'templates.contact.form.name' | t }}]"
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              >
+            </div>
+            <div class="ny-field">
+              <label class="ny-field__label" for="ContactForm-email">
+                {{- 'templates.contact.form.email' | t }} <span aria-hidden="true">*</span>
+              </label>
+              <input
+                class="ny-field__input"
+                autocomplete="email"
+                type="email"
+                id="ContactForm-email"
+                name="contact[email]"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                required
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="ContactForm-email-error"
+                {% endif %}
+              >
+              {%- if form.errors contains 'email' -%}
+                <small class="ny-field__error" id="ContactForm-email-error">
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="ny-field">
+            <label class="ny-field__label" for="ContactForm-order">{{ 'noyelo.contact.order_number' | t }}</label>
+            <input
+              class="ny-field__input"
+              type="text"
+              id="ContactForm-order"
+              name="contact[{{ 'noyelo.contact.order_number' | t }}]"
+              value="{{ form.order }}"
+            >
+          </div>
+          <div class="ny-field">
+            <label class="ny-field__label" for="ContactForm-body">{{ 'templates.contact.form.comment' | t }}</label>
+            <textarea
+              rows="6"
+              class="ny-field__input ny-field__input--textarea"
+              id="ContactForm-body"
+              name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            >
+              {{- form.body -}}
+            </textarea>
+          </div>
+          {%- if section.settings.privacy_text != blank -%}
+            <div class="ny-contact-form__privacy">{{ section.settings.privacy_text }}</div>
+          {%- endif -%}
+          <button type="submit" class="button button--primary button--large ny-contact-form__submit">
+            {{ 'templates.contact.form.send' | t }}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "NOYELO Kontakt",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Wir sind für dich da."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Ob Frage zur Bestellung, zum Schlafgefühl oder zur Rückgabe – schreib uns. Wir antworten persönlich.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "privacy_text",
+      "label": "Datenschutzhinweis",
+      "default": "<p>Mit dem Absenden stimmst du der Verarbeitung deiner Angaben zur Beantwortung deiner Anfrage zu. Mehr in unserer Datenschutzerklärung.</p>"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Farbschema",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand oben",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Abstand unten",
+      "default": 96
+    }
+  ],
+  "blocks": [
+    {
+      "type": "channel",
+      "name": "Kontaktweg",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "chat", "label": "Chat / E-Mail" },
+            { "value": "calendar", "label": "Kalender / Zeiten" },
+            { "value": "pin", "label": "Standort" },
+            { "value": "package", "label": "Paket / Bestellung" },
+            { "value": "return", "label": "Rückgabe" },
+            { "value": "heart", "label": "Herz" }
+          ],
+          "default": "chat"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel",
+          "default": "E-Mail"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_shop_email",
+          "label": "E-Mail-Adresse des Shops anzeigen",
+          "info": "Nutzt die Kontakt-E-Mail aus Einstellungen › Shopdetails.",
+          "default": false
+        },
+        {
+          "type": "inline_richtext",
+          "id": "value",
+          "label": "Wert",
+          "default": "Mo–Fr, 9–17 Uhr"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOYELO Kontakt",
+      "blocks": [
+        { "type": "channel" }
+      ]
+    }
+  ]
+}
+{% endschema %}

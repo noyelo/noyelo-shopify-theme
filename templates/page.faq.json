@@ -8,7 +8,7 @@
         "text": "<p>Alles, was du über dein neues Kissen wissen möchtest.</p>",
         "contact_text": "Noch Fragen?",
         "contact_label": "Schreib uns",
-        "contact_link": "",
+        "contact_link": "/pages/kontakt",
         "open_first": true,
         "structured_data": true,
         "color_scheme": "scheme-1",
