@@ -1790,6 +1790,13 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
     min-height: max(clamp(52rem, 72vh, 76rem), 45vw);
   }
 
+  /* text keeps the reference distance to the top (eyebrow ~9rem below the menu) instead of sliding down
+     with the taller hero */
+  body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero--overlay .ny-hero__content {
+    align-items: flex-start;
+    padding-top: calc(var(--header-height, 7.4rem) + 9rem);
+  }
+
   body .header-wrapper--overlay .header.page-width,
   body .ny-hero--overlay .ny-hero__content.page-width {
     max-width: none;
