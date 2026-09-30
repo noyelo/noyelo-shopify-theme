@@ -28,9 +28,9 @@
           "settings": {
             "icon": "chat",
             "title": "E-Mail",
-            "use_shop_email": true,
-            "value": "",
-            "link": ""
+            "use_shop_email": false,
+            "value": "kontakt@noyelo.de",
+            "link": "mailto:kontakt@noyelo.de"
           }
         },
         "hours": {
