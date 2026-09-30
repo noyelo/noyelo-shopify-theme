@@ -9,27 +9,28 @@
           "type": "link_list",
           "settings": {
             "heading": "Shop",
-            "menu": "main-menu"
+            "menu": "footer-shop"
           }
         },
         "service": {
           "type": "link_list",
           "settings": {
             "heading": "Service",
-            "menu": "footer"
+            "menu": "footer-service"
           }
         },
         "company": {
           "type": "link_list",
           "settings": {
             "heading": "Unternehmen",
-            "menu": ""
+            "menu": "footer-unternehmen"
           }
         },
         "legal": {
-          "type": "policies",
+          "type": "link_list",
           "settings": {
-            "heading": "Rechtliches"
+            "heading": "Rechtliches",
+            "menu": "footer-rechtliches"
           }
         }
       },
