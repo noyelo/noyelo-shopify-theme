@@ -2,6 +2,12 @@
    NOYELO — image with pulsing hotspots (sections/noyelo-hotspots.liquid)
    ========================================================================== */
 
+/* closed (invisible) info cards must not widen the page on small screens */
+.ny-hotspots {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
 .ny-hotspots .ny-section-intro {
   margin-bottom: 4rem;
 }
