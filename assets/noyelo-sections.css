@@ -1805,6 +1805,59 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
   }
 }
 
+/* Wide desktops: hero text grows with the image in the same ratio as the 1440px reference
+   (values = reference px / 14.4 vw), capped at 1.4x (~2000px) */
+@media screen and (min-width: 1441px) {
+  .ny-hero--overlay .ny-hero__inner {
+    max-width: clamp(64rem, 44.44vw, 89.6rem);
+    gap: clamp(2rem, 1.389vw, 2.8rem);
+  }
+
+  .ny-hero--overlay .ny-hero__inner .ny-eyebrow {
+    font-size: clamp(1.2rem, 0.833vw, 1.68rem);
+    gap: clamp(0.8rem, 0.556vw, 1.12rem);
+  }
+
+  .ny-hero--overlay .ny-hero__inner .ny-eyebrow::before {
+    width: clamp(1.6rem, 1.111vw, 2.24rem);
+    height: clamp(1.05rem, 0.729vw, 1.47rem);
+  }
+
+  .ny-hero--overlay .ny-hero__heading.h0 {
+    font-size: clamp(6.8rem, 4.722vw, 9.52rem);
+  }
+
+  .ny-hero--overlay .ny-hero__text {
+    max-width: clamp(52rem, 36.11vw, 72.8rem);
+    font-size: clamp(1.8rem, 1.25vw, 2.52rem);
+  }
+
+  .ny-hero--overlay .ny-hero__buttons {
+    margin-top: clamp(0.8rem, 0.556vw, 1.12rem);
+  }
+
+  .ny-hero--overlay .ny-hero__buttons .button--large {
+    min-height: clamp(5.6rem, 3.889vw, 7.84rem);
+    padding: 0 clamp(3.6rem, 2.5vw, 5.04rem);
+    font-size: clamp(1.6rem, 1.111vw, 2.24rem);
+  }
+
+  .ny-hero--overlay .ny-hero__buttons .button .ny-icon {
+    width: clamp(1.8rem, 1.25vw, 2.52rem);
+    height: clamp(1.8rem, 1.25vw, 2.52rem);
+  }
+
+  .ny-hero--overlay .ny-hero__usps {
+    font-size: clamp(1.4rem, 0.972vw, 1.96rem);
+    gap: clamp(1rem, 0.694vw, 1.4rem) clamp(2.4rem, 1.667vw, 3.36rem);
+  }
+
+  .ny-hero--overlay .ny-hero__usp .ny-icon {
+    width: clamp(2rem, 1.389vw, 2.8rem);
+    height: clamp(2rem, 1.389vw, 2.8rem);
+  }
+}
+
 /* Soft fade into the page white at the bottom edge of the hero, independent of how the image is cropped */
 .ny-hero--overlay .ny-hero__grid::after {
   content: '';
