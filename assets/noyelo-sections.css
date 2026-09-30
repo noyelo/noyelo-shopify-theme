@@ -1785,6 +1785,11 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
    1400px column. Side margin scales with the screen (70px at 1440px), so the composition keeps the
    same proportions on every desktop width. */
 @media screen and (min-width: 990px) {
+  /* keep the reference crop (1440 x 648 = 45% of the width): same pillow size and top clouds on wide screens */
+  .ny-hero--overlay .ny-hero__grid {
+    min-height: max(clamp(52rem, 72vh, 76rem), 45vw);
+  }
+
   body .header-wrapper--overlay .header.page-width,
   body .ny-hero--overlay .ny-hero__content.page-width {
     max-width: none;
