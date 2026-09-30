@@ -1781,6 +1781,18 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
   object-position: 70% 50%;
 }
 
+/* Homepage top (desktop): header and hero text follow the full-bleed cloud image instead of a centred
+   1400px column. Side margin scales with the screen (70px at 1440px), so the composition keeps the
+   same proportions on every desktop width. */
+@media screen and (min-width: 990px) {
+  body .header-wrapper--overlay .header.page-width,
+  body .ny-hero--overlay .ny-hero__content.page-width {
+    max-width: none;
+    padding-left: max(5rem, 4.86vw);
+    padding-right: max(5rem, 4.86vw);
+  }
+}
+
 /* Soft fade into the page white at the bottom edge of the hero, independent of how the image is cropped */
 .ny-hero--overlay .ny-hero__grid::after {
   content: '';
