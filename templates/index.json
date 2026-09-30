@@ -1,698 +1,707 @@
 {
-  "sections": {
-    "hero": {
-      "type": "noyelo-hero",
-      "settings": {
-        "layout": "overlay",
-        "height": "medium",
-        "overlay_opacity": 0,
-        "eyebrow": "Das neue NOYELO Kissen",
-        "heading": "Besser schlafen beginnt hier.",
-        "heading_size": "h0",
-        "text": "<p>Ergonomischer Memory Foam, der sich deinem Nacken anpasst – für ruhige Nächte und entspannte Morgen.</p>",
-        "button_label": "Kissen entdecken",
-        "button_link": "shopify://products/noyelo-memory-foam-pillow",
-        "button_label_2": "",
-        "button_link_2": "",
-        "content_alignment": "left",
-        "mobile_order": "image-first",
-        "color_scheme": "scheme-2",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "default_art": "hero",
-        "default_art_mobile": "hero-mobile",
-        "mobile_content_position": "top"
-      },
-      "blocks": {
-        "usp-trial": {
-          "type": "usp",
-          "settings": {
-            "icon": "moon",
-            "text": "30 Nächte testen"
-          }
-        },
-        "usp-shipping": {
-          "type": "usp",
-          "settings": {
-            "icon": "truck",
-            "text": "Kostenloser Versand ab 50 €"
-          }
-        }
-      },
-      "block_order": [
-        "usp-trial",
-        "usp-shipping"
-      ]
-    },
-    "trust": {
-      "type": "noyelo-trust-bar",
-      "settings": {
-        "heading": "Deine Vorteile",
-        "style": "plain",
-        "color_scheme": "scheme-1",
-        "padding_top": 32,
-        "padding_bottom": 32
-      },
-      "blocks": {
-        "t1": {
-          "type": "item",
-          "settings": {
-            "icon": "moon",
-            "title": "30 Nächte testen",
-            "text": "Probeschlafen ohne Risiko"
-          }
-        },
-        "t2": {
-          "type": "item",
-          "settings": {
-            "icon": "truck",
-            "title": "Kostenloser Versand",
-            "text": "Ab 50 € Bestellwert"
-          }
-        },
-        "t3": {
-          "type": "item",
-          "settings": {
-            "icon": "contour",
-            "title": "Ergonomischer Komfort",
-            "text": "Passt sich dir an"
-          }
-        },
-        "t4": {
-          "type": "item",
-          "settings": {
-            "icon": "return",
-            "title": "Einfache Rückgabe",
-            "text": "Unkompliziert &amp; fair"
-          }
-        }
-      },
-      "block_order": [
-        "t1",
-        "t2",
-        "t3",
-        "t4"
-      ]
-    },
-    "featured": {
-      "type": "noyelo-featured-product",
-      "settings": {
-        "badge": "Bestseller",
-        "media_position": "left",
-        "eyebrow": "Unser Kissen",
-        "heading": "",
-        "description": "<p>Das NOYELO Kissen verbindet anpassungsfähigen Memory Foam mit einer ergonomischen Form. Es stützt deinen Nacken, entlastet die Schultern und fühlt sich trotzdem wunderbar weich an.</p>",
-        "show_rating": true,
-        "cta_mode": "add_to_cart",
-        "button_label": "Kissen entdecken",
-        "link_label": "Mehr erfahren",
-        "note": "Kostenloser Versand · 30 Nächte testen",
-        "color_scheme": "scheme-1",
-        "padding_top": 80,
-        "padding_bottom": 96,
-        "media_index": 1
-      },
-      "blocks": {
-        "p1": {
-          "type": "point",
-          "settings": {
-            "text": "Passt sich Kopf und Nacken an"
-          }
-        },
-        "p2": {
-          "type": "point",
-          "settings": {
-            "text": "Atmungsaktiver, abnehmbarer Bezug"
-          }
-        },
-        "p3": {
-          "type": "point",
-          "settings": {
-            "text": "Für Seiten- und Rückenschläfer"
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3"
-      ]
-    },
-    "benefits": {
-      "type": "noyelo-benefits",
-      "settings": {
-        "layout": "split",
-        "columns_desktop": 4,
-        "eyebrow": "Warum NOYELO",
-        "heading": "Durchdacht bis in die kleinste Schicht.",
-        "text": "",
-        "intro_alignment": "center",
-        "button_label": "",
-        "button_link": "",
-        "color_scheme": "scheme-2",
-        "padding_top": 96,
-        "padding_bottom": 96,
-        "default_art": "product-cloud"
-      },
-      "blocks": {
-        "b1": {
-          "type": "benefit",
-          "settings": {
-            "icon": "contour",
-            "title": "Ergonomische Unterstützung",
-            "text": "<p>Die geschwungene Form stützt den Nacken und hält die Wirbelsäule in einer natürlichen Linie.</p>"
-          }
-        },
-        "b2": {
-          "type": "benefit",
-          "settings": {
-            "icon": "cloud",
-            "title": "Memory Foam",
-            "text": "<p>Formt sich sanft nach Kopf und Schultern und kehrt morgens in seine Form zurück.</p>"
-          }
-        },
-        "b3": {
-          "type": "benefit",
-          "settings": {
-            "icon": "air",
-            "title": "Atmungsaktiver Bezug",
-            "text": "<p>Weiches, luftiges Gewebe für ein angenehm frisches Schlafgefühl.</p>"
-          }
-        },
-        "b4": {
-          "type": "benefit",
-          "settings": {
-            "icon": "feather",
-            "title": "Druckentlastung",
-            "text": "<p>Verteilt das Gewicht gleichmäßig und entlastet empfindliche Druckpunkte.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4"
-      ]
-    },
-    "story_material": {
-      "type": "noyelo-image-text",
-      "settings": {
-        "image_ratio": "portrait",
-        "image_position": "left",
-        "image_caption": "",
-        "eyebrow": "Material",
-        "heading": "Weich an der Oberfläche. Stabil im Kern.",
-        "text": "<p>Unser Memory Foam reagiert auf Körperwärme und gibt genau dort nach, wo du es brauchst. Der Bezug ist angenehm kühl, weich auf der Haut und lässt sich zum Waschen einfach abnehmen.</p>",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "secondary",
-        "vertical_alignment": "center",
-        "content_card": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 96,
-        "padding_bottom": 96,
-        "default_art": "material"
-      },
-      "blocks": {
-        "m1": {
-          "type": "point",
-          "settings": {
-            "icon": "wash",
-            "text": "Abnehmbarer, waschbarer Bezug"
-          }
-        },
-        "m2": {
-          "type": "point",
-          "settings": {
-            "icon": "air",
-            "text": "Luftdurchlässiges Gewebe"
-          }
-        },
-        "m3": {
-          "type": "point",
-          "settings": {
-            "icon": "shield",
-            "text": "Formstabil – auch nach vielen Nächten"
-          }
-        }
-      },
-      "block_order": [
-        "m1",
-        "m2",
-        "m3"
-      ]
-    },
-    "layers": {
-      "type": "noyelo-layers",
-      "settings": {
-        "eyebrow": "Aufbau",
-        "heading": "Vier Schichten für einen ruhigen Schlaf.",
-        "text": "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>",
-        "color_scheme": "scheme-2",
-        "padding_top": 96,
-        "padding_bottom": 96,
-        "default_art": "layers"
-      },
-      "blocks": {
-        "l1": {
-          "type": "layer",
-          "settings": {
-            "title": "Atmungsaktiver Bezug",
-            "text": "<p>Weiches, luftdurchlässiges Gewebe – abnehmbar und waschbar.</p>",
-            "color": "#FFFFFF",
-            "thickness": 1,
-            "texture": "knit"
-          }
-        },
-        "l2": {
-          "type": "layer",
-          "settings": {
-            "title": "Komfortschicht",
-            "text": "<p>Eine sanfte Auflage, die sich beim Hinlegen angenehm weich anfühlt.</p>",
-            "color": "#F4F1EA",
-            "thickness": 2,
-            "texture": "smooth"
-          }
-        },
-        "l3": {
-          "type": "layer",
-          "settings": {
-            "title": "Memory-Foam-Kern",
-            "text": "<p>Reagiert auf Wärme und Gewicht und passt sich Kopf und Nacken an.</p>",
-            "color": "#EFE2CC",
-            "thickness": 4,
-            "texture": "foam"
-          }
-        },
-        "l4": {
-          "type": "layer",
-          "settings": {
-            "title": "Stützende Basis",
-            "text": "<p>Ein stabiles Fundament, das die Form auch nach vielen Nächten hält.</p>",
-            "color": "#D9E6F4",
-            "thickness": 2,
-            "texture": "smooth"
-          }
-        }
-      },
-      "block_order": [
-        "l1",
-        "l2",
-        "l3",
-        "l4"
-      ]
-    },
-    "comparison": {
-      "type": "noyelo-comparison",
-      "settings": {
-        "eyebrow": "Der Unterschied",
-        "heading": "NOYELO vs. normales Kissen",
-        "text": "<p>Ein gutes Kissen ist mehr als eine weiche Füllung. So unterscheidet sich NOYELO von einem gewöhnlichen Kissen.</p>",
-        "button_label": "Kissen entdecken",
-        "button_link": "shopify://products/noyelo-memory-foam-pillow",
-        "brand_label": "NOYELO",
-        "other_label": "Normales Kissen",
-        "color_scheme": "scheme-1",
-        "padding_top": 96,
-        "padding_bottom": 96
-      },
-      "blocks": {
-        "c1": {
-          "type": "row",
-          "settings": {
-            "feature": "Ergonomische Unterstützung",
-            "brand_value": "yes",
-            "brand_text": "",
-            "other_value": "no",
-            "other_text": ""
-          }
-        },
-        "c2": {
-          "type": "row",
-          "settings": {
-            "feature": "Memory Foam",
-            "brand_value": "yes",
-            "brand_text": "",
-            "other_value": "no",
-            "other_text": ""
-          }
-        },
-        "c3": {
-          "type": "row",
-          "settings": {
-            "feature": "Atmungsaktiver Bezug",
-            "brand_value": "yes",
-            "brand_text": "",
-            "other_value": "no",
-            "other_text": ""
-          }
-        },
-        "c4": {
-          "type": "row",
-          "settings": {
-            "feature": "Waschbarer Bezug",
-            "brand_value": "yes",
-            "brand_text": "",
-            "other_value": "text",
-            "other_text": "Selten"
-          }
-        },
-        "c5": {
-          "type": "row",
-          "settings": {
-            "feature": "Testphase",
-            "brand_value": "text",
-            "brand_text": "30 Nächte",
-            "other_value": "no",
-            "other_text": ""
-          }
-        }
-      },
-      "block_order": [
-        "c1",
-        "c2",
-        "c3",
-        "c4",
-        "c5"
-      ]
-    },
-    "reviews": {
-      "type": "noyelo-reviews",
-      "settings": {
-        "eyebrow": "Bewertungen",
-        "heading": "Was unsere Kund:innen sagen",
-        "color_scheme": "scheme-2",
-        "padding_top": 96,
-        "padding_bottom": 96
-      },
-      "blocks": {
-        "r1": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Endlich ohne Nackenverspannung",
-            "text": "<p>Ich schlafe seit zwei Wochen auf dem Kissen und wache deutlich entspannter auf. Die ersten Nächte waren ungewohnt, jetzt möchte ich nicht mehr zurück.</p>",
-            "author": "Beispiel: Anna",
-            "verified": false,
-            "detail": "Seitenschläferin"
-          }
-        },
-        "r2": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Weich und trotzdem stabil",
-            "text": "<p>Genau die Mischung, die ich gesucht habe. Das Kissen gibt nach, ohne dass der Kopf einsinkt. Der Bezug fühlt sich angenehm kühl an.</p>",
-            "author": "Beispiel: Jonas",
-            "verified": false,
-            "detail": "Rückenschläfer"
-          }
-        },
-        "r3": {
-          "type": "review",
-          "settings": {
-            "rating": 4,
-            "title": "Toller Schlafkomfort",
-            "text": "<p>Schöne Verarbeitung, schnelle Lieferung. Nach ein paar Nächten Eingewöhnung für mich eine klare Verbesserung.</p>",
-            "author": "Beispiel: Miriam",
-            "verified": false,
-            "detail": "Seitenschläferin"
-          }
-        },
-        "r4": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Sehr angenehm",
-            "text": "<p>Ich war skeptisch, aber der 30-Nächte-Test hat mich überzeugt. Das Kissen bleibt.</p>",
-            "author": "Beispiel: Felix",
-            "verified": false,
-            "detail": "Kombinationsschläfer"
-          }
-        }
-      },
-      "block_order": [
-        "r1",
-        "r2",
-        "r3",
-        "r4"
-      ]
-    },
-    "trial": {
-      "type": "noyelo-trial",
-      "settings": {
-        "number": "30",
-        "unit": "Nächte",
-        "eyebrow": "Ohne Risiko",
-        "heading": "30 Nächte zuhause testen.",
-        "text": "<p>Dein Körper braucht ein paar Nächte, um sich an ein neues Kissen zu gewöhnen. Deshalb nimmst du dir bei uns die Zeit – ganz entspannt in deinem eigenen Bett.</p>",
-        "button_label": "Jetzt testen",
-        "button_link": "shopify://products/noyelo-memory-foam-pillow",
-        "link_label": "",
-        "link_url": "",
-        "color_scheme": "scheme-4",
-        "outer_scheme": "scheme-1",
-        "padding_top": 48,
-        "padding_bottom": 48,
-        "default_art": "night"
-      },
-      "blocks": {
-        "s1": {
-          "type": "step",
-          "settings": {
-            "icon": "package",
-            "title": "Bestellen",
-            "text": "Bequem nach Hause geliefert."
-          }
-        },
-        "s2": {
-          "type": "step",
-          "settings": {
-            "icon": "moon",
-            "title": "30 Nächte probeschlafen",
-            "text": "Ganz in Ruhe, in deinem Bett."
-          }
-        },
-        "s3": {
-          "type": "step",
-          "settings": {
-            "icon": "heart",
-            "title": "Behalten oder zurückgeben",
-            "text": "Passt es nicht, gibst du es einfach zurück."
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3"
-      ]
-    },
-    "faq": {
-      "type": "noyelo-faq",
-      "settings": {
-        "eyebrow": "FAQ",
-        "heading": "Häufige Fragen",
-        "text": "<p>Alles, was du über dein neues Kissen wissen möchtest.</p>",
-        "contact_text": "Noch Fragen?",
-        "contact_label": "Schreib uns",
-        "contact_link": "",
-        "open_first": true,
-        "structured_data": true,
-        "color_scheme": "scheme-1",
-        "padding_top": 96,
-        "padding_bottom": 96
-      },
-      "blocks": {
-        "f1": {
-          "type": "question",
-          "settings": {
-            "question": "Wie funktioniert der 30-Nächte-Test?",
-            "answer": "<p>Du schläfst 30 Nächte auf deinem neuen Kissen. Wenn du nicht überzeugt bist, meldest du dich einfach bei uns und wir kümmern uns um die Rückgabe.</p>"
-          }
-        },
-        "f2": {
-          "type": "question",
-          "settings": {
-            "question": "Für welche Schlafposition eignet sich das Kissen?",
-            "answer": "<p>Das Kissen ist besonders für Seiten- und Rückenschläfer entwickelt. Die ergonomische Form stützt den Nacken in beiden Positionen.</p>"
-          }
-        },
-        "f3": {
-          "type": "question",
-          "settings": {
-            "question": "Kann ich den Bezug waschen?",
-            "answer": "<p>Ja. Der Bezug ist abnehmbar und bei 40 °C waschbar. Den Memory-Foam-Kern bitte nicht waschen, sondern nur lüften.</p>"
-          }
-        },
-        "f4": {
-          "type": "question",
-          "settings": {
-            "question": "Riecht das Kissen beim Auspacken?",
-            "answer": "<p>Neuer Schaum kann anfangs leicht riechen. Lass das Kissen nach dem Auspacken ein bis zwei Tage an einem gut belüfteten Ort ruhen.</p>"
-          }
-        },
-        "f5": {
-          "type": "question",
-          "settings": {
-            "question": "Wie lange dauert der Versand?",
-            "answer": "<p>Bestellungen werden in der Regel innerhalb von 1–2 Werktagen versendet. Ab 50 € ist der Versand kostenlos.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "f1",
-        "f2",
-        "f3",
-        "f4",
-        "f5"
-      ]
-    },
-    "newsletter": {
-      "type": "noyelo-newsletter",
-      "settings": {
-        "eyebrow": "",
-        "heading": "Ruhige Post von NOYELO",
-        "text": "<p>Schlaftipps, Neuheiten und exklusive Angebote – ohne Spam.</p>",
-        "button_label": "Anmelden",
-        "privacy_text": "<p>Abmeldung jederzeit möglich. Mehr in unserer Datenschutzerklärung.</p>",
-        "color_scheme": "scheme-2",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "positions": {
-      "type": "noyelo-sleep-positions",
-      "settings": {
-        "eyebrow": "Für jede Schlafposition",
-        "heading": "Wie schläfst du am liebsten?",
-        "text": "<p>Die richtige Höhe hält Kopf und Wirbelsäule in einer Linie – so können Nacken und Schultern nachts wirklich entspannen.</p>",
-        "color_scheme": "scheme-1",
-        "padding_top": 96,
-        "padding_bottom": 96
-      },
-      "blocks": {
-        "side": {
-          "type": "position",
-          "settings": {
-            "label": "Seitenschläfer",
-            "default_art": "pos-side",
-            "badge": "Besonders geeignet",
-            "title": "Halt für die Seitenlage",
-            "text": "<p>Die erhöhte Nackenzone füllt den Abstand zwischen Schulter und Kopf. So bleibt die Wirbelsäule gerade und die Schulter wird entlastet.</p>",
-            "point_1": "Stabile Nackenstütze",
-            "point_2": "Entlastet die Schulter",
-            "point_3": "",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "back": {
-          "type": "position",
-          "settings": {
-            "label": "Rückenschläfer",
-            "default_art": "pos-back",
-            "badge": "Besonders geeignet",
-            "title": "Sanft gestützt in Rückenlage",
-            "text": "<p>Der Kopf liegt in der sanften Mulde, der Nacken wird von der Kontur getragen – ohne dass der Kopf nach vorne kippt.</p>",
-            "point_1": "Mulde für stabile Kopflage",
-            "point_2": "Natürliche Nackenkurve",
-            "point_3": "",
-            "button_label": "",
-            "button_link": ""
-          }
-        },
-        "stomach": {
-          "type": "position",
-          "settings": {
-            "label": "Bauchschläfer",
-            "default_art": "pos-stomach",
-            "badge": "Eingeschränkt geeignet",
-            "title": "Tipp für Bauchschläfer",
-            "text": "<p>In Bauchlage sollte der Kopf möglichst flach liegen. Nutze die niedrigere Seite der Kontur oder teste in Ruhe, was sich für dich gut anfühlt – dafür gibt es die Testphase.</p>",
-            "point_1": "",
-            "point_2": "",
-            "point_3": "",
-            "button_label": "",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "side",
-        "back",
-        "stomach"
-      ]
-    },
-    "logos": {
-      "type": "noyelo-logo-bar",
-      "disabled": true,
-      "settings": {
-        "heading": "Bekannt aus",
-        "color_scheme": "scheme-1",
-        "padding_top": 32,
-        "padding_bottom": 32
-      },
-      "blocks": {
-        "l1": {
-          "type": "logo",
-          "settings": {
-            "name": "Logo 1",
-            "link": ""
-          }
-        },
-        "l2": {
-          "type": "logo",
-          "settings": {
-            "name": "Logo 2",
-            "link": ""
-          }
-        },
-        "l3": {
-          "type": "logo",
-          "settings": {
-            "name": "Logo 3",
-            "link": ""
-          }
-        },
-        "l4": {
-          "type": "logo",
-          "settings": {
-            "name": "Logo 4",
-            "link": ""
-          }
-        },
-        "l5": {
-          "type": "logo",
-          "settings": {
-            "name": "Logo 5",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "l1",
-        "l2",
-        "l3",
-        "l4",
-        "l5"
-      ]
-    }
-  },
-  "order": [
-    "hero",
-    "trust",
-    "logos",
-    "featured",
-    "benefits",
-    "positions",
-    "story_material",
-    "layers",
-    "comparison",
-    "reviews",
-    "trial",
-    "faq",
-    "newsletter"
-  ]
+    "sections":  {
+                     "hero":  {
+                                  "type":  "noyelo-hero",
+                                  "settings":  {
+                                                   "layout":  "overlay",
+                                                   "height":  "medium",
+                                                   "overlay_opacity":  0,
+                                                   "eyebrow":  "Das neue NOYELO Kissen",
+                                                   "heading":  "Besser schlafen beginnt hier.",
+                                                   "heading_size":  "h0",
+                                                   "text":  "<p>Ergonomischer Memory Foam, der sich deinem Nacken anpasst – für ruhige Nächte und entspannte Morgen.</p>",
+                                                   "button_label":  "Kissen entdecken",
+                                                   "button_link":  "shopify://products/noyelo-memory-foam-pillow",
+                                                   "button_label_2":  "",
+                                                   "button_link_2":  "",
+                                                   "content_alignment":  "left",
+                                                   "mobile_order":  "image-first",
+                                                   "color_scheme":  "scheme-2",
+                                                   "padding_top":  0,
+                                                   "padding_bottom":  0,
+                                                   "default_art":  "hero",
+                                                   "default_art_mobile":  "hero-mobile",
+                                                   "mobile_content_position":  "top"
+                                               },
+                                  "blocks":  {
+                                                 "usp-trial":  {
+                                                                   "type":  "usp",
+                                                                   "settings":  {
+                                                                                    "icon":  "moon",
+                                                                                    "text":  "30 Nächte testen"
+                                                                                }
+                                                               },
+                                                 "usp-shipping":  {
+                                                                      "type":  "usp",
+                                                                      "settings":  {
+                                                                                       "icon":  "truck",
+                                                                                       "text":  "Kostenloser Versand ab 50 €"
+                                                                                   }
+                                                                  }
+                                             },
+                                  "block_order":  [
+                                                      "usp-trial",
+                                                      "usp-shipping"
+                                                  ]
+                              },
+                     "trust":  {
+                                   "type":  "noyelo-trust-bar",
+                                   "settings":  {
+                                                    "heading":  "Deine Vorteile",
+                                                    "style":  "plain",
+                                                    "color_scheme":  "scheme-1",
+                                                    "padding_top":  32,
+                                                    "padding_bottom":  32
+                                                },
+                                   "blocks":  {
+                                                  "t1":  {
+                                                             "type":  "item",
+                                                             "settings":  {
+                                                                              "icon":  "moon",
+                                                                              "title":  "30 Nächte testen",
+                                                                              "text":  "Probeschlafen ohne Risiko"
+                                                                          }
+                                                         },
+                                                  "t2":  {
+                                                             "type":  "item",
+                                                             "settings":  {
+                                                                              "icon":  "truck",
+                                                                              "title":  "Kostenloser Versand",
+                                                                              "text":  "Ab 50 € Bestellwert"
+                                                                          }
+                                                         },
+                                                  "t3":  {
+                                                             "type":  "item",
+                                                             "settings":  {
+                                                                              "icon":  "contour",
+                                                                              "title":  "Ergonomischer Komfort",
+                                                                              "text":  "Passt sich dir an"
+                                                                          }
+                                                         },
+                                                  "t4":  {
+                                                             "type":  "item",
+                                                             "settings":  {
+                                                                              "icon":  "return",
+                                                                              "title":  "Einfache Rückgabe",
+                                                                              "text":  "Unkompliziert &amp; fair"
+                                                                          }
+                                                         }
+                                              },
+                                   "block_order":  [
+                                                       "t1",
+                                                       "t2",
+                                                       "t3",
+                                                       "t4"
+                                                   ]
+                               },
+                     "featured":  {
+                                      "type":  "noyelo-featured-product",
+                                      "settings":  {
+                                                       "badge":  "Bestseller",
+                                                       "media_position":  "left",
+                                                       "eyebrow":  "Unser Kissen",
+                                                       "heading":  "",
+                                                       "description":  "<p>Das NOYELO Kissen verbindet anpassungsfähigen Memory Foam mit einer ergonomischen Form. Es stützt deinen Nacken, entlastet die Schultern und fühlt sich trotzdem wunderbar weich an.</p>",
+                                                       "show_rating":  true,
+                                                       "cta_mode":  "add_to_cart",
+                                                       "button_label":  "Kissen entdecken",
+                                                       "link_label":  "Mehr erfahren",
+                                                       "note":  "Kostenloser Versand · 30 Nächte testen",
+                                                       "color_scheme":  "scheme-1",
+                                                       "padding_top":  80,
+                                                       "padding_bottom":  96,
+                                                       "media_index":  1
+                                                   },
+                                      "blocks":  {
+                                                     "p1":  {
+                                                                "type":  "point",
+                                                                "settings":  {
+                                                                                 "text":  "Passt sich Kopf und Nacken an"
+                                                                             }
+                                                            },
+                                                     "p2":  {
+                                                                "type":  "point",
+                                                                "settings":  {
+                                                                                 "text":  "Atmungsaktiver, abnehmbarer Bezug"
+                                                                             }
+                                                            },
+                                                     "p3":  {
+                                                                "type":  "point",
+                                                                "settings":  {
+                                                                                 "text":  "Für Seiten- und Rückenschläfer"
+                                                                             }
+                                                            }
+                                                 },
+                                      "block_order":  [
+                                                          "p1",
+                                                          "p2",
+                                                          "p3"
+                                                      ]
+                                  },
+                     "benefits":  {
+                                      "type":  "noyelo-benefits",
+                                      "settings":  {
+                                                       "layout":  "split",
+                                                       "columns_desktop":  4,
+                                                       "eyebrow":  "Warum NOYELO",
+                                                       "heading":  "Durchdacht bis in die kleinste Schicht.",
+                                                       "text":  "",
+                                                       "intro_alignment":  "center",
+                                                       "button_label":  "",
+                                                       "button_link":  "",
+                                                       "color_scheme":  "scheme-2",
+                                                       "padding_top":  96,
+                                                       "padding_bottom":  96,
+                                                       "default_art":  "product-cloud"
+                                                   },
+                                      "blocks":  {
+                                                     "b1":  {
+                                                                "type":  "benefit",
+                                                                "settings":  {
+                                                                                 "icon":  "contour",
+                                                                                 "title":  "Ergonomische Unterstützung",
+                                                                                 "text":  "<p>Die geschwungene Form stützt den Nacken und hält die Wirbelsäule in einer natürlichen Linie.</p>"
+                                                                             }
+                                                            },
+                                                     "b2":  {
+                                                                "type":  "benefit",
+                                                                "settings":  {
+                                                                                 "icon":  "cloud",
+                                                                                 "title":  "Memory Foam",
+                                                                                 "text":  "<p>Formt sich sanft nach Kopf und Schultern und kehrt morgens in seine Form zurück.</p>"
+                                                                             }
+                                                            },
+                                                     "b3":  {
+                                                                "type":  "benefit",
+                                                                "settings":  {
+                                                                                 "icon":  "air",
+                                                                                 "title":  "Atmungsaktiver Bezug",
+                                                                                 "text":  "<p>Weiches, luftiges Gewebe für ein angenehm frisches Schlafgefühl.</p>"
+                                                                             }
+                                                            },
+                                                     "b4":  {
+                                                                "type":  "benefit",
+                                                                "settings":  {
+                                                                                 "icon":  "feather",
+                                                                                 "title":  "Druckentlastung",
+                                                                                 "text":  "<p>Verteilt das Gewicht gleichmäßig und entlastet empfindliche Druckpunkte.</p>"
+                                                                             }
+                                                            }
+                                                 },
+                                      "block_order":  [
+                                                          "b1",
+                                                          "b2",
+                                                          "b3",
+                                                          "b4"
+                                                      ]
+                                  },
+                     "story_material":  {
+                                            "type":  "noyelo-image-text",
+                                            "settings":  {
+                                                             "image_ratio":  "portrait",
+                                                             "image_position":  "left",
+                                                             "image_caption":  "",
+                                                             "eyebrow":  "Material",
+                                                             "heading":  "Weich an der Oberfläche. Stabil im Kern.",
+                                                             "text":  "<p>Unser Memory Foam reagiert auf Körperwärme und gibt genau dort nach, wo du es brauchst. Der Bezug ist angenehm kühl, weich auf der Haut und lässt sich zum Waschen einfach abnehmen.</p>",
+                                                             "button_label":  "",
+                                                             "button_link":  "",
+                                                             "button_style":  "secondary",
+                                                             "vertical_alignment":  "center",
+                                                             "content_card":  false,
+                                                             "color_scheme":  "scheme-1",
+                                                             "padding_top":  96,
+                                                             "padding_bottom":  96,
+                                                             "default_art":  "material"
+                                                         },
+                                            "blocks":  {
+                                                           "m1":  {
+                                                                      "type":  "point",
+                                                                      "settings":  {
+                                                                                       "icon":  "wash",
+                                                                                       "text":  "Abnehmbarer, waschbarer Bezug"
+                                                                                   }
+                                                                  },
+                                                           "m2":  {
+                                                                      "type":  "point",
+                                                                      "settings":  {
+                                                                                       "icon":  "air",
+                                                                                       "text":  "Luftdurchlässiges Gewebe"
+                                                                                   }
+                                                                  },
+                                                           "m3":  {
+                                                                      "type":  "point",
+                                                                      "settings":  {
+                                                                                       "icon":  "shield",
+                                                                                       "text":  "Formstabil – auch nach vielen Nächten"
+                                                                                   }
+                                                                  }
+                                                       },
+                                            "block_order":  [
+                                                                "m1",
+                                                                "m2",
+                                                                "m3"
+                                                            ]
+                                        },
+                     "comparison":  {
+                                        "type":  "noyelo-comparison",
+                                        "settings":  {
+                                                         "eyebrow":  "Der Unterschied",
+                                                         "heading":  "NOYELO vs. normales Kissen",
+                                                         "text":  "<p>Ein gutes Kissen ist mehr als eine weiche Füllung. So unterscheidet sich NOYELO von einem gewöhnlichen Kissen.</p>",
+                                                         "button_label":  "Kissen entdecken",
+                                                         "button_link":  "shopify://products/noyelo-memory-foam-pillow",
+                                                         "brand_label":  "NOYELO",
+                                                         "other_label":  "Normales Kissen",
+                                                         "color_scheme":  "scheme-1",
+                                                         "padding_top":  96,
+                                                         "padding_bottom":  96
+                                                     },
+                                        "blocks":  {
+                                                       "c1":  {
+                                                                  "type":  "row",
+                                                                  "settings":  {
+                                                                                   "feature":  "Ergonomische Unterstützung",
+                                                                                   "brand_value":  "yes",
+                                                                                   "brand_text":  "",
+                                                                                   "other_value":  "no",
+                                                                                   "other_text":  ""
+                                                                               }
+                                                              },
+                                                       "c2":  {
+                                                                  "type":  "row",
+                                                                  "settings":  {
+                                                                                   "feature":  "Memory Foam",
+                                                                                   "brand_value":  "yes",
+                                                                                   "brand_text":  "",
+                                                                                   "other_value":  "no",
+                                                                                   "other_text":  ""
+                                                                               }
+                                                              },
+                                                       "c3":  {
+                                                                  "type":  "row",
+                                                                  "settings":  {
+                                                                                   "feature":  "Atmungsaktiver Bezug",
+                                                                                   "brand_value":  "yes",
+                                                                                   "brand_text":  "",
+                                                                                   "other_value":  "no",
+                                                                                   "other_text":  ""
+                                                                               }
+                                                              },
+                                                       "c4":  {
+                                                                  "type":  "row",
+                                                                  "settings":  {
+                                                                                   "feature":  "Waschbarer Bezug",
+                                                                                   "brand_value":  "yes",
+                                                                                   "brand_text":  "",
+                                                                                   "other_value":  "text",
+                                                                                   "other_text":  "Selten"
+                                                                               }
+                                                              },
+                                                       "c5":  {
+                                                                  "type":  "row",
+                                                                  "settings":  {
+                                                                                   "feature":  "Testphase",
+                                                                                   "brand_value":  "text",
+                                                                                   "brand_text":  "30 Nächte",
+                                                                                   "other_value":  "no",
+                                                                                   "other_text":  ""
+                                                                               }
+                                                              }
+                                                   },
+                                        "block_order":  [
+                                                            "c1",
+                                                            "c2",
+                                                            "c3",
+                                                            "c4",
+                                                            "c5"
+                                                        ]
+                                    },
+                     "reviews":  {
+                                     "type":  "noyelo-reviews",
+                                     "settings":  {
+                                                      "eyebrow":  "Bewertungen",
+                                                      "heading":  "Was unsere Kund:innen sagen",
+                                                      "color_scheme":  "scheme-2",
+                                                      "padding_top":  96,
+                                                      "padding_bottom":  96
+                                                  },
+                                     "blocks":  {
+                                                    "r1":  {
+                                                               "type":  "review",
+                                                               "settings":  {
+                                                                                "rating":  5,
+                                                                                "title":  "Endlich ohne Nackenverspannung",
+                                                                                "text":  "<p>Ich schlafe seit zwei Wochen auf dem Kissen und wache deutlich entspannter auf. Die ersten Nächte waren ungewohnt, jetzt möchte ich nicht mehr zurück.</p>",
+                                                                                "author":  "Beispiel: Anna",
+                                                                                "verified":  false,
+                                                                                "detail":  "Seitenschläferin"
+                                                                            }
+                                                           },
+                                                    "r2":  {
+                                                               "type":  "review",
+                                                               "settings":  {
+                                                                                "rating":  5,
+                                                                                "title":  "Weich und trotzdem stabil",
+                                                                                "text":  "<p>Genau die Mischung, die ich gesucht habe. Das Kissen gibt nach, ohne dass der Kopf einsinkt. Der Bezug fühlt sich angenehm kühl an.</p>",
+                                                                                "author":  "Beispiel: Jonas",
+                                                                                "verified":  false,
+                                                                                "detail":  "Rückenschläfer"
+                                                                            }
+                                                           },
+                                                    "r3":  {
+                                                               "type":  "review",
+                                                               "settings":  {
+                                                                                "rating":  4,
+                                                                                "title":  "Toller Schlafkomfort",
+                                                                                "text":  "<p>Schöne Verarbeitung, schnelle Lieferung. Nach ein paar Nächten Eingewöhnung für mich eine klare Verbesserung.</p>",
+                                                                                "author":  "Beispiel: Miriam",
+                                                                                "verified":  false,
+                                                                                "detail":  "Seitenschläferin"
+                                                                            }
+                                                           },
+                                                    "r4":  {
+                                                               "type":  "review",
+                                                               "settings":  {
+                                                                                "rating":  5,
+                                                                                "title":  "Sehr angenehm",
+                                                                                "text":  "<p>Ich war skeptisch, aber der 30-Nächte-Test hat mich überzeugt. Das Kissen bleibt.</p>",
+                                                                                "author":  "Beispiel: Felix",
+                                                                                "verified":  false,
+                                                                                "detail":  "Kombinationsschläfer"
+                                                                            }
+                                                           }
+                                                },
+                                     "block_order":  [
+                                                         "r1",
+                                                         "r2",
+                                                         "r3",
+                                                         "r4"
+                                                     ],
+                                     "disabled":  true
+                                 },
+                     "trial":  {
+                                   "type":  "noyelo-trial",
+                                   "settings":  {
+                                                    "number":  "30",
+                                                    "unit":  "Nächte",
+                                                    "eyebrow":  "Ohne Risiko",
+                                                    "heading":  "30 Nächte zuhause testen.",
+                                                    "text":  "<p>Dein Körper braucht ein paar Nächte, um sich an ein neues Kissen zu gewöhnen. Deshalb nimmst du dir bei uns die Zeit – ganz entspannt in deinem eigenen Bett.</p>",
+                                                    "button_label":  "Jetzt testen",
+                                                    "button_link":  "shopify://products/noyelo-memory-foam-pillow",
+                                                    "link_label":  "",
+                                                    "link_url":  "",
+                                                    "color_scheme":  "scheme-4",
+                                                    "outer_scheme":  "scheme-1",
+                                                    "padding_top":  48,
+                                                    "padding_bottom":  48,
+                                                    "default_art":  "night"
+                                                },
+                                   "blocks":  {
+                                                  "s1":  {
+                                                             "type":  "step",
+                                                             "settings":  {
+                                                                              "icon":  "package",
+                                                                              "title":  "Bestellen",
+                                                                              "text":  "Bequem nach Hause geliefert."
+                                                                          }
+                                                         },
+                                                  "s2":  {
+                                                             "type":  "step",
+                                                             "settings":  {
+                                                                              "icon":  "moon",
+                                                                              "title":  "30 Nächte probeschlafen",
+                                                                              "text":  "Ganz in Ruhe, in deinem Bett."
+                                                                          }
+                                                         },
+                                                  "s3":  {
+                                                             "type":  "step",
+                                                             "settings":  {
+                                                                              "icon":  "heart",
+                                                                              "title":  "Behalten oder zurückgeben",
+                                                                              "text":  "Passt es nicht, gibst du es einfach zurück."
+                                                                          }
+                                                         }
+                                              },
+                                   "block_order":  [
+                                                       "s1",
+                                                       "s2",
+                                                       "s3"
+                                                   ]
+                               },
+                     "faq":  {
+                                 "type":  "noyelo-faq",
+                                 "settings":  {
+                                                  "eyebrow":  "FAQ",
+                                                  "heading":  "Häufige Fragen",
+                                                  "text":  "<p>Alles, was du über dein neues Kissen wissen möchtest.</p>",
+                                                  "contact_text":  "Noch Fragen?",
+                                                  "contact_label":  "Schreib uns",
+                                                  "contact_link":  "",
+                                                  "open_first":  true,
+                                                  "structured_data":  true,
+                                                  "color_scheme":  "scheme-1",
+                                                  "padding_top":  96,
+                                                  "padding_bottom":  96
+                                              },
+                                 "blocks":  {
+                                                "f1":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "Wie funktioniert der 30-Nächte-Test?",
+                                                                            "answer":  "<p>Du schläfst 30 Nächte auf deinem neuen Kissen. Wenn du nicht überzeugt bist, meldest du dich einfach bei uns und wir kümmern uns um die Rückgabe.</p>"
+                                                                        }
+                                                       },
+                                                "f2":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "Für welche Schlafposition eignet sich das Kissen?",
+                                                                            "answer":  "<p>Das Kissen ist besonders für Seiten- und Rückenschläfer entwickelt. Die ergonomische Form stützt den Nacken in beiden Positionen.</p>"
+                                                                        }
+                                                       },
+                                                "f3":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "Kann ich den Bezug waschen?",
+                                                                            "answer":  "<p>Ja. Der Bezug ist abnehmbar und bei 40 °C waschbar. Den Memory-Foam-Kern bitte nicht waschen, sondern nur lüften.</p>"
+                                                                        }
+                                                       },
+                                                "f4":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "Riecht das Kissen beim Auspacken?",
+                                                                            "answer":  "<p>Neuer Schaum kann anfangs leicht riechen. Lass das Kissen nach dem Auspacken ein bis zwei Tage an einem gut belüfteten Ort ruhen.</p>"
+                                                                        }
+                                                       },
+                                                "f5":  {
+                                                           "type":  "question",
+                                                           "settings":  {
+                                                                            "question":  "Wie lange dauert der Versand?",
+                                                                            "answer":  "<p>Bestellungen werden in der Regel innerhalb von 1–2 Werktagen versendet. Ab 50 € ist der Versand kostenlos.</p>"
+                                                                        }
+                                                       }
+                                            },
+                                 "block_order":  [
+                                                     "f1",
+                                                     "f2",
+                                                     "f3",
+                                                     "f4",
+                                                     "f5"
+                                                 ]
+                             },
+                     "newsletter":  {
+                                        "type":  "noyelo-newsletter",
+                                        "settings":  {
+                                                         "eyebrow":  "",
+                                                         "heading":  "Ruhige Post von NOYELO",
+                                                         "text":  "<p>Schlaftipps, Neuheiten und exklusive Angebote – ohne Spam.</p>",
+                                                         "button_label":  "Anmelden",
+                                                         "privacy_text":  "<p>Abmeldung jederzeit möglich. Mehr in unserer Datenschutzerklärung.</p>",
+                                                         "color_scheme":  "scheme-2",
+                                                         "padding_top":  80,
+                                                         "padding_bottom":  80
+                                                     }
+                                    },
+                     "positions":  {
+                                       "type":  "noyelo-sleep-positions",
+                                       "settings":  {
+                                                        "eyebrow":  "Für jede Schlafposition",
+                                                        "heading":  "Wie schläfst du am liebsten?",
+                                                        "text":  "<p>Die richtige Höhe hält Kopf und Wirbelsäule in einer Linie – so können Nacken und Schultern nachts wirklich entspannen.</p>",
+                                                        "color_scheme":  "scheme-1",
+                                                        "padding_top":  96,
+                                                        "padding_bottom":  96
+                                                    },
+                                       "blocks":  {
+                                                      "side":  {
+                                                                   "type":  "position",
+                                                                   "settings":  {
+                                                                                    "label":  "Seitenschläfer",
+                                                                                    "default_art":  "pos-side",
+                                                                                    "badge":  "Besonders geeignet",
+                                                                                    "title":  "Halt für die Seitenlage",
+                                                                                    "text":  "<p>Die erhöhte Nackenzone füllt den Abstand zwischen Schulter und Kopf. So bleibt die Wirbelsäule gerade und die Schulter wird entlastet.</p>",
+                                                                                    "point_1":  "Stabile Nackenstütze",
+                                                                                    "point_2":  "Entlastet die Schulter",
+                                                                                    "point_3":  "",
+                                                                                    "button_label":  "",
+                                                                                    "button_link":  ""
+                                                                                }
+                                                               },
+                                                      "back":  {
+                                                                   "type":  "position",
+                                                                   "settings":  {
+                                                                                    "label":  "Rückenschläfer",
+                                                                                    "default_art":  "pos-back",
+                                                                                    "badge":  "Besonders geeignet",
+                                                                                    "title":  "Sanft gestützt in Rückenlage",
+                                                                                    "text":  "<p>Der Kopf liegt in der sanften Mulde, der Nacken wird von der Kontur getragen – ohne dass der Kopf nach vorne kippt.</p>",
+                                                                                    "point_1":  "Mulde für stabile Kopflage",
+                                                                                    "point_2":  "Natürliche Nackenkurve",
+                                                                                    "point_3":  "",
+                                                                                    "button_label":  "",
+                                                                                    "button_link":  ""
+                                                                                }
+                                                               },
+                                                      "stomach":  {
+                                                                      "type":  "position",
+                                                                      "settings":  {
+                                                                                       "label":  "Bauchschläfer",
+                                                                                       "default_art":  "pos-stomach",
+                                                                                       "badge":  "Eingeschränkt geeignet",
+                                                                                       "title":  "Tipp für Bauchschläfer",
+                                                                                       "text":  "<p>In Bauchlage sollte der Kopf möglichst flach liegen. Nutze die niedrigere Seite der Kontur oder teste in Ruhe, was sich für dich gut anfühlt – dafür gibt es die Testphase.</p>",
+                                                                                       "point_1":  "",
+                                                                                       "point_2":  "",
+                                                                                       "point_3":  "",
+                                                                                       "button_label":  "",
+                                                                                       "button_link":  ""
+                                                                                   }
+                                                                  }
+                                                  },
+                                       "block_order":  [
+                                                           "side",
+                                                           "back",
+                                                           "stomach"
+                                                       ]
+                                   },
+                     "logos":  {
+                                   "type":  "noyelo-logo-bar",
+                                   "disabled":  true,
+                                   "settings":  {
+                                                    "heading":  "Bekannt aus",
+                                                    "color_scheme":  "scheme-1",
+                                                    "padding_top":  32,
+                                                    "padding_bottom":  32
+                                                },
+                                   "blocks":  {
+                                                  "l1":  {
+                                                             "type":  "logo",
+                                                             "settings":  {
+                                                                              "name":  "Logo 1",
+                                                                              "link":  ""
+                                                                          }
+                                                         },
+                                                  "l2":  {
+                                                             "type":  "logo",
+                                                             "settings":  {
+                                                                              "name":  "Logo 2",
+                                                                              "link":  ""
+                                                                          }
+                                                         },
+                                                  "l3":  {
+                                                             "type":  "logo",
+                                                             "settings":  {
+                                                                              "name":  "Logo 3",
+                                                                              "link":  ""
+                                                                          }
+                                                         },
+                                                  "l4":  {
+                                                             "type":  "logo",
+                                                             "settings":  {
+                                                                              "name":  "Logo 4",
+                                                                              "link":  ""
+                                                                          }
+                                                         },
+                                                  "l5":  {
+                                                             "type":  "logo",
+                                                             "settings":  {
+                                                                              "name":  "Logo 5",
+                                                                              "link":  ""
+                                                                          }
+                                                         }
+                                              },
+                                   "block_order":  [
+                                                       "l1",
+                                                       "l2",
+                                                       "l3",
+                                                       "l4",
+                                                       "l5"
+                                                   ]
+                               },
+                     "layers":  {
+                                    "type":  "noyelo-hotspots",
+                                    "settings":  {
+                                                     "eyebrow":  "Aufbau",
+                                                     "heading":  "Vier Schichten für einen ruhigen Schlaf.",
+                                                     "text":  "<p>Jede Schicht übernimmt eine eigene Aufgabe – zusammen entsteht ein Kissen, das weich nachgibt und trotzdem zuverlässig stützt.</p>",
+                                                     "default_art":  "layers-photo",
+                                                     "image_width":  60,
+                                                     "dot_style":  "light",
+                                                     "hint":  "Fahre über die Punkte oder tippe sie an, um mehr zu erfahren.",
+                                                     "anchor":  "aufbau-start",
+                                                     "color_scheme":  "scheme-1",
+                                                     "padding_top":  96,
+                                                     "padding_bottom":  96
+                                                 },
+                                    "blocks":  {
+                                                   "h1":  {
+                                                              "type":  "hotspot",
+                                                              "settings":  {
+                                                                               "title":  "Bezug",
+                                                                               "text":  "<p>Kühlend und atmungsaktiv. Der weiche Strickbezug lässt sich zum Waschen einfach abnehmen.</p>",
+                                                                               "label":  "",
+                                                                               "card_position":  "right",
+                                                                               "x":  57,
+                                                                               "y":  18
+                                                                           }
+                                                          },
+                                                   "h2":  {
+                                                              "type":  "hotspot",
+                                                              "settings":  {
+                                                                               "title":  "Kühlende Mesh-Lage",
+                                                                               "text":  "<p>Die luftdurchlässige 3D-Mesh-Lage sorgt für Luftzirkulation und ein frisches Schlafgefühl.</p>",
+                                                                               "label":  "",
+                                                                               "card_position":  "left",
+                                                                               "x":  64,
+                                                                               "y":  42
+                                                                           }
+                                                          },
+                                                   "h3":  {
+                                                              "type":  "hotspot",
+                                                              "settings":  {
+                                                                               "title":  "Memory Foam",
+                                                                               "text":  "<p>Reagiert auf Körperwärme und Druck und passt sich Kopf und Nacken an – für spürbare Entlastung.</p>",
+                                                                               "label":  "",
+                                                                               "card_position":  "right",
+                                                                               "x":  56,
+                                                                               "y":  66
+                                                                           }
+                                                          },
+                                                   "h4":  {
+                                                              "type":  "hotspot",
+                                                              "settings":  {
+                                                                               "title":  "Stützender Kern",
+                                                                               "text":  "<p>Das feste Fundament gibt stabilen Halt und hält die ergonomische Form Nacht für Nacht.</p>",
+                                                                               "label":  "",
+                                                                               "card_position":  "left",
+                                                                               "x":  61,
+                                                                               "y":  82
+                                                                           }
+                                                          }
+                                               },
+                                    "block_order":  [
+                                                        "h1",
+                                                        "h2",
+                                                        "h3",
+                                                        "h4"
+                                                    ]
+                                }
+                 },
+    "order":  [
+                  "hero",
+                  "trust",
+                  "logos",
+                  "featured",
+                  "benefits",
+                  "positions",
+                  "story_material",
+                  "layers",
+                  "comparison",
+                  "reviews",
+                  "trial",
+                  "faq",
+                  "newsletter"
+              ]
 }
