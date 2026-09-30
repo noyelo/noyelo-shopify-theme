@@ -1778,8 +1778,7 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
 }
 
 .ny-hero--overlay .ny-hero__media > picture > img {
-  /* anchored to the bottom: the clouds fade into the page white exactly at the section edge */
-  object-position: 70% 100%;
+  object-position: 70% 50%;
 }
 
 /* Soft fade into the page white at the bottom edge of the hero, independent of how the image is cropped */
@@ -1792,20 +1791,6 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
   height: 16%;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff 92%);
   pointer-events: none;
-}
-
-/* Desktop: hero height follows the image proportions (1.71 : 1), capped at the viewport height;
-   focal point keeps the pillow clear of the header on wide, short screens */
-@media screen and (min-width: 990px) {
-  .ny-hero--overlay .ny-hero__grid,
-  .ny-hero--overlay.ny-hero--compact .ny-hero__grid,
-  .ny-hero--overlay.ny-hero--large .ny-hero__grid {
-    min-height: min(50vw, calc(100svh - var(--header-height, 7rem) + 4rem));
-  }
-
-  .ny-hero--overlay .ny-hero__media > picture > img {
-    object-position: 70% 62%;
-  }
 }
 
 @media screen and (max-width: 749px) {

@@ -107,7 +107,7 @@
       "type": "noyelo-faq",
       "settings": {
         "eyebrow": "FAQ",
-        "heading": "Fragen zu Versand & Zahlung",
+        "heading": "Fragen zu Versand &amp; Zahlung",
         "heading_tag": "h2",
         "text": "",
         "contact_text": "Noch Fragen?",
