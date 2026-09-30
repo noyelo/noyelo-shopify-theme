@@ -2068,6 +2068,67 @@ body:has(.header-wrapper--overlay) main > .shopify-section:first-child .ny-hero-
   object-position: 54% 60%;
 }
 
+/* Night scene: occasional soft star twinkles (decorative, above the image) */
+.ny-twinkle {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.ny-twinkle span {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: calc(var(--s, 1) * 1.8rem);
+  height: calc(var(--s, 1) * 1.8rem);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 9%, rgba(255, 255, 255, 0.55) 14%, rgba(210, 225, 255, 0) 55%);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  animation: ny-twinkle var(--t, 8s) ease-in-out var(--d, 0s) infinite;
+}
+
+/* thin four-point glint */
+.ny-twinkle span::before,
+.ny-twinkle span::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 0.12rem;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  transform: translate(-50%, -50%);
+}
+
+.ny-twinkle span::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+@keyframes ny-twinkle {
+  0%,
+  78%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+  }
+  86% {
+    opacity: 0.95;
+    transform: translate(-50%, -50%) scale(1) rotate(25deg);
+  }
+  93% {
+    opacity: 0.35;
+    transform: translate(-50%, -50%) scale(0.55) rotate(40deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ny-twinkle {
+    display: none;
+  }
+}
+
 
 /* Real product photos (studio shots on white) */
 .ny-media:has(> .ny-img--product) {

@@ -70,6 +70,20 @@
             sizes: '(min-width: 990px) 55vw, 100vw',
             art: section.settings.default_art
           -%}
+          {%- if section.settings.image == blank and section.settings.default_art == 'night' -%}
+            {%- comment -%} Occasional soft star twinkles in the night sky (decorative) {%- endcomment -%}
+            <div class="ny-twinkle" aria-hidden="true">
+              <span style="--x: 9%; --y: 9%; --d: 0.4s; --t: 7s; --s: 1;"></span>
+              <span style="--x: 27%; --y: 22%; --d: 2.6s; --t: 8.5s; --s: 0.8;"></span>
+              <span style="--x: 41%; --y: 7%; --d: 5.1s; --t: 9s; --s: 1.1;"></span>
+              <span style="--x: 16%; --y: 36%; --d: 3.8s; --t: 7.5s; --s: 0.75;"></span>
+              <span style="--x: 55%; --y: 27%; --d: 1.5s; --t: 10s; --s: 0.9;"></span>
+              <span style="--x: 64%; --y: 12%; --d: 6.4s; --t: 8s; --s: 0.8;"></span>
+              <span style="--x: 34%; --y: 36%; --d: 4.6s; --t: 9.5s; --s: 0.7;"></span>
+              <span style="--x: 82%; --y: 40%; --d: 7.2s; --t: 8.8s; --s: 0.85;"></span>
+              <span style="--x: 5%; --y: 41%; --d: 2.1s; --t: 10.5s; --s: 0.7;"></span>
+            </div>
+          {%- endif -%}
         </div>
       {%- endif -%}
     </div>
