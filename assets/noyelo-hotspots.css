@@ -180,6 +180,18 @@
 
 .ny-hotspots--dots-light .ny-hotspots__media {
   background-color: transparent;
+  border-radius: 0;
+}
+
+/* Studio photos are not pure white: feather the edges so no rectangle shows on the white section.
+   Feather widths follow the free space around the product (wide left, narrow right). */
+.ny-hotspots--dots-light .ny-hotspots__media > img {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 96%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 7%, #000 91%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent 0, #000 16%, #000 96%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 7%, #000 91%, transparent 100%);
+  mask-composite: intersect;
 }
 
 /* Info card */
